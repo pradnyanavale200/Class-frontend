@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StudentRoutingModule } from './student-routing.module';
 import { StudentComponent } from './student.component';
@@ -11,6 +12,8 @@ import { StudentUpdateComponent } from './student-update/student-update.componen
 @NgModule({
   declarations: [StudentComponent, StudentListComponent, StudentCreateComponent, StudentUpdateComponent],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     StudentRoutingModule
   ]
