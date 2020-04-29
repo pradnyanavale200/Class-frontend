@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "class-app-front-end"
+    }
+  },
+  "defaultProject": "class-app-front-end",
+  "cli": {
+    "analytics": false
+  }
 }
