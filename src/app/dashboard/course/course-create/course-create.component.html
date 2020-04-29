@@ -1,1 +1,68 @@
 <p>course-create works!</p>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+    <div class="container">
+        <h2>Course Registration Form</h2>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="inputCourseName">Course Name:</label>
+                <input type="text" class="form-control" id="inputCourseName" placeholder="Enter Course Name">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="inputDuration">Duration:</label>
+                    <input list="numbers" class="form-control" placeholder="Choose">
+                    <datalist id="numbers">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </datalist>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="inputValue">Value:</label>
+                    <input list="value" class="form-control" placeholder="Years/Months">
+                    <datalist id="value">
+                        <option>Months</option>
+                        <option>Years</option>
+                    </datalist>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="inputFess">Fees:</label>
+                <input type="text" class="form-control" id="inputFees" placeholder="Enter Fees">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                <button type="submit" class="btn btn-primary">Create Course</button>
+                </div>
+
+                <div class="form-group col-md-2">
+                <button type="submit" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
+<html>
