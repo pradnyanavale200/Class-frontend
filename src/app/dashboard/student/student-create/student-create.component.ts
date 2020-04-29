@@ -37,4 +37,11 @@ export class StudentCreateComponent implements OnInit {
   get fcourse() {
     return this.StudregForm.get('fcourse');
   }
+
+  cancel(){
+    this.StudregForm.reset({ FirstName: '', LastName: '', email: '', fcourse: '' });
+  }
+
+
 }
+

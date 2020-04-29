@@ -1,39 +1,45 @@
 <div class = "row">
-<div class = "col-lg-6 col-md-8 col-sm-8 col-xs-8 shadow" style = " border-radius: 5px; vertical-align: middle; margin: auto;">
-<form class = "formGroup" [formGroup] = "StudregForm" [class.has-error] = "(FirstName.invalid && FirstName.touched) || (LastName.invalid && LastName.touched) || (email.invalid && email.touched) || (fcourse.invalid && fcourse.touched)">
-    <h2 style="margin-left: 10px;">Student Register</h2>
+  <div class = "col-lg-6 col-md-8 col-sm-8 col-xs-8 shadow" style = " border-radius: 5px; vertical-align: middle; margin: auto;">
+      <form class = "formGroup" [formGroup] = "StudregForm" [class.has-error] = "(FirstName.invalid && FirstName.touched) || (LastName.invalid && LastName.touched) || (email.invalid && email.touched) || (fcourse.invalid && fcourse.touched)">
+            <h2 style="margin-left: 10px;">Student Register</h2>
 
+              <label for="FirstName">FirstName</label>
+              <input type="text" class="form-control" id="FirstName" pattern = "^[a-zA-Z]*$" formControlName = "FirstName">
+              <div class="text-danger" *ngIf="(FirstName.invalid && FirstName.touched)" style="margin-left: 10px;">
+                    FirstName is required
+              </div>
+              <div *ngIf="FirstName.errors?.pattern" style="color: red">
+                    Firstname not valid.
+              </div> <br>
 
-    Enter FirstName:  <br><input type="text" formControlName = "FirstName" pattern = "^[a-zA-Z]*$"><br>
-    <div class="text-danger" *ngIf="(FirstName.invalid && FirstName.touched)" style="margin-left: 10px;">
-        FirstName is required
-      </div>
-      <div *ngIf="FirstName.errors?.pattern" style="color: red">
-        Firstname not valid.
-   </div> <br>
+              <label for="LastName">LastName</label>
+              <input type="text" class="form-control" id="LastName" pattern = "^[a-zA-Z]*$" formControlName = "LastName">
+                <div class="text-danger" *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)" style="margin-left: 10px;">
+                    LastName is required
+                </div>
+                <div *ngIf="LastName.errors?.pattern" style="color: red">
+                    Lastname not valid.
+                </div><br>
 
-
-    Enter LastName: <br><input type="text" formControlName = "LastName" pattern = "^[a-zA-Z]*$"><br>
-    <div class="text-danger" *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)" style="margin-left: 10px;">
-        LastName is required
-      </div>
-      <div *ngIf="LastName.errors?.pattern" style="color: red">
-        Lastname not valid.
-   </div><br>
-
-
-    Enter email: <br><input type="text" formControlName = "email" pattern = "^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"><br>
-    <div class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)" style="margin-left: 10px;">
-        Email is Required
-      </div>
-      <div *ngIf="email.errors?.pattern" style="color: red">
-        Email not valid.
-   </div><br>
-    Select Course: <br><select class = "form-control" formControlName = "fcourse">
-        <option value="null" disabled>Choose your Course</option>
-        <option *ngFor="let course of Courses" [ngValue]="course">{{course}}</option>
-     </select><br>
-    <button class = "btn btn-primary">Register</button><br><br>
-</form>
-</div>
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" id="email" pattern = "^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" formControlName = "email">
+                  <div class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)" style="margin-left: 10px;">
+                      Email is Required
+                    </div>
+                    <div *ngIf="email.errors?.pattern" style="color: red">
+                      Email not valid.
+                </div><br>
+   
+              <label for="fcourse">Course</label>
+              <select class="form-control" id="fcourse" formControlName = "fcourse">
+                    <option value="null" disabled>Choose your Course</option>
+                    <option *ngFor="let course of Courses" [ngValue]="course">{{course}}</option>
+                </select>
+                <div class="text-danger" *ngIf="fcourse.invalid && (fcourse.dirty || fcourse.touched)" style="margin-left: 10px;">
+                  Course is Required
+                </div>
+                <br>
+     <button class = "btn btn-primary">Register</button> <button (click) = "cancel()" class = "btn btn-danger">Cancel</button><br><br>
+      </form>
+  </div>
 </div>
