@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InstituteRegisterComponent } from './institute-register/institute-register.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { InstituteRegisterComponent } from './institute-register/institute-regis
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
     FormsModule
   ],
   providers: [],
