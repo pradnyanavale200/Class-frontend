@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,FormBuilder,Validators } from "@angular/forms";
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-student-create',
@@ -9,8 +10,15 @@ import { FormGroup,FormControl,FormBuilder,Validators } from "@angular/forms";
 export class StudentCreateComponent implements OnInit {
 
   StudregForm: FormGroup;
-  Courses: any = ['A', 'B', 'C', 'D'];
+  
+  Courses: any = [];
+  disabled = false;
+  ShowFilter = false;
+  limitSelection = false;
+  selectedItems: any = [];
+  dropdownSettings:IDropdownSettings = {};
 
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(){
@@ -18,8 +26,27 @@ export class StudentCreateComponent implements OnInit {
       FirstName : ['',Validators.required,],
       LastName : ['',Validators.required],
       email : ['',Validators.required],
-      fcourse : ['',Validators.required]
+      fcourse : [this.selectedItems,Validators.required]
     });
+
+    this.Courses = [
+      { item_id: 1, item_text: "A"},
+      { item_id: 2, item_text: "B"},
+      { item_id: 3, item_text: "C"},
+      { item_id: 4, item_text: "D"}
+    ];
+
+    this.selectedItems = [{item_id: 2, item_text: "B"},{item_id: 3, item_text: "C"}];
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
   }
 
   get FirstName() {
