@@ -1,1 +1,46 @@
-<p>login works!</p>
+<!-- <p>login works!</p> -->
+
+<!-- <p>student-update works!</p> -->
+
+<div class="row" >
+    <div  class="col-lg-6 col-md-8 col-sm-8 col-xs-8 colnm shadow" >
+        <form class="formGroup" [formGroup]="loginForm">
+            <h2 >Login</h2>
+            <div  class="formGroup frmgrp" >
+                <label for="firstName" >Firstname : </label>
+                <input id="firstName" class="form-control" type="text" formControlName="firstname" required>
+                <div class="text-danger" *ngIf="firstname.invalid && (firstname.dirty|| firstname.touched)">
+                    Please enter valid firstname
+                </div>
+
+                <label for="lastName" >Lastname : </label>
+                <input id="lastName" class="form-control" type="text" formControlName="lastname">
+                <div class="text-danger" *ngIf="lastname.invalid && (lastname.dirty|| lastname.touched)">
+                    Please enter valid lastname
+                </div>
+
+                <label for="email" >Email : </label>
+                <input id="email" class="form-control" type="text" formControlName="email">
+                <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched)">
+                    Please enter valid email<br>Must be in Format : abcd12@gmail.com
+                </div>
+
+                <label for="password" >Password : </label>
+                <input id="email" class="form-control" type="password" formControlName="password">
+                <div class="text-danger" *ngIf="password.invalid && (password.dirty|| password.touched)">
+                    Please enter valid password<br>Password must contain at least one letter, at least one number, and be longer than six charaters.
+                </div>
+
+                <div  class="btn-group btn-block btngrp justify-content-between" >
+                    <div class="update" >
+                        <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" >Update</button>
+                    </div>
+                    <div class="cancel" >
+                        <button class="btn btn-block btn-danger" >Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
