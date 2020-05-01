@@ -9,8 +9,8 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class StudentCreateComponent implements OnInit {
 
-  StudregForm: FormGroup;
-
+  studentRegistrationForm: FormGroup;
+  
   Courses: any = [];
   disabled = false;
   ShowFilter = false;
@@ -22,11 +22,11 @@ export class StudentCreateComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(){
-    this.StudregForm = this.fb.group({
-      FirstName : ['', Validators.required],
-      LastName : ['', Validators.required],
-      email : ['', Validators.required],
-      fcourse : [this.selectedItems, Validators.required]
+    this.studentRegistrationForm = this.fb.group({
+      firstName : ['',Validators.required,],
+      lastName : ['',Validators.required],
+      email : ['',Validators.required],
+      fcourse : [this.selectedItems,Validators.required]
     });
 
     this.Courses = [
@@ -49,24 +49,24 @@ export class StudentCreateComponent implements OnInit {
     };
   }
 
-  get FirstName() {
-    return this.StudregForm.get('FirstName');
+  get firstName() {
+    return this.studentRegistrationForm.get('firstName');
   }
 
-  get LastName() {
-    return this.StudregForm.get('LastName');
+  get lastName() {
+    return this.studentRegistrationForm.get('lastName');
   }
 
   get email() {
-    return this.StudregForm.get('email');
+    return this.studentRegistrationForm.get('email');
   }
 
   get fcourse() {
-    return this.StudregForm.get('fcourse');
+    return this.studentRegistrationForm.get('fcourse');
   }
 
   cancel(){
-    this.StudregForm.reset({ FirstName: '', LastName: '', email: '', fcourse: '' });
+    this.studentRegistrationForm.reset({ firstName: '', lastName: '', email: '', fcourse: '' });
   }
 
 

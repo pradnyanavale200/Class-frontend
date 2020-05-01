@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-student-update',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class StudentUpdateComponent implements OnInit {
 
   list = [ {no: '1'}, {no: '2'}, {no: '3'}, {no: '4'}, {no: '5'}, ];
-  constructor() { }
+  constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
   }

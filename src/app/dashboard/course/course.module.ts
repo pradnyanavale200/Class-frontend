@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CourseRoutingModule } from './course-routing.module';
 import { CourseComponent } from './course.component';
@@ -12,7 +14,10 @@ import { CourseUpdateComponent } from './course-update/course-update.component';
   declarations: [CourseComponent, CourseListComponent, CourseCreateComponent, CourseUpdateComponent],
   imports: [
     CommonModule,
-    CourseRoutingModule
+    CourseRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class CourseModule { }
