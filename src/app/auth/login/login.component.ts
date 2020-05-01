@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { REGEX } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  emailex: '< example > @ < mail >.< com >';
+  emailExample: '< example > @ < mail >.< com >';
 
   constructor(
     private fb: FormBuilder,
@@ -17,21 +18,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(){
     this.loginForm = this.fb.group({
-      firstname : ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
-      lastname : ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
-      email : ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
-      password : ['', [Validators.required, Validators.pattern('^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$')]],
+      firstName : ['', [Validators.required, Validators.pattern(REGEX.NAME)]],
+      lastName : ['', [Validators.required, Validators.pattern(REGEX.NAME)]],
+      email : ['', [Validators.required, Validators.pattern(REGEX.EMAIL)]],
+      password : ['', [Validators.required, Validators.pattern(REGEX.PASSWORD)]],
     });
   }
 
-
-
-  get firstname() {
-    return this.loginForm.get('firstname');
+  onLoginClick() {
+    // Code is left here. Under development
   }
 
-  get lastname() {
-    return this.loginForm.get('lastname');
+  get firstName() {
+    return this.loginForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.loginForm.get('lastName');
   }
   get email() {
     return this.loginForm.get('email');
