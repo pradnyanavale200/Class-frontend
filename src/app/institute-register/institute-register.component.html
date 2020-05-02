@@ -1,19 +1,10 @@
-<router-outlet></router-outlet>
-
 <div class="container-fluid">
   <div class="row justify-content-center position-sticky">
-    <div class="alert-primary col-12 col-sm-8 col-md-3  shadow-lg p-3 mb-5 rounded ">
-          <div class="form-group">
-            <button type="button" class="close" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
+    <div class=" col-sm-8 col-md-4 mb-4 col-12 col-md-5 col-sm-7  shadow-lg p-3 mb-5 rounded ">
     <form (ngSubmit)="onSubmit(userForm.value)" #userForm = "ngForm" novalidate>
-
       <div class="form-group" [class.has-error] = "nameRef.invalid" >
         <label class="alert-link control-label" for="exampleInputPassword1">*Institute Name: </label>
-        <input required [(ngModel)] = "name" type="text" class="form-control border border-primary border-top-0" name = "Name" aria-describedby="InstituteName" #nameRef="ngModel" pattern="[a-zA-Z]*">
+        <input required [(ngModel)]="instituteDemoObj.name" type="text" class="form-control" name = "Name" aria-describedby="InstituteName" #nameRef="ngModel" pattern="[a-zA-Z]*">
 
         <small class="help-block" *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)">Please enter institute name</small>
         <small class="help-block" *ngIf="nameRef.errors?.pattern"><br>Should contain Alphabets only</small>
@@ -21,67 +12,48 @@
 
       <div class="form-group">
         <label class="alert-link" for="AddressLine1">*Address Line1:</label>
-        <input required [(ngModel)] = "addrLine1" name="addr1" type="text" class="form-control border border-primary border-top-0" #addr1Ref = "ngModel">
-
+        <input required [(ngModel)]="instituteDemoObj.addrLine1" name="addr1" type="text" class="form-control" #addr1Ref = "ngModel">
           <small class="help-block" *ngIf="addr1Ref.errors && (addr1Ref.dirty || addr1Ref.touched)">Please Enter Address</small>
       </div>
 
       <div class="form-group">
         <label class="alert-link" for="AddressLine2">Address Line2:</label>
-        <input [(ngModel)]="addrLine2" name="addr2" type="text" class="form-control border border-primary border-top-0">
+        <input [(ngModel)]="instituteDemoObj.addrLine2" name="addr2" type="text" class="form-control">
       </div>
 
       <div class="form-group" [class.has-error] = "stateRef.touched">
         <label class="alert-link" for="State">*State: </label>
-          <select required class="form-control border border-primary border-top-0" name= "State" [(ngModel)]="state" (change)="onchange()" #stateRef = "ngModel">
-            <option value="" disabled selected >Choose your state</option>
-          <option class="text-capitalize alert alert-link" name ="options" *ngFor="let item of stateArray" [ngValue]="item">{{item.state}}</option>
+          <select required class="form-control" name= "State" [(ngModel)]="instituteDemoObj.state" (change)="instituteDemoObj.onchange()" #stateRef = "ngModel">
+            <option value="" disabled>Choose your state</option>
+          <option class="text-capitalize alert alert-link" name ="options" *ngFor="let item of instituteDemoObj.stateArray" [ngValue]="item">{{item.state}}</option>
         </select>
           <small class="help-block" *ngIf="stateRef.invalid || stateRef.pristine && stateRef.touched">Please select state</small>
       </div>
 
     <div class="form-group" [class.has-error] = "cityRef.untouched && cityRef.pristine && cityRef.invalid">
       <label class="alert-link" for="City">*City: </label>
-      <select required [disabled] ="disabledcity" class="form-control border border-primary border-top-0" name="City" [(ngModel)]="city" #cityRef = "ngModel">
-        <option value="" disabled>Choose your city</option>
-            <ng-container *ngFor="let item of cityArray">
-              <ng-container *ngFor="let cityNames of item.city">
-                <option *ngIf="state.id == item.id">
+      <select required [disabled] ="instituteDemoObj.disabledcity" class="form-control" name="City" [(ngModel)]="instituteDemoObj.city" #cityRef = "ngModel">
+        <option value="" disabled selected>Choose your city</option>
+            <ng-container *ngFor="let item of instituteDemoObj.cityArray">
+              <ng-container *ngFor="let cityNames of item.districts">
+                <option *ngIf="instituteDemoObj.state.id == item.id">
                   {{cityNames}}
                 </option>
             </ng-container>
             </ng-container>
      </select>
-  <small class="help-block" *ngIf="cityRef.touched && (cityRef.pristine || cityRef.invalid)">Please select city</small>
+    <small class="help-block" *ngIf="cityRef.touched && (cityRef.pristine || cityRef.invalid)">Please select city</small>
     </div>
 
-
-
-      <div class="form-group" [class.has-error]="pinRef.invalid">
-        <label class="alert-link control-label" for="pincode">*Pincode: </label>
-        <input required [(ngModel)]="pincode" name="Pincode" type="number" pattern="^[1-9][0-9]{5}$" class="form-control border border-primary border-top-0" id="Pincode" #pinRef="ngModel">
-        <small class="help-block" *ngIf="pinRef.invalid && pinRef.errors && (pinRef.dirty || pinRef.touched)">
+    <div class="form-group" [class.has-error]="pinRef.invalid">
+      <label class="alert-link control-label" for="pincode">*Pincode: </label>
+      <input required [(ngModel)]="instituteDemoObj.pincode" name="Pincode" type="number" pattern="^[1-9][0-9]{5}$" class="form-control" id="Pincode" #pinRef="ngModel">
+      <small class="help-block" *ngIf="pinRef.invalid && pinRef.errors && (pinRef.dirty || pinRef.touched)">
           Should be 6 digits long
-        </small>
-      </div>
+      </small>
+    </div>
 
-
-      <!--
-         <div class="form-group" [class.has-error] = "nameRef.invalid" >
-        <label class="alert-link control-label" for="exampleInputPassword1">*Institute Name: </label>
-        <input required [(ngModel)] = "name" type="text" class="form-control border border-primary border-top-0" name = "Name" aria-describedby="InstituteName" #nameRef="ngModel" pattern="[A-Za-z]+">
-
-        <span class="help-block" *ngIf="nameRef.invalid && nameRef.errors && (nameRef.dirty || nameRef.touched)">Please enter institute name</span>
-
-          <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)" class="alert alert-danger">
-            Please enter Institute name
-          </div>
-      </div>
-
-       -->
-
-      <button [disabled] = "!userForm.form.valid" type="submit" class="btn btn-primary btn-block btn-group-lg shadow-lg" >REGISTER </button>
+    <button [disabled] = "!userForm.form.valid" type="submit" class="btn btn-primary btn-block btn-group-lg shadow-lg" >REGISTER </button>
     </form>
   </div>
-  </div>
-
+</div>
