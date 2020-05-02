@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
-=======
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
->>>>>>> c539e173feada4d1c2a5073cc2211b295e80daa6
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
@@ -25,14 +16,9 @@ export class StudentCreateComponent implements OnInit {
   limitSelection = false;
   selectedItems: any = [];
   dropdownSettings: IDropdownSettings = {};
-<<<<<<< HEAD
-
-  constructor(private fb: FormBuilder) {}
-=======
 
 
   constructor(private fb: FormBuilder) { }
->>>>>>> c539e173feada4d1c2a5073cc2211b295e80daa6
 
   ngOnInit() {
     this.studentRegistrationForm = this.fb.group({
@@ -43,18 +29,6 @@ export class StudentCreateComponent implements OnInit {
     });
 
     this.Courses = [
-<<<<<<< HEAD
-      { item_id: 1, item_text: 'A' },
-      { item_id: 2, item_text: 'B' },
-      { item_id: 3, item_text: 'C' },
-      { item_id: 4, item_text: 'D' },
-    ];
-
-    this.selectedItems = [
-      { item_id: 2, item_text: 'B' },
-      { item_id: 3, item_text: 'C' },
-    ];
-=======
       { item_id: 1, item_text: 'A'},
       { item_id: 2, item_text: 'B'},
       { item_id: 3, item_text: 'C'},
@@ -62,7 +36,6 @@ export class StudentCreateComponent implements OnInit {
     ];
 
     this.selectedItems = [{item_id: 2, item_text: 'B'}, {item_id: 3, item_text: 'C'}];
->>>>>>> c539e173feada4d1c2a5073cc2211b295e80daa6
 
     this.dropdownSettings = {
       singleSelection: false,
