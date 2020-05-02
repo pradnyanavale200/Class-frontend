@@ -14,21 +14,23 @@ export class RegisterComponent implements OnInit {
   togglePassword = 'visibility';
   disabledPassword = true;
   typePassword = 'password';
+
   constructor() {}
 
   ngOnInit(): void {}
 
+  // Register Form control
   onSubmit(value) {
     console.log(value);
   }
+
+  // Show/hide password character
   toggle() {
     if (this.disabledPassword == true) {
       this.disabledPassword = false;
       this.togglePassword = 'visibility_off';
       this.typePassword = 'text';
-
-    }
-    else {
+    } else {
       this.disabledPassword = true;
       this.togglePassword = 'visibility';
       this.typePassword = 'password';

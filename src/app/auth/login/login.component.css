@@ -1,0 +1,26 @@
+label {
+    margin-top: 10px;
+}
+
+.colnm {
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 5px;
+}
+
+form {
+    padding: 20px;
+}
+
+form h2,
+.frmgrp {
+    margin-left: 10px;
+}
+
+.btngrp {
+    padding: 20px 0px 20px 0px; 
+}
+
+.update, .cancel {
+    width: 48%;
+}

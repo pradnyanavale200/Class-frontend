@@ -1,10 +1,16 @@
+<!-- Material Icons for password eye -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Material Icons for password eye -->
 
+<!-- User Registeration form -->
 <div class="container-fluid">
   <div class="row justify-content-center align-items-center">
     <div class=" col-sm-8 col-md-4 mb-4 col-12 col-md-5 col-sm-7  shadow-lg p-3 mb-5 rounded ">
 
       <form (ngSubmit)="onSubmit(userRegisterForm.value)" #userRegisterForm="ngForm" novalidate>
+
+
+        <!-- First Name -->
         <div class="form-group" [class.has-error]="fnameRef.invalid">
           <label class="alert-link control-label" for="exampleInputPassword1">FirstName: </label>
           <input required [(ngModel)]="firstName" type="text" class="form-control" name="FirstName" #fnameRef="ngModel"
@@ -15,7 +21,9 @@
           </small>
           <small class="help-block" *ngIf="fnameRef.errors?.pattern"><br>Should contain Alphabets only</small>
         </div>
+        <!-- First Name -->
 
+        <!-- Last Name -->
         <div class="form-group" [class.has-error]="lnameRef.invalid">
           <label class="alert-link control-label" for="exampleInputPassword1">LastName: </label>
           <input required [(ngModel)]="lastName" type="text" class="form-control" name="LastName" #lnameRef="ngModel"
@@ -26,8 +34,10 @@
           </small>
           <small class="help-block" *ngIf="lnameRef.errors?.pattern"><br>Should contain Alphabets only</small>
         </div>
+        <!-- Last Name -->
 
 
+        <!-- Email ID -->
         <div class="form-group" [class.has-error]="emailRef.invalid">
           <label class="alert-link control-label" for="exampleInputPassword1">Email Id: </label>
           <input required [(ngModel)]="email" type="email" class="form-control" name="Email" #emailRef="ngModel"
@@ -39,25 +49,33 @@
           <small class="help-block" *ngIf="emailRef.errors?.pattern"><br>You can use letters, numbers, periods and
             underscore</small>
         </div>
+        <!-- Email ID -->
 
+        <!-- Password -->
         <div class="form-group" [class.has-error]="passRef.invalid">
-        <label class="alert-link control-label" for="exampleInputPassword1">Password: </label>
+          <label class="alert-link control-label" for="exampleInputPassword1">Password: </label>
           <div class="input-group">
-            <input required data-toggle="password" [(ngModel)]="password" type="{{typePassword}}" class="form-control" name="Password"
-              #passRef="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+            <input required data-toggle="password" [(ngModel)]="password" type="{{typePassword}}" class="form-control"
+              name="Password" #passRef="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
             <div class="input-group-append">
-              <div class="input-group-text bg-white"><span class="material-icons" (click) = "toggle()">
-                {{togglePassword}}
-              </span></div>
+              <div class="input-group-text bg-white"><span class="material-icons" (click)="toggle()">
+                  {{togglePassword}}
+                </span></div>
             </div>
           </div>
           <small class="help-block" *ngIf="passRef.errors && (passRef.dirty || passRef.touched)">Please enter valid
             Password
           </small>
-          <small class="help-block" *ngIf="passRef.errors?.pattern"><br>Use 8 or more characters with a mix of letters, numbers & symbols ;)</small>
+          <small class="help-block" *ngIf="passRef.errors?.pattern"><br>Use 8 or more characters with a mix of letters,
+            numbers & symbols ;)</small>
         </div>
+        <!-- Password -->
+
+        <!-- Register Button -->
         <button [disabled]="!userRegisterForm.form.valid" type="submit"
           class="btn btn-primary btn-block btn-group-lg shadow-lg">REGISTER </button>
+        <!-- Register Button -->
       </form>
     </div>
   </div>
+  <!-- User Registeration Form -->

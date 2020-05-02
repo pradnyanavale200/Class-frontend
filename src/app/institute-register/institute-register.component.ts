@@ -5,10 +5,10 @@ import { Institute } from '../instituteDemo';
 @Component({
   selector: 'app-institute-register',
   templateUrl: './institute-register.component.html',
-  styleUrls: ['./institute-register.component.css']
+  styleUrls: ['./institute-register.component.css'],
 })
 export class InstituteRegisterComponent implements OnInit {
-
+  // Reference variable : Institute class
   instituteDemoObj: Institute;
 
   constructor(private stateService: StateService) {
@@ -19,8 +19,8 @@ export class InstituteRegisterComponent implements OnInit {
     this.instituteDemoObj.cityArray = this.stateService.getCity();
   }
 
-  onSubmit(value){
+  // display fields value
+  onSubmit(value) {
     console.log(value);
   }
-
 }
