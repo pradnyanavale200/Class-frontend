@@ -8,12 +8,9 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { ConfirmPassComponent } from './confirm-pass/confirm-pass.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 @NgModule({
   declarations: [AuthComponent, LoginComponent, RegisterComponent, ForgotPassComponent, ConfirmPassComponent],
-  imports: [
-    CommonModule,
+    imports: [CommonModule,
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
