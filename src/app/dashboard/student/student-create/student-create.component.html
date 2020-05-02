@@ -1,8 +1,8 @@
-<div class="row justify-content-center align-items-center">
-  <div class="col-lg-6 col-md-8 col-sm-8 col-xs-8 shadow">
+<div class="mx-auto row justify-content-center align-items-center">
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-8 shadow">
     <form class="formGroup" [formGroup]="studentRegistrationForm"
       [class.has-error]="(firstName.invalid && firstName.touched) || (lastName.invalid && lastName.touched) || (email.invalid && email.touched) || (fcourse.invalid && fcourse.touched)">
-      <h2>Student Register</h2>
+      <h2 class="mx-auto">Student Register</h2>
 
       <label for="firstName">FirstName</label>
       <input type="text" class="form-control" id="FirstName" pattern="^[a-zA-Z]*$" formControlName="firstName">
