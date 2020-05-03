@@ -5,12 +5,11 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 @Component({
   selector: 'app-student-create',
   templateUrl: './student-create.component.html',
-  styleUrls: ['./student-create.component.css']
+  styleUrls: ['./student-create.component.css'],
 })
 export class StudentCreateComponent implements OnInit {
-
   studentRegistrationForm: FormGroup;
-  
+
   Courses: any = [];
   disabled = false;
   ShowFilter = false;
@@ -21,12 +20,12 @@ export class StudentCreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.studentRegistrationForm = this.fb.group({
-      firstName : ['',Validators.required,],
-      lastName : ['',Validators.required],
-      email : ['',Validators.required],
-      fcourse : [this.selectedItems,Validators.required]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
+      fcourse: [this.selectedItems, Validators.required],
     });
 
     this.Courses = [
@@ -45,7 +44,7 @@ export class StudentCreateComponent implements OnInit {
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 5,
-      allowSearchFilter: true
+      allowSearchFilter: true,
     };
   }
 
@@ -65,10 +64,12 @@ export class StudentCreateComponent implements OnInit {
     return this.studentRegistrationForm.get('fcourse');
   }
 
-  cancel(){
-    this.studentRegistrationForm.reset({ firstName: '', lastName: '', email: '', fcourse: '' });
+  cancel() {
+    this.studentRegistrationForm.reset({
+      firstName: '',
+      lastName: '',
+      email: '',
+      fcourse: '',
+    });
   }
-
-
 }
-

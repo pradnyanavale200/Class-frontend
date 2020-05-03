@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../services/student.service';
 import { Student } from '../models/student';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
@@ -10,13 +11,16 @@ import { Student } from '../models/student';
 export class StudentListComponent implements OnInit {
 
   students: Student[];
-
+  disablelabel = true;
   constructor(
-    private studentService: StudentService
+    private studentService: StudentService, private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getStudents();
+    if (this.students != undefined) {
+      this.disablelabel = false;
+    }
   }
 
   getStudents(): void {
@@ -25,6 +29,18 @@ export class StudentListComponent implements OnInit {
     }, (error) => {
       // handle error here
     });
+  }
+
+
+  deleteStudent(i) {
+  }
+
+
+  editStudent(index) {
+  }
+
+  addStudent() {
+    this.router.navigate(['/dashboard/student/create']);
   }
 
 }

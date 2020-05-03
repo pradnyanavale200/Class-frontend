@@ -1,1 +1,109 @@
-<p>institute-update works!</p>
+<!-- Institute Update Form -->
+<div class="container-fluid">
+  <div class="row justify-content-center position-sticky">
+    <div class=" col-sm-8 col-md-4 mb-4 col-12 col-md-5 col-sm-7 shadow-lg p-5 mb-1 rounded ">
+
+        <!-- Institute Update Header -->
+        <div class="form-group text-center">
+          <h5 for="PageName" class="text-capitalize text-info font-weight-bold">Institute Update</h5>
+        </div>
+        <!-- Institute Update Header -->
+
+      <form (ngSubmit)="onSubmit(instituteUpdateForm.value)" #instituteUpdateForm="ngForm" novalidate>
+
+        <!-- Institute Name -->
+        <div class="form-group" [class.has-error]="nameRef.invalid">
+          <label class="control-label" for="InstituteName">*Institute Name: </label>
+          <input required [(ngModel)]="instituteUpdateObj.name" type="text" class="form-control" name="Name"
+            aria-describedby="InstituteName" #nameRef="ngModel" pattern="[a-zA-Z]*">
+
+          <small class="help-block" *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)">Please enter institute
+            name</small>
+          <small class="help-block" *ngIf="nameRef.errors?.pattern"><br>Should contain Alphabets only</small>
+        </div>
+        <!-- Institute Name -->
+
+        <!-- AddrLine1 -->
+        <div class="form-group">
+          <label for="AddressLine1">*Address Line1:</label>
+          <input required [(ngModel)]="instituteUpdateObj.addrLine1" name="addr1" type="text" class="form-control"
+            #addr1Ref="ngModel" (change)="onChange()">
+          <small class="help-block" *ngIf="addr1Ref.errors && (addr1Ref.dirty || addr1Ref.touched)">Please Enter
+            Address</small>
+        </div>
+        <!-- AddrLine1 -->
+
+        <!-- AddrLine2 -->
+        <div class="form-group">
+          <label for="AddressLine2">Address Line2:</label>
+          <input [(ngModel)]="instituteUpdateObj.addrLine2" name="addr2" type="text" class="form-control">
+        </div>
+        <!-- AddrLine2 -->
+
+        <!-- State -->
+        <div class="form-group" [class.has-error]="stateRef.touched">
+          <label for="State">*State: </label>
+          <select required class="form-control" name="State" [(ngModel)]="instituteUpdateObj.state"
+            (change)="instituteUpdateObj.onchange()" #stateRef="ngModel">
+            <option value="" disabled>Choose your state</option>
+            <option class="text-capitalize alert" name="options"
+              *ngFor="let item of instituteUpdateObj.stateArray" [ngValue]="item">{{item.state}}</option>
+          </select>
+          <small class="help-block" *ngIf="stateRef.invalid || stateRef.pristine && stateRef.touched">Please select
+            state</small>
+        </div>
+        <!-- State -->
+
+        <!-- City -->
+        <div class="form-group" [class.has-error]="cityRef.untouched && cityRef.pristine && cityRef.invalid">
+          <label for="City">*City: </label>
+          <select required [disabled]="instituteUpdateObj.disabledcity" class="form-control" name="City"
+            [(ngModel)]="instituteUpdateObj.city" #cityRef="ngModel">
+            <option value="" disabled selected>Choose your city</option>
+            <ng-container *ngFor="let item of instituteUpdateObj.cityArray">
+              <ng-container *ngFor="let cityNames of item.city">
+                <option *ngIf="instituteUpdateObj.state.id == item.id">
+                  {{cityNames}}
+                </option>
+              </ng-container>
+            </ng-container>
+          </select>
+          <small class="help-block" *ngIf="cityRef.touched && (cityRef.pristine || cityRef.invalid)">Please select
+            city</small>
+        </div>
+        <!-- City -->
+
+        <!-- Pincode -->
+        <div class="form-group" [class.has-error]="pinRef.invalid">
+          <label class="control-label" for="pincode">*Pincode: </label>
+          <input required [(ngModel)]="instituteUpdateObj.pincode" name="Pincode" type="number"
+            pattern="^[1-9][0-9]{5}$" class="form-control" id="Pincode" #pinRef="ngModel">
+          <small class="help-block" *ngIf="pinRef.invalid && pinRef.errors && (pinRef.dirty || pinRef.touched)">
+            Should be 6 digits long
+          </small>
+        </div>
+        <div>
+          <!-- Pincode -->
+
+          <!-- Button  -->
+          <div class="row mx-4">
+            <!-- Update Btn -->
+            <div class="col-6">
+              <button [disabled]='!instituteUpdateForm.form.valid' type="submit"
+                class="btn btn-danger btn-block btn-group-lg shadow-lg p-2">UPDATE
+              </button>
+            </div>
+            <!-- Update Btn -->
+
+            <!-- Cancel -->
+            <div class="col-6">
+              <button type="reset" class="btn btn-primary btn-block btn-group-lg shadow-lg p-2">CANCEL </button>
+            </div>
+            <!-- Cancel -->
+          </div>
+          <!-- Button -->
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Institute Update Form -->
