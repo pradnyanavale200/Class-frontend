@@ -1,68 +1,84 @@
-<p>course-create works!</p>
+<div class="container">
+  <h2>Course Create Form</h2>
+    <form [formGroup]="courseCreateForm">
+      <div class="form-row">
+        <div class="form-group col-md-6">
 
-<html>
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    </head>
-
-    <body>
-    <div class="container">
-        <h2>Course Registration Form</h2>
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                <label for="inputCourseName">Course Name:</label>
-                <input type="text" class="form-control" id="inputCourseName" placeholder="Enter Course Name">
-                </div>
+          <!-- Course name -->
+          <label for="courseName">Course Name</label>
+          <input [class.is-invalid] = "courseCreateForm.get('courseName').invalid && courseCreateForm.get('courseName').touched"
+            type="text" class="form-control" formControlName = "courseName" id="courseName" placeholder="Enter Course Name">
+          <div *ngIf="(courseNameValidate.invalid && courseNameValidate.touched) || courseNameValidate.dirty">
+            <h6 style="text-align: left;" *ngIf="courseNameValidate.errors?.required" class="text-danger">*Course name is required</h6>
+            <h6 style="text-align: left;" *ngIf="courseNameValidate.errors?.pattern" class="text-danger">*Please provide a valid Course name</h6>
+          </div>
+          <!-- Course name end -->
+        </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <!-- Duration  -->
+            <label for="duration">Duration</label>
+            <input [class.is-invalid] = "courseCreateForm.get('duration').invalid && courseCreateForm.get('duration').touched"
+              list="numbers" class="form-control" placeholder="Choose">
+            <datalist id="numbers">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </datalist>
+            <div *ngIf="(durationValidate.invalid && durationValidate.touched) || durationValidate.dirty">
+              <h6 style="text-align: left;" *ngIf="durationValidate.errors?.required" class="text-danger">*Duration is required</h6>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputDuration">Duration:</label>
-                    <input list="numbers" class="form-control" placeholder="Choose">
-                    <datalist id="numbers">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
-                    </datalist>
-                </div>
+            <!-- Duration end -->
+          </div>
 
-                <div class="form-group col-md-3">
-                    <label for="inputValue">Value:</label>
-                    <input list="value" class="form-control" placeholder="Years/Months">
-                    <datalist id="value">
-                        <option>Months</option>
-                        <option>Years</option>
-                    </datalist>
-                </div>
+          <div class="form-group col-md-3">
+            <!-- Value -->
+            <label for="value">Value:</label>
+            <input [class.is-invalid] = "courseCreateForm.get('value').invalid && courseCreateForm.get('value').touched"
+              list="list-value" class="form-control" placeholder="Years/Months">
+            <datalist id="list-value">
+              <option>Months</option>
+              <option>Years</option>
+            </datalist>
+            <div *ngIf="(valueValidate.invalid && valueValidate.touched) || valueValidate.dirty">
+              <h6 style="text-align: left;" *ngIf="valueValidate.errors?.required" class="text-danger">*Value is required</h6>
             </div>
+            <!-- Value end -->
+          </div>
+        </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                <label for="inputFess">Fees:</label>
-                <input type="text" class="form-control" id="inputFees" placeholder="Enter Fees">
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-primary">Create Course</button>
-                </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <!-- Fees -->
+          <label for="fess">Fees:</label>
+          <input [class.is-invalid] = "courseCreateForm.get('fees').invalid && courseCreateForm.get('fees').touched"
+            type="text" class="form-control" id="fees" placeholder="Enter Fees">
+          <div *ngIf="(feesValidate.invalid && feesValidate.touched) || feesValidate.dirty">
+            <h6 style="text-align: left;" *ngIf="feesValidate.errors?.required" class="text-danger">*Fees is required</h6>
+            <h6 style="text-align: left;" *ngIf="feesValidate.errors?.pattern" class="text-danger">*Please provide a valid Fees</h6>
+          </div>
+          <!-- Fees end -->
+        </div>
+      </div>
 
-                <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-danger">Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    </body>
-<html>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <button type="submit" class="btn btn-success" (click)="createCourse()" [disabled]="courseCreateForm">Create Course</button>
+        </div>
+
+        <div class="form-group col-md-2">
+          <a href="#" [routerLink]="['../../list']"> <button type="button" class="btn btn-danger" >Cancel</button></a>
+        </div>
+      </div>
+    </form>
+</div>
