@@ -11,13 +11,7 @@ import { CourseService } from '../services/course.service';
 export class CourseCreateComponent implements OnInit {
 
   courseCreateForm: FormGroup;
-  public courseId = ' ';
-  public course = {
-    courseName: '',
-    duration: '',
-    value: '',
-    fees: ''
-  };
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -51,7 +45,6 @@ export class CourseCreateComponent implements OnInit {
 
   createCourse(){
     const data = {
-      id : this.courseId,
       courseName : this.courseCreateForm.get('courseName').value,
       duration : this.courseCreateForm.get('duration').value,
       value : this.courseCreateForm.get('value').value,

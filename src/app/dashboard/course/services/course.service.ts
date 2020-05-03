@@ -12,7 +12,7 @@ export class CourseService {
   ) {   }
 
   courseCreate(data){
-    return this.http.get(this.courseApi + '/courseCreate', data);
+    return this.http.post(this.courseApi + '/courseCreate', data);
   }
 
   courseUpdate(data){
