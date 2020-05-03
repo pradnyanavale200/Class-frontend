@@ -4,6 +4,7 @@
       [class.has-error]="(firstName.invalid && firstName.touched) || (lastName.invalid && lastName.touched) || (email.invalid && email.touched) || (fcourse.invalid && fcourse.touched)">
       <h2 class="mx-auto">Student Register</h2>
 
+      <!--FirstName-->
       <label for="firstName">FirstName</label>
       <input type="text" class="form-control" id="FirstName" pattern="^[a-zA-Z]*$" formControlName="firstName">
       <div class="text-danger" *ngIf="(firstName.invalid && firstName.touched)">
@@ -12,7 +13,9 @@
       <div *ngIf="firstName.errors?.pattern" style="color: red">
         Firstname not valid.
       </div> <br>
+      <!--FirstName end-->
 
+      <!--LastName-->
       <label for="lastName">LastName</label>
       <input type="text" class="form-control" id="lastName" pattern="^[a-zA-Z]*$" formControlName="lastName">
       <div class="text-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
@@ -21,7 +24,9 @@
       <div *ngIf="lastName.errors?.pattern" style="color: red">
         Lastname not valid.
       </div><br>
+      <!--Lastname end-->
 
+      <!--Email-->
       <label for="email">E-mail</label>
       <input type="email" class="form-control" id="email"
         pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" formControlName="email">
@@ -31,7 +36,9 @@
       <div *ngIf="email.errors?.pattern" style="color: red">
         Email not valid.
       </div><br>
+      <!--Email end-->
 
+      <!--Course-->
       <label>Course</label>
       <ng-multiselect-dropdown name="fcourse" [settings]="dropdownSettings" [data]="Courses" formControlName="fcourse"
         [attr.disabled]="disabled"></ng-multiselect-dropdown>
@@ -40,6 +47,7 @@
         Course is Required
       </div>
       <br>
+      <!--Course end-->
 
       <button [disabled]="studentRegistrationForm.invalid" class="btn btn-primary">Register</button> <button
         (click)="cancel()" class="btn btn-danger">Cancel</button><br><br>
