@@ -1,6 +1,9 @@
 label {
     margin-top: 10px;
 }
+.rowlm {
+    margin: auto;
+}
 
 .colnm {
     margin: auto;
@@ -19,8 +22,9 @@ form h2,
 
 .btngrp {
     padding: 20px 0px 20px 0px; 
+    
 }
 
 .update, .cancel {
-    width: 48%;
+    width: 100%;
 }
