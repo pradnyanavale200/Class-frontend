@@ -2,87 +2,61 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Material Icons for password eye -->
 
-<!-- List of Students UI -->
+<!-- List of Student UI -->
 <div class="container-12 mx-4 my-4">
 
-  <!-- Search and Add student btn -->
+
+  <!-- Search and Add Student -->
   <div class="row p-3 mb-2 bg-light text-white">
-    <div class="col-md-10">
-      <div class="input-group w-50 float-right">
-        <input type="text" class="form-control" placeholder="Search ">
-        <span class="input-group-append">
-          <div class="input-group-text bg-white"><span class="material-icons">
-              search</span></div>
-        </span>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <button (click)="addStudent()" class="btn btn-primary w-100 float-center"> Add Student</button>
-    </div>
-  </div>
-  <!-- Search and Add student btn -->
-
-  <!-- Filters and List of students label -->
-  <div class="row bold text-monospace text-secondary">
-    <div class="col-md-3 border-right">
-      <h2 class="">Filters</h2>
-    </div>
-    <div class="col-md-9 border-left">
-      <h2 class="text-center">List of Students</h2>
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+      <form class="form-inline justify-content-end">
+        <div class="input-group">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
+          <span class="input-group-append">
+            <div class="input-group-text bg-white"><span class="material-icons">
+                search</span></div>
+          </span>
+        </div>
+        <div class="my-2 mx-2 my-sm-0">
+          <button (click)="addStudent()" class="btn btn-primary float-center"> Add Student</button>
+        </div>
+      </form>
     </div>
   </div>
-  <!-- Filters and List of students label -->
+  <!-- Search and Add Student -->
 
-  <!-- Filters content -->
-  <div class="row">
-    <div class="col-md-3 border-right">
-
-      <div>
-        <a href="#" class="text-info stretched-link mb-2">
-          <h5>STUDENTS</h5>
-        </a>
-      </div>
-      <div>
-        <a href="#" class="text-info stretched-link mb-2">
-          <h5>DURATION</h5>
-        </a>
-      <div>
-        <a href="#" class="text-info stretched-link ">
-          <h5>FEES</h5>
-        </a>
-      </div>
-      </div>
-    </div>
-    <!-- Filters content -->
-
-    <!-- Table of Student List -->
-    <div class="col-md-9 border-left">
-      <div class="card shadow border border-white">
+  <!-- Filter and list of Student Table -->
+  <div class="row border-top border-primary">
+    <!-- Table of student list -->
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+      <h2 class="text-center text-monospace text-secondary">List of Student</h2>
+      <div class="card shadow border-white mb-1">
         <div class="card-body">
           <table class="table text-center table-bordered table-hover uk-table-condensed">
             <thead class="table-primary active">
               <tr>
                 <th scope="col">Sr.No</th>
-                <th scope="col">Name </th>
+                <th scope="col">Student Name</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
             </thead>
-
             <tbody>
               <tr class="text-center" *ngFor="let item of students; let i = index">
-                <th scope="row">{{i}}</th>
-                <td>{{item.firstName}} {{item.lastName}}</td>
-                <td><button (click)="editStudent(item)" class="btn btn-outline-warning uk-text-contrast">Edit</button></td>
-                <td><button (click)="deleteStudent(item)" class="btn btn-danger">Delete</button></td>
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.firstName}}</td>
+                <td><button (click)="editStudent(i)" class="btn btn-warning uk-text-contrast">Edit</button>
+                </td>
+                <td><button (click)="deleteStudent(i)" class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
           </table>
-          <small *ngIf="disablelabel">No students found</small>
+                <small *ngIf="disablelabel" class="text-left p-3 bold">No Student added</small>
         </div>
       </div>
     </div>
-    <!-- Table of Student List -->
+    <!-- Table of student list -->
   </div>
-  <!-- List of Students UI -->
+  <!-- Filter and list of Student Table -->
+</div>
+<!-- List of Student UI -->
