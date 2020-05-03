@@ -11,6 +11,10 @@ export class CourseService {
     private http: HttpClient
   ) {   }
 
+  courseCreate(data){
+    return this.http.get(this.courseApi + '/courseCreate', data);
+  }
+
   courseUpdate(data){
     return this.http.get(this.courseApi + '/courseUpdate', data);
   }
