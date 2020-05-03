@@ -2,7 +2,10 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Material Icons for password eye -->
 
+<!-- List of Students UI -->
 <div class="container-12 mx-4 my-4">
+
+  <!-- Search and Add student btn -->
   <div class="row p-3 mb-2 bg-light text-white">
     <div class="col-md-10">
       <div class="input-group w-50 float-right">
@@ -18,7 +21,9 @@
       <button (click)="addStudent()" class="btn btn-primary w-100 float-center"> Add Student</button>
     </div>
   </div>
+  <!-- Search and Add student btn -->
 
+  <!-- Filters and List of students label -->
   <div class="row bold text-monospace text-secondary">
     <div class="col-md-3 border-right">
       <h2 class="">Filters</h2>
@@ -27,27 +32,31 @@
       <h2 class="text-center">List of Students</h2>
     </div>
   </div>
+  <!-- Filters and List of students label -->
 
+  <!-- Filters content -->
   <div class="row">
-    <div class="col-md-3 border-right p-3 mb-2 bg-light">
+    <div class="col-md-3 border-right">
+
       <div>
-        <a href="#" class="text-info stretched-link mb-4">
+        <a href="#" class="text-info stretched-link mb-2">
           <h5>STUDENTS</h5>
         </a>
       </div>
       <div>
-        <a href="#" class="text-info stretched-link mb-4">
+        <a href="#" class="text-info stretched-link mb-2">
           <h5>DURATION</h5>
         </a>
-      </div>
       <div>
-        <a href="#" class="text-info stretched-link mb-4 ">
-            <h5>FEES</h5>
+        <a href="#" class="text-info stretched-link ">
+          <h5>FEES</h5>
         </a>
       </div>
+      </div>
     </div>
+    <!-- Filters content -->
 
-
+    <!-- Table of Student List -->
     <div class="col-md-9 border-left">
       <div class="card shadow border border-white">
         <div class="card-body">
@@ -65,8 +74,7 @@
               <tr class="text-center" *ngFor="let item of students; let i = index">
                 <th scope="row">{{i}}</th>
                 <td>{{item.firstName}} {{item.lastName}}</td>
-                <td><button (click)="editStudent(item)" class="btn btn-outline-warning uk-text-contrast">Edit</button>
-                </td>
+                <td><button (click)="editStudent(item)" class="btn btn-outline-warning uk-text-contrast">Edit</button></td>
                 <td><button (click)="deleteStudent(item)" class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
@@ -75,5 +83,6 @@
         </div>
       </div>
     </div>
+    <!-- Table of Student List -->
   </div>
-</div>
+  <!-- List of Students UI -->

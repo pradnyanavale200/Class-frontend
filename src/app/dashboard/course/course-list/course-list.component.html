@@ -1,1 +1,92 @@
-<p>course-list works!</p>
+<!-- Material Icons for password eye -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Material Icons for password eye -->
+
+<!-- List of Course UI -->
+<div class="container-12 mx-4 my-4">
+
+
+  <!-- Search and Add Course -->
+  <div class="row p-3 mb-2 bg-light text-white">
+    <div class="col-md-10">
+      <div class="input-group w-50 float-right">
+        <input type="text" class="form-control" placeholder="Search ">
+        <span class="input-group-append">
+          <div class="input-group-text bg-white"><span class="material-icons">
+              search</span></div>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <button (click)="addCourse()" class="btn btn-primary w-100 float-center"> Add Course</button>
+    </div>
+  </div>
+  <!-- Search and Add Course -->
+
+  <!-- Filter and list of Course label -->
+  <div class="row bold text-monospace text-secondary">
+    <div class="col-md-3 border-right">
+      <h2 class="">Filters</h2>
+    </div>
+    <div class="col-md-9 border-left">
+      <h2 class="text-center">List of Courses</h2>
+    </div>
+  </div>
+  <!-- Filter and list of Course label -->
+
+  <!-- Filters content and list of Course table -->
+  <div class="row">
+  <!-- Filters Links -->
+    <div class="col-md-3 border-right">
+
+      <div>
+        <a href="#" class="text-info stretched-link mb-2">
+          <h5>SUBJECTS</h5>
+        </a>
+      </div>
+      <div>
+        <a href="#" class="text-info stretched-link mb-2">
+          <h5>DURATION</h5>
+        </a>
+        <div>
+          <a href="#" class="text-info stretched-link ">
+            <h5>FEES</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+  <!-- Filters Links -->
+
+  <!-- Table of Courses list -->
+    <div class="col-md-9 border-left">
+      <div class="card shadow border border-white">
+        <div class="card-body">
+          <table class="table text-center table-bordered table-hover uk-table-condensed">
+            <thead class="table-primary active">
+              <tr>
+                <th scope="col">Sr.No</th>
+                <th scope="col">Course Name</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="text-center" *ngFor="let item of Course; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.name}}</td>
+                <td><button (click)="editCourse(item)" class="btn btn-outline-warning uk-text-contrast">Edit</button>
+                </td>
+                <td><button (click)="deleteCourse(item)" class="btn btn-danger">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <small *ngIf="disableCourse" >No Course added</small>
+        </div>
+      </div>
+     <!-- Table of course list -->
+    </div>
+    <!-- Filter content and list of students table -->
+  </div>
+  <!-- List of Course UI -->
