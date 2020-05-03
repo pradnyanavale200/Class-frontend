@@ -7,38 +7,33 @@
         <form class="formGroup" [formGroup]="loginForm">
             <h2 >Login</h2>
             <div  class="formGroup frmgrp" >
-                <!-- <label for="firstName" >Firstname : </label>
-                <input  class="form-control" type="text" formControlName="firstName" required>
-                <div class="text-danger" *ngIf="firstName.invalid && (firstName.dirty|| firstName.touched)">
-                    Please enter valid firstname
-                </div>
-
-                <label for="lastName" >Lastname : </label>
-                <input  class="form-control" type="text" formControlName="lastName">
-                <div class="text-danger" *ngIf="lastName.invalid && (lastName.dirty|| lastName.touched)">
-                    Please enter valid lastname
-                </div> -->
-
+                <!-- Firstname -->
                 <label for="email" >Email : </label>
                 <input  class="form-control" type="text" formControlName="email">
                 <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched)">
                     Please enter valid email<br>Must be in Format : abcd12@gmail.com
                 </div>
+                <!-- Firstname -->
 
+                <!-- Lastname -->
                 <label for="password" >Password : </label>
                 <input  class="form-control" type="password" formControlName="password">
                 <div class="text-danger" *ngIf="password.invalid && (password.dirty|| password.touched)">
                     Please enter valid password<br>Password must contain at least one letter, at least one number, and be longer than six charaters.
                 </div>
+                <!-- Lastname -->
 
+                <!-- Login and new user button -->
                 <div  class="btn-block btngrp" >
                     <div class="update btn-block" >
                         <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" (click)="onLoginClick()" >Login</button>
                     </div>
                     <div class="cancel" >
-                        <a class="btn btn-block " >New User? SignUp </a>
+                        <a class="btn btn-block " (click)="onRegisterClick()">New User? SignUp </a>
                     </div>
                 </div>
+                <!-- Login and new user button -->
+                
             </div>
 
         </form>

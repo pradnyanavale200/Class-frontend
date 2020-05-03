@@ -4,76 +4,77 @@
 
 <!-- User Registeration form -->
 <div class="container-fluid">
-  <div class="row justify-content-center align-items-center">
+  <div class="row justify-content-center align-items-center mx-4 my-4">
     <div class=" col-sm-8 col-md-4 mb-4 col-12 col-md-5 col-sm-7  shadow-lg p-3 mb-5 rounded ">
 
-      <form (ngSubmit)="onSubmit(userRegisterForm.value)" #userRegisterForm="ngForm" novalidate>
-
+      
+      <form [formGroup]="regsiterForm" class="colmn">
+        <h2>Register</h2>
 
         <!-- First Name -->
-        <div class="form-group" [class.has-error]="fnameRef.invalid">
+        <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">FirstName: </label>
-          <input required [(ngModel)]="firstName" type="text" class="form-control" name="FirstName" #fnameRef="ngModel"
+          <input required formControlName="firstName" type="text" class="form-control"  name="FirstName" 
             pattern="[a-zA-Z]*">
 
-          <small class="help-block" *ngIf="fnameRef.errors && (fnameRef.dirty || fnameRef.touched)">Please enter First
+          <small class="help-block" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">Please enter First
             Name
           </small>
-          <small class="help-block" *ngIf="fnameRef.errors?.pattern"><br>Should contain Alphabets only</small>
+          <small class="help-block" *ngIf="firstName.errors?.pattern"><br>Should contain Alphabets only</small>
         </div>
         <!-- First Name -->
 
         <!-- Last Name -->
-        <div class="form-group" [class.has-error]="lnameRef.invalid">
+        <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">LastName: </label>
-          <input required [(ngModel)]="lastName" type="text" class="form-control" name="LastName" #lnameRef="ngModel"
+          <input required formControlName="lastName" type="text" class="form-control" name="LastName" 
             pattern="[a-zA-Z]*">
 
-          <small class="help-block" *ngIf="lnameRef.errors && (lnameRef.dirty || lnameRef.touched)">Please enter Last
+          <small class="help-block" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Please enter Last
             Name
           </small>
-          <small class="help-block" *ngIf="lnameRef.errors?.pattern"><br>Should contain Alphabets only</small>
+          <small class="help-block" *ngIf="lastName.errors?.pattern"><br>Should contain Alphabets only</small>
         </div>
         <!-- Last Name -->
 
 
         <!-- Email ID -->
-        <div class="form-group" [class.has-error]="emailRef.invalid">
+        <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">Email Id: </label>
-          <input required [(ngModel)]="email" type="email" class="form-control" name="Email" #emailRef="ngModel"
+          <input required formControlName="email" type="email" class="form-control" name="Email" 
             pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
 
-          <small class="help-block" *ngIf="emailRef.invalid && (emailRef.dirty || emailRef.touched)">Please enter Email
+          <small class="help-block" *ngIf="email.invalid && (email.dirty || email.touched)">Please enter Email
             Id
           </small>
-          <small class="help-block" *ngIf="emailRef.errors?.pattern"><br>You can use letters, numbers, periods and
+          <small class="help-block" *ngIf="email.errors?.pattern"><br>You can use letters, numbers, periods and
             underscore</small>
         </div>
         <!-- Email ID -->
 
         <!-- Password -->
-        <div class="form-group" [class.has-error]="passRef.invalid">
+        <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">Password: </label>
           <div class="input-group">
-            <input required data-toggle="password" [(ngModel)]="password" type="{{typePassword}}" class="form-control"
-              name="Password" #passRef="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+            <input required data-toggle="password" formControlName="password" type="{{typePassword}}" class="form-control"
+              name="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
             <div class="input-group-append">
               <div class="input-group-text bg-white"><span class="material-icons" (click)="toggle()">
                   {{togglePassword}}
                 </span></div>
             </div>
           </div>
-          <small class="help-block" *ngIf="passRef.errors && (passRef.dirty || passRef.touched)">Please enter valid
+          <small class="help-block" *ngIf="password.errors && (password.dirty || password.touched)">Please enter valid
             Password
           </small>
-          <small class="help-block" *ngIf="passRef.errors?.pattern"><br>Use 8 or more characters with a mix of letters,
+          <small class="help-block" *ngIf="password.errors?.pattern"><br>Use 8 or more characters with a mix of letters,
             numbers & symbols ;)</small>
         </div>
         <!-- Password -->
 
         <!-- Register Button -->
-        <button [disabled]="!userRegisterForm.form.valid" type="submit"
-          class="btn btn-primary btn-block btn-group-lg shadow-lg">REGISTER </button>
+        <button [disabled]="regsiterForm.invalid" type="submit"
+          class="btn btn-primary btn-block btn-group-lg shadow-lg" (click)="onSubmit()">REGISTER </button>
         <!-- Register Button -->
       </form>
     </div>

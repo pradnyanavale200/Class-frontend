@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { REGEX } from 'src/app/shared/constants';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,28 +16,41 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(){
     this.loginForm = this.fb.group({
-      // firstName : ['', [Validators.required, Validators.pattern(REGEX.NAME)]],
-      // lastName : ['', [Validators.required, Validators.pattern(REGEX.NAME)]],
       email : ['', [Validators.required, Validators.pattern(REGEX.EMAIL)]],
       password : ['', [Validators.required, Validators.pattern(REGEX.PASSWORD)]],
     });
   }
 
-  onLoginClick() {
-    // Code is left here. Under development
+  loginData() {
+    const loginDataValue = {
+      email : this.loginForm.get('email').value,
+      password : this.loginForm.get('password').value,
+    };
+    return loginDataValue;
   }
 
-  // get firstName() {
-  //   return this.loginForm.get('firstName');
-  // }
+  onLoginClick() {
 
-  // get lastName() {
-  //   return this.loginForm.get('lastName');
-  // }
+    const data = this.loginData();
+    this.auth.login(data).subscribe((res: any) => {
+
+      this.router.navigate(['./dashboard/institute']);
+    }, (err: any) => {
+      alert('Error in login');
+    });
+  }
+
+  onRegisterClick() {
+    this.router.navigate(['./auth/register']);
+  }
+
+
   get email() {
     return this.loginForm.get('email');
   }

@@ -28,3 +28,7 @@ form h2,
 .update, .cancel {
     width: 100%;
 }
+
+.cancel { 
+    margin-top: 20px;
+}

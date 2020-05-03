@@ -6,6 +6,7 @@ export const REGEX = {
     // Description : In this Pattern email should match this pattern eg. < example > @ < mail >.< com >.
     EMAIL: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
     // Description : In this Pattern only characters will be accepted and can be used for firstName and lastname.
-    PASSWORD: '^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
+    // PASSWORD: '^(?=.*[0-9]+.*)(?=.*\d)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
+    PASSWORD: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
 
 };
