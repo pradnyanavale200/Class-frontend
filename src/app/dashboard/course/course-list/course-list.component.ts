@@ -7,9 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseListComponent implements OnInit {
 
+  // Dummy variable[]
+  Course = [
+    {
+      name: 'Angular'
+    }
+  ];
+
+  disableCourse = false;
   constructor() { }
 
   ngOnInit(): void {
+
+  }
+
+  addCourse() {
+
+  }
+
+  editCourse(i) {
+
+  }
+
+  deleteCourse(i) {
+
   }
 
 }
