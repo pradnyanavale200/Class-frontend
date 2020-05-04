@@ -27,10 +27,10 @@ export class StudentService {
   }
 
   getStudent(data): Observable<object> {
-    return this.httpService.post(`${this.studentApi}/studentSearch`, data);
+    return this.httpService.get(`${this.studentApi}/studentSearch/${data}`);
   }
 
   updateStudent(data): Observable<object> {
-    return this.httpService.post(`${this.studentApi}/studentUpdate`, data);
+    return this.httpService.put(`${this.studentApi}/studentUpdate`, data);
   }
 }

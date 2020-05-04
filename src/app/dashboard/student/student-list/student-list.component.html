@@ -10,13 +10,6 @@
   <div class="row p-3 mb-2 bg-light text-white">
     <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
       <form class="form-inline justify-content-end">
-        <div class="input-group">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-          <span class="input-group-append">
-            <div class="input-group-text bg-white"><span class="material-icons">
-                search</span></div>
-          </span>
-        </div>
         <div class="my-2 mx-2 my-sm-0">
           <button (click)="addStudent()" class="btn btn-primary float-center"> Add Student</button>
         </div>
@@ -51,7 +44,7 @@
                 <td>{{item.lastname}}</td>
                 <td>{{item.email}}</td>
                 <td><li *ngFor="let item2 of item.courses">{{item2.item_text}}</li></td>
-                <td><button (click)="editStudent(item._id)" class="btn btn-warning uk-text-contrast">Edit</button>
+                <td><button (click)="editStudent(item._id)" class="btn btn-warning">Edit</button>
                 </td>
                 <td><button (click)="deleteStudent(item._id)" class="btn btn-danger">Delete</button></td>
               </tr>
