@@ -1,6 +1,10 @@
 export interface Student {
-  firstName: string;
-  lastName: string;
+  _id : string;
+  firstname: string;
+  lastname: string;
   email: string;
-  courses: [];
+  courses: [{
+    item_id: string,
+    item_text: string
+  }];
 }

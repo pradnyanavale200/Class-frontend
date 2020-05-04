@@ -1,7 +1,7 @@
 <div class="mx-4 my-4 row justify-content-center align-items-center">
   <div class="col-lg-8 col-md-8 col-sm-12 col-xs-8 shadow">
     <form class="formGroup px-4 py-4" [formGroup]="studentRegistrationForm"
-      [class.has-error]="(firstName.invalid && firstName.touched) || (lastName.invalid && lastName.touched) || (email.invalid && email.touched) || (fcourse.invalid && fcourse.touched)">
+      [class.has-error]="(firstName.invalid && firstName.touched) || (lastName.invalid && lastName.touched) || (email.invalid && email.touched) || (courses.invalid && courses.touched)">
       <h2 class="mx-auto">Student Register</h2>
 
       <!--FirstName-->
@@ -40,16 +40,16 @@
 
       <!--Course-->
       <label>Course</label>
-      <ng-multiselect-dropdown name="fcourse" [settings]="dropdownSettings" [data]="Courses" formControlName="fcourse"
+      <ng-multiselect-dropdown name="courses" [settings]="dropdownSettings" [data]="Courses" formControlName="courses"
         [attr.disabled]="disabled"></ng-multiselect-dropdown>
 
-      <div class="text-danger" *ngIf="fcourse.invalid && (fcourse.dirty || fcourse.touched)">
+      <div class="text-danger" *ngIf="courses.invalid && (courses.dirty || courses.touched)">
         Course is Required
       </div>
       <br>
       <!--Course end-->
 
-      <button [disabled]="studentRegistrationForm.invalid" class="btn btn-primary">Register</button> <button
+      <button (click)="register()" [disabled]="studentRegistrationForm.invalid" class="btn btn-primary">Register</button> <button
         (click)="cancel()" class="btn btn-danger">Cancel</button><br><br>
     </form>
   </div>

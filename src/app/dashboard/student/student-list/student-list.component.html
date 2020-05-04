@@ -36,7 +36,10 @@
             <thead class="table-primary active">
               <tr>
                 <th scope="col">Sr.No</th>
-                <th scope="col">Student Name</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Email</th>
+                <th scope="col">Courses</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -44,14 +47,16 @@
             <tbody>
               <tr class="text-center" *ngFor="let item of students; let i = index">
                 <th scope="row">{{i+1}}</th>
-                <td>{{item.firstName}}</td>
-                <td><button (click)="editStudent(i)" class="btn btn-warning uk-text-contrast">Edit</button>
+                <td>{{item.firstname}}</td>
+                <td>{{item.lastname}}</td>
+                <td>{{item.email}}</td>
+                <td><li *ngFor="let item2 of item.courses">{{item2.item_text}}</li></td>
+                <td><button (click)="editStudent(item._id)" class="btn btn-warning uk-text-contrast">Edit</button>
                 </td>
-                <td><button (click)="deleteStudent(i)" class="btn btn-danger">Delete</button></td>
+                <td><button (click)="deleteStudent(item._id)" class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
           </table>
-                <small *ngIf="disablelabel" class="text-left p-3 bold">No Student added</small>
         </div>
       </div>
     </div>

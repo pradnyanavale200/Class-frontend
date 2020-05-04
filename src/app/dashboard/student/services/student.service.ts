@@ -4,21 +4,33 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentService {
-
   studentApi = `${environment.api}/student`;
 
-  constructor(
-    private httpService: HttpService
-  ) { }
+  constructor(private httpService: HttpService) {}
 
   getStudents(): Observable<object> {
     return this.httpService.get(`${this.studentApi}/studentDisplay`);
   }
 
-  createStudents(student): Observable<object> {
-    return this.httpService.post(`${this.studentApi}/studentRegistration`, student);
+  createStudent(student): Observable<object> {
+    return this.httpService.post(
+      `${this.studentApi}/studentRegistration`,
+      student
+    );
+  }
+
+  deleteStudent(id): Observable<object> {
+    return this.httpService.delete(`${this.studentApi}/studentDelete/${id}`);
+  }
+
+  getStudent(data): Observable<object> {
+    return this.httpService.post(`${this.studentApi}/studentSearch`, data);
+  }
+
+  updateStudent(data): Observable<object> {
+    return this.httpService.post(`${this.studentApi}/studentUpdate`, data);
   }
 }
