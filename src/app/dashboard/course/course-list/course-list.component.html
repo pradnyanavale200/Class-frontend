@@ -30,6 +30,9 @@
               <tr>
                 <th scope="col">Sr.No</th>
                 <th scope="col">Course Name</th>
+                <th scope="col">DurationType</th>
+                <th scope="col">DurationValue</th>
+                <th scope="col">Fees</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -38,9 +41,12 @@
               <tr class="text-center" *ngFor="let item of Course; let i = index">
                 <th scope="row">{{i+1}}</th>
                 <td>{{item.name}}</td>
+                <td>{{item.durationType}}</td>
+                <td>{{item.durationValue}}</td>
+                <td>{{item.fees}}</td>
                 <td><button (click)="editCourse(item)" class="btn btn-warning text-dark w-50">Edit</button>
                 </td>
-                <td><button (click)="deleteCourse(item)" class="btn btn-danger">Delete</button></td>
+                <td><button (click)="deleteCourse(item._id)" class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
           </table>

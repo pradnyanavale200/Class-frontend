@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {  Router, ActivatedRoute } from '@angular/router';
+import { CourseService } from '../services/course.service';
+
 
 @Component({
   selector: 'app-course-list',
@@ -7,30 +10,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseListComponent implements OnInit {
 
-  // Dummy variable[]
-  Course = [
-    {
-      name: 'Angular'
-    }
-  ];
-
+  Course = [];
+  InstID :any = '5eb029a7bbb56d0acc8a9d04';
   disableCourse = false;
-  constructor() { }
+
+  constructor(
+    private route:ActivatedRoute,
+    private router:Router,
+    private courseService: CourseService
+    ) { }
 
   ngOnInit(): void {
-
+    this.courseService.getCourse(this.InstID).subscribe((response: any) => {
+      this.Course = response.course;
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   addCourse() {
-
+  this.router.navigate(['./dashboard/course/create']);
   }
 
   editCourse(i) {
-
+    this.router.navigate(['./dashboard/course/update']);
   }
 
-  deleteCourse(i) {
-
+  deleteCourse(courseId) {
+    this.courseService.deleteCourse(courseId).subscribe((response: any) => {
+      this.router.navigate(['./dashboard/course/list']);
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 }

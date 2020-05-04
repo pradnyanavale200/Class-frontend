@@ -19,10 +19,15 @@ export class CourseService {
     return this.http.put(this.courseApi, data);
   }
 
-  getCourse(){
-    return this.http.get(this.courseApi);
+  getCourse(data){
+    return this.http.get(this.courseApi + data);
   }
 
+  deleteCourse(data){
+    console.log(data); 
+    return this.http.delete(this.courseApi + data);
+    
+  }
   // createCourse(data) {
   //   return this.http.post(this.courseApi, data);
   // }
