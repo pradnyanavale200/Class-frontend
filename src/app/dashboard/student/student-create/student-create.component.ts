@@ -92,7 +92,7 @@ export class StudentCreateComponent implements OnInit {
     this.studentService.createStudent(student).subscribe(
       (response: any) => {
         alert(response.message);
-        this.router.navigate(['/dasboard/student/list']);
+        this.router.navigate(['./dashboard/student/list']);
       },
       (error) => {
         console.log(error);

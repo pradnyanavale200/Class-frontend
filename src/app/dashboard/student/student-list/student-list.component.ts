@@ -15,7 +15,7 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getStudents();
-    if (this.students != undefined) {
+    if (this.students !== undefined) {
       this.disablelabel = false;
     }
   }
@@ -24,7 +24,6 @@ export class StudentListComponent implements OnInit {
     this.studentService.getStudents().subscribe(
       (response: any) => {
         this.students = response.studentList;
-        console.log(this.students);
       },
       (error) => {
         alert(error.error.message);
@@ -44,7 +43,7 @@ export class StudentListComponent implements OnInit {
   }
 
   editStudent(id) {
-    this.router.navigate(['../dashboard/student/update'], id);
+    this.router.navigate(['./dashboard/student/update/' + id]);
   }
 
   addStudent() {
