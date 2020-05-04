@@ -5,16 +5,16 @@
 <!-- User Registeration form -->
 <div class="container-fluid">
   <div class="row justify-content-center align-items-center mx-4 my-4">
-    <div class=" col-sm-8 col-md-4 mb-4 col-12 col-md-5 col-sm-7  shadow-lg p-3 mb-5 rounded ">
+    <div class=" col-sm-8 col-md-8 col-lg-6  shadow-lg p-3 mb-5 rounded ">
 
-      
+
       <form [formGroup]="regsiterForm" class="colmn">
         <h2>Register</h2>
 
         <!-- First Name -->
         <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">FirstName: </label>
-          <input required formControlName="firstName" type="text" class="form-control"  name="FirstName" 
+          <input required formControlName="firstName" type="text" class="form-control"  name="FirstName"
             pattern="[a-zA-Z]*">
 
           <small class="help-block" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">Please enter First
@@ -27,7 +27,7 @@
         <!-- Last Name -->
         <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">LastName: </label>
-          <input required formControlName="lastName" type="text" class="form-control" name="LastName" 
+          <input required formControlName="lastName" type="text" class="form-control" name="LastName"
             pattern="[a-zA-Z]*">
 
           <small class="help-block" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Please enter Last
@@ -41,7 +41,7 @@
         <!-- Email ID -->
         <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">Email Id: </label>
-          <input required formControlName="email" type="email" class="form-control" name="Email" 
+          <input required formControlName="email" type="email" class="form-control" name="Email"
             pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
 
           <small class="help-block" *ngIf="email.invalid && (email.dirty || email.touched)">Please enter Email
