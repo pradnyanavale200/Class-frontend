@@ -1,11 +1,5 @@
 export class Institute {
-  name: string;
-  addrLine1: string;
-  addrLine2: string;
   state = { id: -1, name: '' };
-  city = '';
-  pincode: number;
-
   stateArray = [];
   cityArray = [];
   disabledcity = true;

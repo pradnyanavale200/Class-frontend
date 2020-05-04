@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-list',
@@ -15,22 +16,19 @@ export class CourseListComponent implements OnInit {
   ];
 
   disableCourse = false;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
 
   }
 
   addCourse() {
-
+    this.router.navigate(['/dashboard/course/create']);
   }
 
   editCourse(i) {
-
+    this.router.navigate(['/dashboard/course/update']);
   }
 
-  deleteCourse(i) {
-
-  }
-
+  deleteCourse(i) {}
 }
