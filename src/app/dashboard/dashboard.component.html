@@ -36,7 +36,15 @@
         </form>
       </nav>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -61,14 +69,10 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-
             >
               <img src="./assets/profile pic.png" alt="" />
             </a>
-            <div
-              class="dropdown-menu"
-              aria-labelledby="navbarDropdown"
-            >
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Logout</a>
             </div>
           </li>
@@ -88,19 +92,24 @@
   <!-- Sidebar -->
   <div class="bg-light border-right" id="sidebar-wrapper">
     <div class="list-group list-group-flush">
-      <a href="#" class="list-group-item list-group-item-action bg-light"
+      <a
+      (click)="onCourseClick()"
+        class="list-group-item list-group-item-action bg-light"
         >Courses</a
       >
       <a
-        href="#"
-        routerLinkActive="router-link-active"
-        class="list-group-item list-group-item-action bg-light"
+      (click)="onStudentClick()"
+      class="list-group-item list-group-item-action bg-light"
         >Students</a
       >
-      <a href="#" class="list-group-item list-group-item-action bg-light"
+      <a
+      (click)="onInstituteClick()"
+      class="list-group-item list-group-item-action bg-light"
         >Institute</a
       >
-      <a href="#" class="list-group-item list-group-item-action bg-light"
+      <a
+      (click)="onProfileClick()"
+      class="list-group-item list-group-item-action bg-light"
         >Profile</a
       >
     </div>
