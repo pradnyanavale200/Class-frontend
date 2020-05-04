@@ -58,6 +58,8 @@ export class CourseCreateComponent implements OnInit {
       Institute_id
     };
 
+    console.log(data);
+
     this.courseService.courseCreate(data).subscribe((response: any) => {
       this.router.navigate(['./dashboard/course/list']);
     }, (error) => {
