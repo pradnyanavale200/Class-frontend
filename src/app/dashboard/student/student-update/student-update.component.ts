@@ -40,17 +40,12 @@ export class StudentUpdateComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.studId = id;
-    console.log(this.studId);
-    const data = {id : this.studId};
 
     this.studentService.getStudent(this.studId).subscribe((response: any) => {
         this.student = response.student;
-        // this.Courses = response.student.
         this.setData(response.student);
-        console.log('response : ', response.student);
       }, (error) => {
         console.log(error);
-        // alert(error.error.message);
     });
 
     this.studentupdateform = this.fb.group({
@@ -109,15 +104,13 @@ export class StudentUpdateComponent implements OnInit {
       email: this.studentupdateform.get('email').value,
       courses: this.studentupdateform.get('courses').value
     };
-    console.log(data);
 
     this.studentService.updateStudent(data).subscribe((response: any) => {
-        console.log(response);
-        // alert(response.msg);
+        alert(response.message);
         this.router.navigate(['/dashboard/student/list']);
       }, (error) => {
         console.log(error);
-        alert(error.error.msg);
+        alert(error.error.message);
     });
   }
 }

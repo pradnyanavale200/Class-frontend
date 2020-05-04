@@ -1,4 +1,4 @@
-<!-- <p>student-update works!</p> -->
+
 
 <div class="row" style="/*border: 1px solid black;*/">
     <div class="col-lg-6 col-md-8 col-sm-8 col-xs-8 shadow" style="/*border: 1px solid red;*/ border-radius: 5px; vertical-align: middle; margin: auto;" >
@@ -14,18 +14,7 @@
                 <label for="email" style="margin-top: 10px;">Email : </label>
                 <input id="email" class="form-control" type="text" formControlName="email">
 
-                <!-- <label for="courses" style="margin-top: 10px;">Courses enrolled : </label>
-                <input id="courses" disabled class="form-control" type="text" name="courses"> -->
-
                 <label for="courses" style="margin-top: 10px;">Courses enrolled : </label>
-                <!-- <ul class="list-group" *ngFor="let item of list">
-                    <li class="list-group-item disabled">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">{{item.no}}</li>
-                  </ul> -->
 
                 <ng-multiselect-dropdown name="courses" [settings]="dropdownSettings" [data]="Courses" formControlName="courses"
                 [attr.disabled]="disabled"></ng-multiselect-dropdown>

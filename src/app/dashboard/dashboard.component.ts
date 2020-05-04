@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  onCourseClick() {
+    this.router.navigate(['/dashboard/course']);
+  }
+
+  onStudentClick() {
+    this.router.navigate(['/dashboard/student']);
+  }
+
+  onInstituteClick() {
+    this.router.navigate(['/dashboard/institute']);
+  }
+
+  onProfileClick() {
+    this.router.navigate(['/dashboard/user']);
+  }
 }

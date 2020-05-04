@@ -100,8 +100,4 @@ export class StudentCreateComponent implements OnInit {
       }
     );
   }
-
-  fun() {
-    console.log(this.studentRegistrationForm.value);
-  }
 }
