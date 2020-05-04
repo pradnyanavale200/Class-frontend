@@ -1,5 +1,7 @@
+import { Institute } from './../../../instituteDemo';
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/core/services/http.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,28 +9,29 @@ import { HttpService } from 'src/app/core/services/http.service';
 export class CourseService {
 
   courseApi = 'http://localhost:3000/course/';
+
   constructor(
     private http: HttpService
   ) {   }
+
 
   courseCreate(data){
     return this.http.post(this.courseApi, data);
   }
 
-  courseUpdate(data){
+  updateCourse(data){
     return this.http.put(this.courseApi, data);
   }
 
-  getCourse(data){
+  getCourses(data){
     return this.http.get(this.courseApi + data);
   }
 
-  deleteCourse(data){
-    console.log(data); 
-    return this.http.delete(this.courseApi + data);
-    
+  getCourseData(data): Observable<object> {
+    return this.http.get(this.courseApi + 'courseSearch/' + data);
   }
-  // createCourse(data) {
-  //   return this.http.post(this.courseApi, data);
-  // }
+
+  deleteCourse(courseId, instituteId){
+    return this.http.delete(this.courseApi + 'courseDelete/' + courseId + '/' + instituteId);
+  }
 }

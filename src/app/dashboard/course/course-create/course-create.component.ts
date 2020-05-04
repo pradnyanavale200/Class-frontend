@@ -22,23 +22,23 @@ export class CourseCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseCreateForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')]],
-      durationType: ['', [Validators.required, Validators.pattern('[0-9]{1,2}')]],
-      durationValue: ['', Validators.required],
+      courseName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')]],
+      duration: ['', [Validators.required, Validators.pattern('[0-9]{1,2}')]],
+      value: ['', Validators.required],
       fees: ['', [Validators.required, Validators.pattern('^[0-9]*')]]
     });
   }
 
   get courseNameValidate() {
-    return this.courseCreateForm.get('name');
+    return this.courseCreateForm.get('courseName');
   }
 
   get durationValidate() {
-    return this.courseCreateForm.get('durationType');
+    return this.courseCreateForm.get('duration');
   }
 
   get valueValidate() {
-    return this.courseCreateForm.get('durationValue');
+    return this.courseCreateForm.get('value');
   }
 
   get feesValidate() {
@@ -51,13 +51,13 @@ export class CourseCreateComponent implements OnInit {
 
     const Institute_id = '5eb029a7bbb56d0acc8a9d04';
     const data = {
-      name : this.courseCreateForm.get('name').value,
-      durationType : this.courseCreateForm.get('durationType').value,
-      durationValue : this.courseCreateForm.get('durationValue').value,
+      courseName : this.courseCreateForm.get('courseName').value,
+      duration : this.courseCreateForm.get('duration').value,
+      value : this.courseCreateForm.get('value').value,
       fees : this.courseCreateForm.get('fees').value,
       Institute_id
     };
-    console.log(data);
+
     this.courseService.courseCreate(data).subscribe((response: any) => {
       this.router.navigate(['./dashboard/course/list']);
     }, (error) => {

@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: CourseListComponent },
-      { path: 'update', component: CourseUpdateComponent },
+      { path: 'update/:id', component: CourseUpdateComponent },
       { path: 'create', component: CourseCreateComponent },
     ]
   }
