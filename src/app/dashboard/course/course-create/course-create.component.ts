@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {  Router } from '@angular/router';
+import {  Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '../services/course.service';
 
 @Component({
@@ -11,32 +11,34 @@ import { CourseService } from '../services/course.service';
 export class CourseCreateComponent implements OnInit {
 
   courseCreateForm: FormGroup;
+  courseId: string;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private courseService: CourseService
   ) { }
 
   ngOnInit(): void {
     this.courseCreateForm = this.fb.group({
-      courseName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')]],
-      duration: ['', [Validators.required, Validators.pattern('[0-9]{1,2}')]],
-      value: ['', Validators.required],
-      fees: ['', [Validators.required, Validators.pattern('[0-9]')]]
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')]],
+      durationType: ['', [Validators.required, Validators.pattern('[0-9]{1,2}')]],
+      durationValue: ['', Validators.required],
+      fees: ['', [Validators.required, Validators.pattern('^[0-9]*')]]
     });
   }
 
   get courseNameValidate() {
-    return this.courseCreateForm.get('courseName');
+    return this.courseCreateForm.get('name');
   }
 
   get durationValidate() {
-    return this.courseCreateForm.get('duration');
+    return this.courseCreateForm.get('durationType');
   }
 
   get valueValidate() {
-    return this.courseCreateForm.get('value');
+    return this.courseCreateForm.get('durationValue');
   }
 
   get feesValidate() {
@@ -44,15 +46,20 @@ export class CourseCreateComponent implements OnInit {
   }
 
   createCourse(){
-    const data = {
-      courseName : this.courseCreateForm.get('courseName').value,
-      duration : this.courseCreateForm.get('duration').value,
-      value : this.courseCreateForm.get('value').value,
-      fees : this.courseCreateForm.get('fees').value
-    };
+    const id = this.route.snapshot.paramMap.get('id');
+    this.courseId = id;
 
+    const Institute_id = '5eb029a7bbb56d0acc8a9d04';
+    const data = {
+      name : this.courseCreateForm.get('name').value,
+      durationType : this.courseCreateForm.get('durationType').value,
+      durationValue : this.courseCreateForm.get('durationValue').value,
+      fees : this.courseCreateForm.get('fees').value,
+      Institute_id
+    };
+    console.log(data);
     this.courseService.courseCreate(data).subscribe((response: any) => {
-      this.router.navigate(['../../list']);
+      this.router.navigate(['./dashboard/course/list']);
     }, (error) => {
       console.log(error);
     });
