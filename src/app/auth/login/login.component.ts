@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('ownerId', ownerId);
       if (res.institute) {
         this.router.navigate(['/dashboard']);
+        localStorage.setItem('instituteId', res.institute._id);
       } else {
         this.router.navigate(['/new-insitute']);
       }
