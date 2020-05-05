@@ -9,8 +9,8 @@ const routes: Routes = [
     path: '',
     component: InstituteComponent,
     children: [
-      { path: '', redirectTo: 'update', pathMatch: 'full' },
-      { path: 'update', component: InstituteUpdateComponent },
+      { path: '', redirectTo: 'update/:ownerId', pathMatch: 'full' },
+      { path: 'update/:ownerId', component: InstituteUpdateComponent },
     ]
   }
 ];

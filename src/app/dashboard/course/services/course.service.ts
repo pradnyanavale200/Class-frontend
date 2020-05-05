@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class CourseService {
 
   courseApi = 'http://localhost:3000/course/';
+  coursedeleteApi = 'http://localhost:3000/course/courseDelete';
 
   constructor(
     private http: HttpService
@@ -31,7 +32,7 @@ export class CourseService {
     return this.http.get(this.courseApi + 'courseSearch/' + data);
   }
 
-  deleteCourse(courseId, instituteId){
-    return this.http.delete(this.courseApi + 'courseDelete/' + courseId + '/' + instituteId);
+  deleteCourse(id){
+    return this.http.delete(`${this.coursedeleteApi}/${id}`);
   }
 }

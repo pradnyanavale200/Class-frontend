@@ -12,6 +12,7 @@ export class CourseCreateComponent implements OnInit {
 
   courseCreateForm: FormGroup;
   courseId: string;
+  public instituteId=' ';
 
   constructor(
     private fb: FormBuilder,
@@ -21,6 +22,8 @@ export class CourseCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('instituteId');
+    this.instituteId=id;
     this.courseCreateForm = this.fb.group({
       courseName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')]],
       duration: ['', [Validators.required, Validators.pattern('[0-9]{1,2}')]],
@@ -49,19 +52,20 @@ export class CourseCreateComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.courseId = id;
 
-    const Institute_id = '5eb029a7bbb56d0acc8a9d04';
+
     const data = {
       courseName : this.courseCreateForm.get('courseName').value,
       duration : this.courseCreateForm.get('duration').value,
       value : this.courseCreateForm.get('value').value,
       fees : this.courseCreateForm.get('fees').value,
-      Institute_id
+      Institute_id: this.instituteId
     };
 
-    console.log(data);
+
 
     this.courseService.courseCreate(data).subscribe((response: any) => {
-      this.router.navigate(['./dashboard/course/list']);
+      const instituteId=this.instituteId;
+      this.router.navigate(['/dashboard/course/list', instituteId]);
     }, (error) => {
       console.log(error);
     });

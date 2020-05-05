@@ -11,7 +11,8 @@ import { CourseService } from '../services/course.service';
 export class CourseListComponent implements OnInit {
 
   Course = [];
-  InstID: any = '5eb029a7bbb56d0acc8a9d04';
+  public instId = ' ';
+  public instituteId = ' ';
   disableCourse = false;
 
   constructor(
@@ -21,26 +22,31 @@ export class CourseListComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('instituteId');
+    this.instId=id;
+    this.instituteId=id;
     this.getCourses();
   }
 
   getCourses() {
-    this.courseService.getCourses(this.InstID).subscribe((response: any) => {
+    this.courseService.getCourses(this.instId).subscribe((response: any) => {
       this.Course = response.course;
     }, (error) => {
       console.log(error);
     });
   }
   addCourse() {
-  this.router.navigate(['./dashboard/course/create']);
+    const instituteId=this.instituteId;
+    this.router.navigate(['./dashboard/course/create', instituteId]);
   }
 
-  editCourse(courseId) {
-    this.router.navigate(['./dashboard/course/update/' + courseId]);
+  editCourse(id) {
+    const instituteId=this.instituteId;
+    this.router.navigate(['./dashboard/course/update/', id, instituteId]);
   }
 
   deleteCourse(courseId) {
-    this.courseService.deleteCourse(courseId, this.InstID).subscribe((response: any) => {
+    this.courseService.deleteCourse(courseId).subscribe((response: any) => {
       this.getCourses();
     }, (error) => {
       console.log(error);
