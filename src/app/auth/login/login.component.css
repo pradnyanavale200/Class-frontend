@@ -40,4 +40,9 @@ input:hover {
 button:hover {
     /* background: linear-gradient(to right, #009FFF 0%, #ec2F4B 100%); */
     background: green;
+    
+}
+
+a:hover {
+    text-decoration: underline;
 }

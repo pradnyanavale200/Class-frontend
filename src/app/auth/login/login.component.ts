@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   togglePassword = 'visibility';
   disabledPassword = true;
   typePassword = 'password';
+  titlebtnDisabled: 'Please enter valid data to enable button';
+  titlebtn: 'Click to login';
+  title: 'data';
 
   constructor(
     private fb: FormBuilder,
@@ -46,8 +49,8 @@ export class LoginComponent implements OnInit {
         email: data1.email
       };
 
-      this.auth.findIdByEmail(data).subscribe(( res: any) => {
-        const ownerId = res.user._id;
+      this.auth.findIdByEmail(data).subscribe((response: any) => {
+        const ownerId = response.user._id;
         localStorage.setItem('ownerId', ownerId);
         this.router.navigate(['/new-insitute']);
       }, (err: any) => {
@@ -72,7 +75,7 @@ export class LoginComponent implements OnInit {
   }
 
   toggle() {
-    if (this.disabledPassword == true) {
+    if (this.disabledPassword === true) {
       this.disabledPassword = false;
       this.togglePassword = 'visibility_off';
       this.typePassword = 'text';
@@ -82,5 +85,7 @@ export class LoginComponent implements OnInit {
       this.typePassword = 'password';
     }
   }
+
+
 
 }
