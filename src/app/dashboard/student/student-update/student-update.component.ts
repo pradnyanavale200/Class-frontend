@@ -3,6 +3,7 @@ import { StudentService } from '../services/student.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { CourseService } from '../../course/services/course.service';
 
 @Component({
   selector: 'app-student-update',
@@ -16,10 +17,11 @@ export class StudentUpdateComponent implements OnInit {
   studentupdateform: FormGroup;
 
   Courses: any = [];
-  disabled = false;
+  disabled = false; 
   ShowFilter = false;
   limitSelection = false;
   selectedItems: any = [];
+  InstID: any = '5eb029a7bbb56d0acc8a9d04';
   dropdownSettings: IDropdownSettings = {};
 
   public studId = ' ';
@@ -34,7 +36,8 @@ export class StudentUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private courseService: CourseService
   ) { }
 
   ngOnInit() {
@@ -55,12 +58,7 @@ export class StudentUpdateComponent implements OnInit {
       courses: [this.selectedItems, Validators.required],
     });
 
-    this.Courses = [
-      { item_id: 1, item_text: 'CPP' },
-      { item_id: 2, item_text: 'C' },
-      { item_id: 3, item_text: 'JAVA' },
-      { item_id: 4, item_text: 'PYTHON' },
-    ];
+    this.getCourses();
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -112,5 +110,19 @@ export class StudentUpdateComponent implements OnInit {
         console.log(error);
         alert(error.error.message);
     });
+  }
+
+  getCourses(){
+    this.courseService.getCourses(this.InstID).subscribe((response: any) => {
+      const data =[];
+      for(let i = 0; i < response.courseNameData.length; i++){
+         data[i] = {item_id :  i, item_text: response.courseNameData[i] };
+      }
+      this.Courses = data;
+      console.log(this.Courses);
+    }, (error) => {
+      console.log(error);
+    });
+
   }
 }
