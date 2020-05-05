@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   emailExample: '< example > @ < mail >.< com >';
+  togglePassword = 'visibility';
+  disabledPassword = true;
+  typePassword = 'password';
 
   constructor(
     private fb: FormBuilder,
@@ -66,6 +69,18 @@ export class LoginComponent implements OnInit {
   }
   get password() {
     return this.loginForm.get('password');
+  }
+
+  toggle() {
+    if (this.disabledPassword == true) {
+      this.disabledPassword = false;
+      this.togglePassword = 'visibility_off';
+      this.typePassword = 'text';
+    } else {
+      this.disabledPassword = true;
+      this.togglePassword = 'visibility';
+      this.typePassword = 'password';
+    }
   }
 
 }

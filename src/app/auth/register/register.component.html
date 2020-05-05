@@ -56,7 +56,7 @@
           <label class="alert-link control-label" for="exampleInputPassword1">Password: </label>
           <div class="input-group">
             <input required data-toggle="password" formControlName="password" type="{{typePassword}}" class="form-control"
-              name="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+              name="Password"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}">
             <div class="input-group-append">
               <div class="input-group-text bg-white"><span class="material-icons" (click)="toggle()">
                   {{togglePassword}}

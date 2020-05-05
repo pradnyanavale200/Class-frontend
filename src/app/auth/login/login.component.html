@@ -17,9 +17,16 @@
 
                 <!-- Lastname -->
                 <label for="password" >Password : </label>
-                <input  class="form-control" type="password" formControlName="password">
+                <div class="input-group">
+                <input  class="form-control" type={{typePassword}} formControlName="password">
+                <div class="input-group-append">
+                    <div class="input-group-text bg-white"><span class="material-icons" (click)="toggle()">
+                        {{togglePassword}}
+                      </span></div>
+                </div>
+                </div>
                 <div class="text-danger" *ngIf="password.invalid && (password.dirty|| password.touched)">
-                    Please enter valid password<br>Password must contain at least one small letter, one capital letter, at least one number, and be longer than six charaters.
+                    Please enter valid password<br>Password must contain at least one small letter, one capital letter, at least one number, and be longer than or equal to 8 charaters.
                 </div>
                 <!-- Lastname -->
 

@@ -32,3 +32,12 @@ form h2,
 .cancel { 
     margin-top: 20px;
 }
+
+input:hover {
+    border-color: green;
+}
+
+button:hover {
+    /* background: linear-gradient(to right, #009FFF 0%, #ec2F4B 100%); */
+    background: green;
+}
