@@ -42,7 +42,11 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginData()).subscribe((res: any) => {
       const ownerId = res.user._id;
       localStorage.setItem('ownerId', ownerId);
-      this.router.navigate(['/new-insitute']);
+      if (res.institute) {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.router.navigate(['/new-insitute']);
+      }
     }, (err: any) => {
       alert('Error in login');
     });
