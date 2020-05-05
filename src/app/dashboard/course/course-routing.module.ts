@@ -11,10 +11,10 @@ const routes: Routes = [
     path: '',
     component: CourseComponent,
     children: [
-      { path: '', redirectTo: 'list/:instituteId', pathMatch: 'full' },
-      { path: 'list/:instituteId', component: CourseListComponent },
-      { path: 'update/:id/:instituteId', component: CourseUpdateComponent },
-      { path: 'create/:instituteId', component: CourseCreateComponent },
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: 'list', component: CourseListComponent },
+      { path: 'update/:id', component: CourseUpdateComponent },
+      { path: 'create', component: CourseCreateComponent },
     ]
   }
 ];
