@@ -6,7 +6,7 @@ import { ProfileUpdateComponent } from './dashboard/user/profile-update/profile-
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'new-insitute', component: InstituteRegisterComponent },
+  { path: 'new-insitute/:ownerId', component: InstituteRegisterComponent },
   { path: 'auth', loadChildren: () => import(`src/app/auth/auth.module`).then(m => m.AuthModule) },
   { path: 'dashboard', loadChildren: () => import(`src/app/dashboard/dashboard.module`).then(m => m.DashboardModule) },
   { path: 'profileupdate', component: ProfileUpdateComponent}

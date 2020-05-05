@@ -37,10 +37,20 @@ export class LoginComponent implements OnInit {
 
   onLoginClick() {
 
-    const data = this.loginData();
-    this.auth.login(data).subscribe((res: any) => {
+    const data1 = this.loginData();
+    this.auth.login(data1).subscribe((res: any) => {
+      const data = {
+        email: data1.email
+      };
+      console.log(data)
+      this.auth.findIdByEmail(data).subscribe(( res: any) => {
+        const ownerId = res.user._id;
+        console.log(res.user._id)
+        this.router.navigate(['/new-insitute', ownerId]);
+      }, (err: any) => {
+        alert('Error in Id');
+      });
 
-      this.router.navigate(['./dashboard/institute']);
     }, (err: any) => {
       alert('Error in login');
     });

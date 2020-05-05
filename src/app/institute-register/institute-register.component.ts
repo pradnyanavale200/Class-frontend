@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from '../state.service';
 import { Institute } from '../instituteDemo';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-
+import { InstituteService } from '../dashboard/institute/services/institute.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-institute-register',
@@ -12,18 +12,22 @@ import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, 
 export class InstituteRegisterComponent implements OnInit {
 
   // Reference variable of formGroup
-  instituteRegisterForm: FormGroup;
+  instituteRegistrationForm: FormGroup;
 
   // Reference variable : Institute class
   instituteDemoObj: Institute;
+  public ownerId = ' ';
+  constructor(
+    private instituteService: InstituteService,
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+    ) {
 
-  constructor(private stateService: StateService, private fb: FormBuilder) {
-    this.instituteDemoObj = new Institute();
-
-    this.instituteRegisterForm = this.fb.group({
-      iname: [null, Validators.required],
-      addr1: [null, Validators.required],
-      addr2: [null],
+    this.instituteRegistrationForm = this.fb.group({
+      instituteName: [null, Validators.required],
+      addressLine1: [null, Validators.required],
+      addressLine2: [null],
       state: [null, Validators.required],
       city: [null, Validators.required],
       pincode: [null, Validators.required]
@@ -31,36 +35,64 @@ export class InstituteRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.instituteDemoObj.stateArray = this.stateService.getStates();
-    this.instituteDemoObj.cityArray = this.stateService.getCity();
+    const id = this.route.snapshot.paramMap.get('ownerId');
+    this.ownerId = id;
+
     }
 
   // display fields value
-  onSubmit() {
-    console.log(this.instituteRegisterForm.value);
-    }
 
-   get iname() {
-    return this.instituteRegisterForm.get('iname');
+   get instituteName() {
+    return this.instituteRegistrationForm.get('instituteName');
   }
 
-  get addr1() {
-     return this.instituteRegisterForm.get('addr1');
+  get addressLine1() {
+     return this.instituteRegistrationForm.get('addressLine1');
   }
 
-  get addr2() {
-    return this.instituteRegisterForm.get('addr2');
+  get addressLine2() {
+    return this.instituteRegistrationForm.get('addressLine2');
   }
 
   get state() {
-    return this.instituteRegisterForm.get('state');
+    return this.instituteRegistrationForm.get('state');
   }
 
    get city() {
-     return this.instituteRegisterForm.get('city');
+     return this.instituteRegistrationForm.get('city');
   }
 
    get pincode() {
-     return this.instituteRegisterForm.get('pincode');
+     return this.instituteRegistrationForm.get('pincode');
     }
+
+  register(){
+    const institute = {
+      instituteName: this.instituteRegistrationForm.get('instituteName').value,
+      instituteAddressLine1: this.instituteRegistrationForm.get('addressLine1').value,
+      instituteAddressLine2: this.instituteRegistrationForm.get('addressLine2').value,
+      state: this.instituteRegistrationForm.get('state').value,
+      city: this.instituteRegistrationForm.get('city').value,
+      pincode: this.instituteRegistrationForm.get('pincode').value,
+      ownerId: this.ownerId
+    };
+
+    this.instituteService.createInstitute(institute).subscribe(
+      (response: any) => {
+
+        const ownerId=this.ownerId;
+        this.router.navigate(['/dashboard/institute/update', ownerId]);
+      },
+      (error) => {
+        console.log(error);
+        alert(error.error.message);
+      }
+    );
+
+  }
+
+  cancel(){
+
+  }
 }
+

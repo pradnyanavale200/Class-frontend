@@ -15,6 +15,19 @@ export class InstituteService {
     return this.httpService.get(`${this.instituteApi}/${ownerId}`);
   }
 
+  getInstitute(instituteId): Observable<object> {
+    return this.httpService.get(`${this.instituteApi}/getinstitute/${instituteId}`);
+  }
+
+  findInstituteId(data): Observable<object> {
+    return this.httpService.post(
+      `${this.instituteApi}/findInstituteId`,
+      data
+    );
+  }
+
+
+
   createInstitute(institute): Observable<object> {
     return this.httpService.post(
       `${this.instituteApi}/register`,
@@ -27,6 +40,6 @@ export class InstituteService {
   }
 
   updateInstitute(data): Observable<object> {
-    return this.httpService.put(`${this.instituteApi}/${data.instId}`, data);
+    return this.httpService.put(`${this.instituteApi}/${data._id}`, data);
   }
 }

@@ -1,104 +1,163 @@
-<!-- Institute Update Form -->
-<div class="container">
-  <div class="row mx-4 my-4">
-    <div class="col-md-8 col-sm-8 col-lg-5 col-xs-8 shadow-lg p-4 rounded ">
+<!-- Institute Registeration Form-->
 
-        <!-- Institute Update Header -->
-        <div class="form-group text-center">
-          <h5 for="PageName" class="text-capitalize text-info font-weight-bold">Institute Update</h5>
-        </div>
-        <!-- Institute Update Header -->
+<div class="mx-4 my-4 row justify-content-center align-items-center">
 
-      <form (ngSubmit)="onSubmit()" [formGroup]="instituteUpdateForm" [class.has-error]="iname.invalid && iname.touched">
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-8 shadow">
 
-        <!-- Institute Name -->
-        <div class="form-group">
-          <label for="InstituteName">*Institute Name: </label>
+    <form class="formGroup px-4 py-4" [formGroup]="instituteUpdateForm" [class.has-error]="
 
-          <input type="text" class="form-control" formControlName="iname" pattern="[a-zA-Z]*">
-          <small class="help-block" *ngIf="iname.dirty || iname.touched">Please enter institute
-            name</small>
-          <small class="help-block" *ngIf="iname.errors?.pattern"><br>Should contain Alphabets only</small>
-        </div>
-        <!-- Institute Name -->
+        (instituteName.invalid && instituteName.touched) ||
 
-        <!-- AddrLine1 -->
-        <div class="form-group">
-          <label for="AddressLine1">*Address Line1:</label>
-          <input  type="text" class="form-control" formControlName="addr1" (change)="onChange()">
-          <small class="help-block" *ngIf="addr1.errors && (addr1.dirty || addr1.touched)">Please Enter
-            Address</small>
-        </div>
-        <!-- AddrLine1 -->
+        (addressLine1.invalid && addressLine1.touched) ||
 
-        <!-- AddrLine2 -->
-        <div class="form-group">
-          <label for="AddressLine2">Address Line2:</label>
-          <input type="text" class="form-control" formControlName="addr2">
-        </div>
-        <!-- AddrLine2 -->
+        (addressLine2.invalid && addressLine2.touched) ||
 
-        <!-- State -->
-        <div class="form-group">
-          <label for="State">*State: </label>
-          <select required class="form-control" name="State" [(ngModel)]="instituteUpdateObj.state" formControlName="state">
-            <option value="" disabled selected>Choose your state</option>
-            <option class="text-capitalize alert" name="options"
-              *ngFor="let item of instituteUpdateObj.stateArray" [ngValue]="item">{{item.state}}</option>
-          </select>
-          <small class="help-block" *ngIf="state.invalid || state.pristine && state.touched">Please select
-            state</small>
-        </div>
-        <!-- State -->
+        (state.invalid && state.touched) ||
 
-        <!-- City -->
-        <div class="form-group">
-          <label for="City">*City: </label>
-          <select class="form-control" formControlName="city">
-            <option value="" disabled selected>Choose your city</option>
-            <ng-container *ngFor="let item of instituteUpdateObj.cityArray">
-              <ng-container *ngFor="let cityNames of item.city">
-                <option *ngIf="instituteUpdateObj.state.id == item.id">
-                  {{cityNames}}
-                </option>
-              </ng-container>
-            </ng-container>
-          </select>
-          <small class="help-block" *ngIf="city.touched && (city.pristine || city.invalid)">Please select
-            city</small>
-        </div>
-        <!-- City -->
+        (city.invalid && city.touched) ||
 
-        <!-- Pincode -->
-        <div class="form-group">
-          <label class="control-label" for="pincode">*Pincode: </label>
-          <input name="Pincode" type="number" pattern="^[1-9][0-9]{5}$" class="form-control" formControlName="pincode">
-          <small class="help-block" *ngIf="pincode.invalid && pincode.errors && (pincode.dirty || pincode.touched)">
-            Should be 6 digits long
-          </small>
-        </div>
-        <div>
-          <!-- Pincode -->
+        (pincode.invalid && pincode.touched)
 
-          <!-- Button  -->
-          <div class="row mx-4">
-            <!-- Update Btn -->
-            <div class="col-6">
-              <button [disabled]='!instituteUpdateForm.valid' type="submit"
-                class="btn btn-danger btn-block btn-group-lg shadow-lg p-2">UPDATE
-              </button>
-            </div>
-            <!-- Update Btn -->
+      ">
 
-            <!-- Cancel -->
-            <div class="col-6">
-              <button type="reset" class="btn btn-primary btn-block btn-group-lg shadow-lg p-2">CANCEL </button>
-            </div>
-            <!-- Cancel -->
-          </div>
-          <!-- Button -->
-        </div>
-      </form>
-    </div>
+      <!-- Institute Register Header -->
+
+      <div class="form-group text-center">
+
+        <h2 class="mx-auto">Institute Update Form</h2>
+
+        <br />
+
+      </div>
+
+      <!-- /Institute Register Header -->
+
+
+
+      <!-- Institute Name -->
+
+      <label for="instituteName">Institute Name </label>
+
+      <input type="text" class="form-control" pattern="^[a-zA-Z ]*$" formControlName="instituteName" />
+
+      <div class="text-danger" *ngIf="instituteName.invalid && (instituteName.dirty || instituteName.touched)">
+
+        Institute Name is required
+
+      </div>
+
+      <div *ngIf="instituteName.errors?.pattern" style="color: red;">
+
+        Institute Name is not valid.
+
+      </div>
+
+      <br />
+
+      <!-- /Institute Name -->
+
+
+
+      <!-- Address Line 1 -->
+
+      <label for="addressLine1">Address Line 1 </label>
+
+      <input type="text" class="form-control" pattern="^(\w*\s*[\#\-\,\/\.\(\)\&]*)+" formControlName="addressLine1" />
+
+      <div class="text-danger" *ngIf="addressLine1.invalid && (addressLine1.dirty || addressLine1.touched)">
+
+        Address Line 1 is required
+
+      </div>
+
+      <div *ngIf="addressLine1.errors?.pattern" style="color: red;">
+
+        Address is not valid.
+
+      </div>
+
+      <br />
+      <!-- /Address Line 1 -->
+      <!-- Address Line 2 -->
+
+      <label for="addressLine2">Address Line 2 </label>
+      <input type="text" class="form-control" pattern="^(\w*\s*[\#\-\,\/\.\(\)\&]*)+" formControlName="addressLine2" />
+      <div class="text-danger" *ngIf="addressLine2.invalid && (addressLine2.dirty || addressLine2.touched)">
+        Address Line 2 is required
+      </div>
+      <div *ngIf="addressLine2.errors?.pattern" style="color: red;">
+        Address is not valid.
+      </div>
+      <br />
+
+      <!-- /Address Line 2 -->
+      <!-- State -->
+      <label for="state">State</label>
+      <input type="text" class="form-control"  formControlName="state" />
+      <div class="text-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
+        state is required
+      </div>
+      <div *ngIf="state.errors?.pattern" style="color: red;">
+        state is not valid.
+      </div>
+      <br />
+
+
+      <!-- /State -->
+      <!-- City -->
+      <label for="city">City </label>
+      <input type="text" class="form-control" formControlName="city" />
+      <div class="text-danger" *ngIf="city.invalid && (city.dirty || city.touched)">
+        City is required
+      </div>
+      <div *ngIf="city.errors?.pattern" style="color: red;">
+        City is not valid.
+      </div>
+      <br />
+      <!-- /City -->
+      <!-- PinCode -->
+
+      <label class="control-label" for="pincode">Pin Code </label>
+
+      <input type="text" class="form-control" pattern="^[1-9][0-9]{5}$" formControlName="pincode" />
+
+      <div class="text-danger" *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)">
+
+        Pin Code is required
+
+      </div>
+
+      <div *ngIf="pincode.errors?.pattern" style="color: red;">
+
+        Pin Code should be 6 digits long
+
+      </div>
+
+      <br />
+
+      <!-- /Pincode -->
+
+
+
+      <!-- Register Button -->
+
+      <div class="text-center">
+
+        <button (click)="update()" [disabled]="instituteUpdateForm.invalid"
+
+        class="btn btn-primary">Update</button>
+
+      <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+
+      </div>
+
+      <!-- /Register Button -->
+
+    </form>
+
   </div>
-  <!-- Institute Update Form -->
+
+</div>
+
+<!-- /Institute Registeration Form-->
+
