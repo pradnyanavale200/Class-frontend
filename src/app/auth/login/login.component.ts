@@ -45,11 +45,11 @@ export class LoginComponent implements OnInit {
       const data = {
         email: data1.email
       };
-      console.log(data)
+
       this.auth.findIdByEmail(data).subscribe(( res: any) => {
         const ownerId = res.user._id;
-        console.log(res.user._id)
-        this.router.navigate(['/new-insitute', ownerId]);
+        localStorage.setItem('ownerId', ownerId);
+        this.router.navigate(['/new-insitute']);
       }, (err: any) => {
         alert('Error in Id');
       });

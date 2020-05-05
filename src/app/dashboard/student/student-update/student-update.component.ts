@@ -17,7 +17,7 @@ export class StudentUpdateComponent implements OnInit {
   studentupdateform: FormGroup;
 
   Courses: any = [];
-  disabled = false; 
+  disabled = false;
   ShowFilter = false;
   limitSelection = false;
   selectedItems: any = [];
@@ -104,7 +104,6 @@ export class StudentUpdateComponent implements OnInit {
     };
 
     this.studentService.updateStudent(data).subscribe((response: any) => {
-        alert(response.message);
         this.router.navigate(['/dashboard/student/list']);
       }, (error) => {
         console.log(error);
