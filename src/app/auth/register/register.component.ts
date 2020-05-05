@@ -37,8 +37,7 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(value).subscribe(
       (res: any) => {
-        alert(res.message);
-        this.router.navigate(['./login']);
+        this.router.navigate(['./auth/login']);
       },
       (err: any) => {
         alert('Error in register');

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       const data = {
         email: data1.email
       };
-      console.log(data);
+
       this.auth.findIdByEmail(data).subscribe(( res: any) => {
         const ownerId = res.user._id;
         localStorage.setItem('ownerId', ownerId);

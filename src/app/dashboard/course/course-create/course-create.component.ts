@@ -24,10 +24,7 @@ export class CourseCreateComponent implements OnInit {
     const id = localStorage.getItem('instituteId');
     this.instituteId = id;
     this.courseCreateForm = this.fb.group({
-      courseName: [
-        '',
-        [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')],
-      ],
+      courseName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')] ],
       duration: ['', [Validators.required, Validators.pattern('[0-9]{1,2}')]],
       value: ['', Validators.required],
       fees: ['', [Validators.required, Validators.pattern('^[0-9]*')]],

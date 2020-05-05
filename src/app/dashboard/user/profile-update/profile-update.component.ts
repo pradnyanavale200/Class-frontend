@@ -75,7 +75,6 @@ export class ProfileUpdateComponent implements OnInit {
     };
 
     this.userService.updateUser(data).subscribe((response: any) => {
-      alert(response.message);
       this.router.navigate(['/dashboard/course/list']);
     }, (error) => {
       console.log(error);
