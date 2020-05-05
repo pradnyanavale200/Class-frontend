@@ -12,13 +12,11 @@ export class UserService {
   constructor(private httpService: HttpService) {}
 
 
- getUser(data): Observable<object> {
-    return this.httpService.get(`${this.userApi}/userSearch/${data}`);
+  getUser(data): Observable<object> {
+    return this.httpService.get(`${this.userApi}/${data}`);
   }
 
   updateUser(data): Observable<object> {
-    return this.httpService.put(`${this.userApi}/userUpdate`, data);
+    return this.httpService.put(`${this.userApi}/`, data);
   }
-
-
 }

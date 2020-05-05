@@ -15,35 +15,26 @@ export class ProfileUpdateComponent implements OnInit {
 
   userId = '';
   user = {
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    mobilenumber: '',
   };
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService
   ) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.userId = id;
-
-    this.profileUpdateform = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      mobilenumber: ['', Validators.required],
-    });
+    // const id = this.route.snapshot.paramMap.get('id');
+    this.userId = '5ea6f540002e5e08ec9d000a';
 
     this.userService.getUser(this.userId).subscribe(
       (response: any) => {
-        this.user = response.user;
-        this.setData(response.user);
+        this.user = response.usersList;
+        this.setData(response.usersList);
       },
       (error) => {
         console.log(error);
@@ -51,54 +42,47 @@ export class ProfileUpdateComponent implements OnInit {
     );
 
     this.profileUpdateform = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', Validators.required],
-      mobilenumber: ['', Validators.required],
     });
   }
 
   setData(student) {
-    this.profileUpdateform.get('firstname').setValue(this.user.firstname);
-    this.profileUpdateform.get('lastname').setValue(this.user.lastname);
+    this.profileUpdateform.get('firstName').setValue(this.user.firstName);
+    this.profileUpdateform.get('lastName').setValue(this.user.lastName);
     this.profileUpdateform.get('email').setValue(this.user.email);
-    this.profileUpdateform.get('mobilenumber').setValue(this.user.mobilenumber);
   }
 
   get firstnamevalidate() {
-    return this.profileUpdateform.get('firstname');
+    return this.profileUpdateform.get('firstName');
   }
 
   get lastnamevalidate() {
-    return this.profileUpdateform.get('lastname');
+    return this.profileUpdateform.get('lastName');
   }
 
   get emailvalidate() {
     return this.profileUpdateform.get('email');
   }
 
-  get mobilenumbervalidate() {
-    return this.profileUpdateform.get('mobilenumber');
-  }
-
   updateStudent() {
     const data = {
-      id: this.userId,
-      firstname: this.profileUpdateform.get('firstname').value,
-      lastname: this.profileUpdateform.get('lastname').value,
+      _id: this.userId,
+      firstName: this.profileUpdateform.get('firstName').value,
+      lastName: this.profileUpdateform.get('lastName').value,
       email: this.profileUpdateform.get('email').value,
-      mobilenumber: this.profileUpdateform.get('mobilenumber').value,
     };
 
-    this.userService.updateUser(data).subscribe(
-      (response: any) => {
-        alert(response.message);
-        // this.router.navigate(['/dashboard/student/list']);
-      },
-      (error) => {
-        console.log(error);
-        alert(error.error.message);
-      }
-    );
+    //console.log(data);
+    alert(data);
+
+    this.userService.updateUser(data).subscribe((response: any) => {
+      alert(response.message);
+      this.router.navigate(['./dashboard/student/list']);
+    }, (error) => {
+      console.log(error);
+      alert(error.error.message);
+    });
   }
 }
