@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { StudentService } from './../services/student.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -8,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import {  Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-create',
@@ -27,7 +27,8 @@ export class StudentCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -79,6 +80,7 @@ export class StudentCreateComponent implements OnInit {
       email: '',
       courses: '',
     });
+    this.router.navigate(['./dashboard/student/list']);
   }
 
   register() {
