@@ -1,105 +1,88 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormBuilder} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-profile-update',
   templateUrl: './profile-update.component.html',
-  styleUrls: ['./profile-update.component.css']
+  styleUrls: ['./profile-update.component.css'],
 })
 export class ProfileUpdateComponent implements OnInit {
-
   profileUpdateform: FormGroup;
-  firstname: FormControl;
-  lastname: FormControl;
-  email: FormControl;
-  mobilenumber: FormControl;
 
-
-
-  userId='';
-  user={
-    firstname: '',
-    lastname: '',
+  userId = '';
+  user = {
+    firstName: '',
+    lastName: '',
     email: '',
-    mobilenumber: ''
-  }
+  };
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
+    // const id = this.route.snapshot.paramMap.get('id');
+    this.userId = '5ea6f540002e5e08ec9d000a';
 
-  /*  const id = this.route.snapshot.paramMap.get('id');
-    this.userId = id;
+    this.userService.getUser(this.userId).subscribe(
+      (response: any) => {
+        this.user = response.usersList;
+        this.setData(response.usersList);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
-    const data = {id : this.userId};
+    this.profileUpdateform = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
+    });
+  }
 
-    this.http.post('http://localhost:3000/dashboard/user/data', data).subscribe((response: any) => {
-      this.user = response.user;
-      this.setdata(this.user);
+  setData(student) {
+    this.profileUpdateform.get('firstName').setValue(this.user.firstName);
+    this.profileUpdateform.get('lastName').setValue(this.user.lastName);
+    this.profileUpdateform.get('email').setValue(this.user.email);
+  }
+
+  get firstnamevalidate() {
+    return this.profileUpdateform.get('firstName');
+  }
+
+  get lastnamevalidate() {
+    return this.profileUpdateform.get('lastName');
+  }
+
+  get emailvalidate() {
+    return this.profileUpdateform.get('email');
+  }
+
+  updateStudent() {
+    const data = {
+      _id: this.userId,
+      firstName: this.profileUpdateform.get('firstName').value,
+      lastName: this.profileUpdateform.get('lastName').value,
+      email: this.profileUpdateform.get('email').value,
+    };
+
+    //console.log(data);
+    alert(data);
+
+    this.userService.updateUser(data).subscribe((response: any) => {
+      alert(response.message);
+      this.router.navigate(['./dashboard/student/list']);
     }, (error) => {
       console.log(error);
+      alert(error.error.message);
     });
-*/
-
-
-
-    this.profileUpdateform= this.fb.group({
-      firstname:['',[Validators.required,Validators.pattern('^[a-zA-Z]*$')]],
-      lastname:['',[Validators.required,Validators.pattern('^[a-zA-Z]*$')]],
-      email:['',[Validators.required,Validators.pattern('^[a-zA-Z]*$')]],
-      mobilenumber:['',[Validators.required,Validators.pattern('^[a-zA-Z]*$')]]
-    });
-
-
   }
-
-/*    createFormControls()
-    {
-     this.firstname = new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z]*$')
-    ]),
-      this.lastname = new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z]*$')
-      ]),
-
-      this.email = new FormControl('', [
-        Validators.required,
-        Validators.pattern('[^@]*@[^ @]*')
-      ]),
-
-    this.mobilenumber = new FormControl('', [
-      Validators.required,
-      Validators.pattern('^((\+){1}91){1}[1-9]{1}[0-9]{9}$')
-    ]);
-
-    }
-*/
-   /* setdata(user)
-    {
-      this.profileUpdateform.get('firstname').setValue(this.user.firstname),
-      this.profileUpdateform.get('lastname').setValue(this.user.lastname),
-      this.profileUpdateform.get('email').setValue(this.user.email),
-      this.profileUpdateform.get('mobilenumber').setValue(this.user.mobilenumber),
-    }*/
-
-    profileUpdate()
-    {
-      const data = {
-        firstname: this.profileUpdateform.get('firstname').value,
-        lastname:  this.profileUpdateform.get('lastname').value,
-        email:  this.profileUpdateform.get('email').value,
-        mobilenumber:  this.profileUpdateform.get('mobilenumber').value,
-      }
-    }
-  }
-
-
-
+}
