@@ -1,29 +1,37 @@
+import { Institute } from './../../../instituteDemo';
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/core/services/http.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  courseApi = 'http://localhost:3000/dashboard/course';
+  courseApi = 'http://localhost:3000/course/';
+
   constructor(
     private http: HttpService
   ) {   }
 
+
   courseCreate(data){
-    return this.http.post(this.courseApi + '/courseCreate', data);
+    return this.http.post(this.courseApi, data);
   }
 
-  courseUpdate(data){
+  updateCourse(data){
     return this.http.put(this.courseApi, data);
   }
 
-  getCourse(){
-    return this.http.get(this.courseApi);
+  getCourses(data){
+    return this.http.get(this.courseApi + data);
   }
 
-  createCourse(data) {
-    return this.http.post(this.courseApi, data);
+  getCourseData(data): Observable<object> {
+    return this.http.get(this.courseApi + 'courseSearch/' + data);
+  }
+
+  deleteCourse(courseId, instituteId){
+    return this.http.delete(this.courseApi + 'courseDelete/' + courseId + '/' + instituteId);
   }
 }

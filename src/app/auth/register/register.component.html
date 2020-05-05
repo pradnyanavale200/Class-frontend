@@ -7,7 +7,6 @@
   <div class="row justify-content-center align-items-center mx-4 my-4">
     <div class=" col-sm-8 col-md-8 col-lg-6  shadow-lg p-3 mb-5 rounded ">
 
-
       <form [formGroup]="regsiterForm" class="colmn">
         <h2>Register</h2>
 
@@ -76,6 +75,9 @@
         <button [disabled]="regsiterForm.invalid" type="submit"
           class="btn btn-primary btn-block btn-group-lg shadow-lg" (click)="onSubmit()">REGISTER </button>
         <!-- Register Button -->
+        <div class="form-group float-right mt-3">
+          <h5 class="alert alert-link "><a [routerLink]="['/auth/login']">Already Register? Login In</a></h5>
+        </div>
       </form>
     </div>
   </div>

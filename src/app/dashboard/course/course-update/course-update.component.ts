@@ -24,27 +24,26 @@ export class CourseUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
-
+    private http: HttpClient,
+    private courseService: CourseService
   ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.courseId = id;
 
-    const data = {id : this.courseId};
-
-    this.http.post('http://localhost:3000/dashboard/course/data', data).subscribe((response: any) => {
+    this.courseService.getCourseData(this.courseId).subscribe((response: any) => {
       this.course = response.course;
-      this.setData(this.course);
+      this.setData(response.course);
     }, (error) => {
       console.log(error);
     });
+
     this.courseUpdateForm = this.fb.group({
       courseName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._,-/]{3,50}')]],
       duration: ['', [Validators.required, Validators.pattern('[0-9]{1,2}')]],
       value: ['', Validators.required],
-      fees: ['', [Validators.required, Validators.pattern('[0-9]')]]
+      fees: ['', [Validators.required, Validators.pattern('^[0-9]*')]]
     });
   }
 
@@ -80,10 +79,12 @@ export class CourseUpdateComponent implements OnInit {
       fees : this.courseUpdateForm.get('fees').value
     };
 
-    this.http.post('http://localhost:3000/dashboard/course/update', data).subscribe((response: any) => {
-      this.router.navigate(['../../list']);
-    }, (error) => {
-      console.log(error);
+    this.courseService.updateCourse(data).subscribe((response: any) => {
+      alert(response.message);
+      this.router.navigate(['/dashboard/course/list']);
+      }, (error) => {
+        console.log(error);
+        alert(error.error.message);
     });
   }
 }
