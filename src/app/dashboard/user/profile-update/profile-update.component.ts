@@ -34,6 +34,7 @@ export class ProfileUpdateComponent implements OnInit {
     this.userService.getUser(this.userId).subscribe(
       (response: any) => {
         this.user = response.usersList;
+        console.log(response.usersList);
         this.setData(response.usersList);
       },
       (error) => {
@@ -48,7 +49,7 @@ export class ProfileUpdateComponent implements OnInit {
     });
   }
 
-  setData(student) {
+  setData(user) {
     this.profileUpdateform.get('firstName').setValue(this.user.firstName);
     this.profileUpdateform.get('lastName').setValue(this.user.lastName);
     this.profileUpdateform.get('email').setValue(this.user.email);
@@ -74,12 +75,8 @@ export class ProfileUpdateComponent implements OnInit {
       email: this.profileUpdateform.get('email').value,
     };
 
-    //console.log(data);
-    alert(data);
-
     this.userService.updateUser(data).subscribe((response: any) => {
       alert(response.message);
-      this.router.navigate(['./dashboard/student/list']);
     }, (error) => {
       console.log(error);
       alert(error.error.message);
