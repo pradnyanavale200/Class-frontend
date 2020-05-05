@@ -1,4 +1,5 @@
 import { StudentService } from './../services/student.service';
+import { CourseService } from '../../course/services/course.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -22,16 +23,19 @@ export class StudentCreateComponent implements OnInit {
   ShowFilter = false;
   limitSelection = false;
   selectedItems: any = [];
+  InstID: any = '5eb029a7bbb56d0acc8a9d04';
   dropdownSettings: IDropdownSettings = {};
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private courseService: CourseService
   ) {}
 
   ngOnInit() {
+
     this.studentRegistrationForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -39,12 +43,7 @@ export class StudentCreateComponent implements OnInit {
       courses: [this.selectedItems, Validators.required],
     });
 
-    this.Courses = [
-      { item_id: 1, item_text: 'CPP' },
-      { item_id: 2, item_text: 'C' },
-      { item_id: 3, item_text: 'JAVA' },
-      { item_id: 4, item_text: 'PYTHON' },
-    ];
+    this.getCourses();
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -101,5 +100,19 @@ export class StudentCreateComponent implements OnInit {
         alert(error.error.message);
       }
     );
+  }
+
+  getCourses(){
+    this.courseService.getCourses(this.InstID).subscribe((response: any) => {
+      const data =[];
+      for(let i = 0; i < response.courseNameData.length; i++){
+         data[i] = {item_id :  i, item_text: response.courseNameData[i] };
+      }
+      this.Courses = data;
+      console.log(this.Courses);
+    }, (error) => {
+      console.log(error);
+    });
+
   }
 }
