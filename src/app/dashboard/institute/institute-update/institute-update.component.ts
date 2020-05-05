@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from 'src/app/state.service';
 import { Institute } from 'src/app/instituteDemo';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-institute-update',
@@ -9,12 +9,26 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./institute-update.component.css'],
 })
 export class InstituteUpdateComponent implements OnInit {
+  // Reference variable of formGroup
+  instituteUpdateForm: FormGroup;
+
+  
+
   // Referenece variable : Institute
   instituteUpdateObj: Institute;
 
   disabledBtn = true;
-  constructor(private stateService: StateService) {
+  constructor(private stateService: StateService, private fb: FormBuilder) {
     this.instituteUpdateObj = new Institute();
+
+    this.instituteUpdateForm = this.fb.group({
+      iname: [null, Validators.required],
+      addr1: [null, Validators.required],
+      addr2: [null],
+      state: [null, Validators.required],
+      city: [null, Validators.required],
+      pincode: [null, Validators.required]
+    });
   }
 
   ngOnInit(): void {
@@ -28,7 +42,31 @@ export class InstituteUpdateComponent implements OnInit {
   }
 
   // display fields
-  onSubmit(value) {
-    console.log(value);
+  onSubmit() {
+    console.log(this.instituteUpdateForm.value);
   }
+
+  get iname() {
+    return this.instituteUpdateForm.get('iname');
+  }
+
+  get addr1() {
+     return this.instituteUpdateForm.get('addr1');
+  }
+
+  get addr2() {
+    return this.instituteUpdateForm.get('addr2');
+  }
+
+  get state() {
+    return this.instituteUpdateForm.get('state');
+  }
+
+   get city() {
+     return this.instituteUpdateForm.get('city');
+  }
+
+   get pincode() {
+     return this.instituteUpdateForm.get('pincode');
+   }
 }

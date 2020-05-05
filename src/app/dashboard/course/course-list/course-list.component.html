@@ -9,13 +9,6 @@
   <div class="row p-3 mb-2 bg-light text-white">
     <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
       <form class="form-inline justify-content-end">
-        <div class="input-group">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-          <span class="input-group-append">
-            <div class="input-group-text bg-white"><span class="material-icons">
-                search</span></div>
-          </span>
-        </div>
         <div class="my-2 mx-2 my-sm-0">
           <button (click)="addCourse()" class="btn btn-primary float-center"> Add Course</button>
         </div>
@@ -37,6 +30,9 @@
               <tr>
                 <th scope="col">Sr.No</th>
                 <th scope="col">Course Name</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Value</th>
+                <th scope="col">Fees</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -44,10 +40,13 @@
             <tbody>
               <tr class="text-center" *ngFor="let item of Course; let i = index">
                 <th scope="row">{{i+1}}</th>
-                <td>{{item.name}}</td>
-                <td><button (click)="editCourse(item)" class="btn btn-warning text-dark w-50">Edit</button>
+                <td>{{item.courseName}}</td>
+                <td>{{item.duration}}</td>
+                <td>{{item.value}}</td>
+                <td>{{item.fees}}</td>
+                <td><button (click)="editCourse(item._id)" class="btn btn-warning text-dark w-50">Edit</button>
                 </td>
-                <td><button (click)="deleteCourse(item)" class="btn btn-danger">Delete</button></td>
+                <td><button (click)="deleteCourse(item._id)" class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
           </table>

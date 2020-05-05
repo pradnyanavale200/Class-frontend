@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class=" col-sm-12 col-md-6 col-lg-6">
-      <form formGroup = "profileUpdate" novalidate>
+      <form formGroup = "profileUpdateform" novalidate>
 
 
 <!-- FirstName-->
@@ -34,8 +34,8 @@
         <div class="form-row">
           <div class="col-12 col-sm-12 col-md-12 ">
             <div class="form-group" [ngClass]="{
-  'has-success': firstname.valid && (firstname.dirty || firstname.touched ),
-  'has-danger' : firstname.invalid && (firstname.dirty || firstname.touched )
+  'has-success': lastname.valid && (lastname.dirty || lastname.touched ),
+  'has-danger' : lastname.invalid && (lastname.dirty || lastname.touched )
 
 }">
               <!--Lastname Validation-->
@@ -76,8 +76,8 @@
         <div class="form-row">
           <div class="col-12 col-sm-12 col-md-12 ">
             <div class="form-group" [ngClass]="{
-      'has-success': firstname.valid && (firstname.dirty || firstname.touched ),
-      'has-danger' : firstname.invalid && (firstname.dirty || firstname.touched )
+      'has-success': mobilenumber.valid && (mobilenumber.dirty || mobilenumber.touched ),
+      'has-danger' : mobilenumber.invalid && (mobilenumber.dirty || mobilenumber.touched )
 
     }">
                <!--Mobile Number Validation-->
