@@ -26,4 +26,8 @@ export class AuthService {
   forgotPassword(data){
     return this.httpService.put(`${this.authApi}/forgetpass`, data);
   }
+
+  confirmPassword(data){
+    return this.httpService.put(`${this.authApi}/userConfirmpass`, data);
+  }
 }
