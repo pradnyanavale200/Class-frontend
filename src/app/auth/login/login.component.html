@@ -41,7 +41,7 @@
                     <div class="update btn-block" >
                         
                         <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" (click)="onLoginClick()"  
-                        data-toggle="tooltip" data-placement="right" title="Enter valid data to enable login button" >Login</button>
+                        data-toggle="tooltip" data-placement="right" [ngStyle]="{cursor: loginForm.invalid ? 'no-drop':'pointer'}" title="Enter valid data to enable login button">Login</button>
                         
                     </div>
                     <div class="cancel" >

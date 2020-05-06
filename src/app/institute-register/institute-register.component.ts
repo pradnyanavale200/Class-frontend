@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Institute } from '../instituteDemo';
 import {
   FormGroup,
   FormControl,
@@ -10,21 +9,29 @@ import {
 } from '@angular/forms';
 import { InstituteService } from '../dashboard/institute/services/institute.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { StateService } from '../state.service';
 @Component({
   selector: 'app-institute-register',
   templateUrl: './institute-register.component.html',
   styleUrls: ['./institute-register.component.css'],
 })
 export class InstituteRegisterComponent implements OnInit {
+  State = [];
+  StateArray = new Array();
+
+  CityArray = [];
+  cityDemo = new Array();
+
+  hideUl = true;
+  hideCity = true;
   // Reference variable of formGroup
   instituteRegistrationForm: FormGroup;
 
   // Reference variable : Institute class
-  instituteDemoObj: Institute;
   public ownerId = ' ';
   constructor(
-    private instituteService: InstituteService,
+    private stateService: StateService,
+    public instituteService: InstituteService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -42,8 +49,63 @@ export class InstituteRegisterComponent implements OnInit {
   ngOnInit() {
     const id = localStorage.getItem('ownerId');
     this.ownerId = id;
+    this.State = this.stateService.getStates();
   }
 
+  complete() {
+    const StateValue = new String(
+      this.instituteRegistrationForm.get('state').value
+    );
+    this.StateArray = [];
+    if (StateValue != '') {
+      for (let i = 0; i < this.State.length; i++) {
+
+        if (this.State[i].state
+          .toLowerCase().startsWith(StateValue.toLowerCase()) &&
+          this.State[i].state.toLowerCase().indexOf((StateValue as string).toLowerCase()) >= 0) {
+          this.hideUl = false;
+          this.StateArray.push({
+            id: this.State[i].id,
+            state: this.State[i].state,
+          });
+        }
+      }
+    }
+  }
+
+  completeCity() {
+    const cityValue = new String(
+      this.instituteRegistrationForm.get('city').value
+    );
+    this.cityDemo = [];
+
+    if (cityValue != '') {
+      for (let i = 0; i < this.CityArray.length; i++) {
+        if (
+          this.CityArray[i].toLowerCase().startsWith(cityValue.toLowerCase()) &&
+          this.CityArray[i].toLowerCase().indexOf((cityValue as string).toLowerCase()) >= 0
+        ) {
+          this.hideCity = false;
+          this.cityDemo.push(this.CityArray[i]);
+        }
+      }
+    }
+  }
+
+  filltextBox(value) {
+    this.instituteRegistrationForm.controls.state.setValue(value.state);
+    this.hideUl = true;
+    this.CityArray = this.stateService
+      .getCity()
+      .filter((x) => x.id == value.id)[0].city;
+  }
+
+  fillCityBox(value) {
+    this.instituteRegistrationForm.controls.city.setValue(value);
+    this.hideCity = true;
+  }
+
+  // display fields value
   get instituteName() {
     return this.instituteRegistrationForm.get('instituteName');
   }
