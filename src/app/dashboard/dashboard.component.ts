@@ -15,6 +15,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onLogoutClick() {
+    localStorage.clear();
+    this.router.navigate(['../auth/login']);
+  }
+
   onCourseClick() {
     this.router.navigate(['/dashboard/course']);
   }
