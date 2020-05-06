@@ -9,28 +9,25 @@ import { Observable } from 'rxjs';
 export class StudentService {
   studentApi = `${environment.api}/student`;
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService) { }
 
-  getStudents(): Observable<object> {
-    return this.httpService.get(`${this.studentApi}/studentDisplay`);
+  getStudents(instituteId): Observable<object> {
+    return this.httpService.get(`${this.studentApi}/institute/${instituteId}`);
   }
 
   createStudent(student): Observable<object> {
-    return this.httpService.post(
-      `${this.studentApi}/studentRegistration`,
-      student
-    );
+    return this.httpService.post(`${this.studentApi}`, student);
   }
 
-  deleteStudent(id): Observable<object> {
-    return this.httpService.delete(`${this.studentApi}/studentDelete/${id}`);
+  deleteStudent(studentId): Observable<object> {
+    return this.httpService.delete(`${this.studentApi}/${studentId}`);
   }
 
-  getStudent(data): Observable<object> {
-    return this.httpService.get(`${this.studentApi}/studentSearch/${data}`);
+  getStudent(studentId): Observable<object> {
+    return this.httpService.get(`${this.studentApi}/${studentId}`);
   }
 
-  updateStudent(data): Observable<object> {
-    return this.httpService.put(`${this.studentApi}/studentUpdate`, data);
+  updateStudent(studentId): Observable<object> {
+    return this.httpService.put(`${this.studentApi}`, studentId);
   }
 }

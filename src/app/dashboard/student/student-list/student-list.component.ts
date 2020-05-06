@@ -11,9 +11,15 @@ import { Router } from '@angular/router';
 export class StudentListComponent implements OnInit {
   students: Student[];
   disablelabel = true;
-  constructor(private studentService: StudentService, private router: Router) {}
+  instituteId;
+  constructor(private studentService: StudentService, private router: Router) { }
 
   ngOnInit(): void {
+    this.instituteId = localStorage.getItem('instituteId');
+    if (!this.instituteId) {
+      this.router.navigate(['/']);
+    }
+
     this.getStudents();
     if (this.students !== undefined) {
       this.disablelabel = false;
@@ -21,9 +27,9 @@ export class StudentListComponent implements OnInit {
   }
 
   getStudents(): void {
-    this.studentService.getStudents().subscribe(
+    this.studentService.getStudents(this.instituteId).subscribe(
       (response: any) => {
-        this.students = response.studentList;
+        this.students = response.students ;
       },
       (error) => {
         alert(error.error.message);
@@ -34,6 +40,7 @@ export class StudentListComponent implements OnInit {
   deleteStudent(id) {
     this.studentService.deleteStudent(id).subscribe(
       (response: any) => {
+        console.log('response', response)
         this.getStudents();
       },
       (error) => {

@@ -23,6 +23,7 @@ export class StudentCreateComponent implements OnInit {
   limitSelection = false;
   selectedItems: any = [];
   dropdownSettings: IDropdownSettings = {};
+  instituteId;
 
   constructor(
     private fb: FormBuilder,
@@ -30,18 +31,28 @@ export class StudentCreateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private courseService: CourseService
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.instituteId = localStorage.getItem('instituteId');
+    if (!this.instituteId) {
+      this.router.navigate(['/']);
+    }
+    this.buildForm();
+    this.getCourses();
+    this.createDropDownSettings();
+  }
+
+  buildForm() {
     this.studentRegistrationForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       courses: [this.selectedItems, Validators.required],
     });
+  }
 
-    this.getCourses();
-
+  createDropDownSettings() {
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
@@ -85,6 +96,7 @@ export class StudentCreateComponent implements OnInit {
       lastname: this.studentRegistrationForm.get('lastName').value,
       email: this.studentRegistrationForm.get('email').value,
       courses: this.studentRegistrationForm.get('courses').value,
+      instituteId: this.instituteId
     };
 
     this.studentService.createStudent(student).subscribe(
