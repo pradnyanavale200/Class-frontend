@@ -34,9 +34,7 @@ li{
 .search-bar{
   padding:10px 10px;
 }
-.dropdown-toggle::after {
-  content: none;
-}
+
 /* HEADER CSS END */
 
 
