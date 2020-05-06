@@ -26,37 +26,31 @@ export class LoginComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.loginForm = this.fb.group({
-      email : ['', [Validators.required, Validators.pattern(REGEX.EMAIL)]],
-      password : ['', [Validators.required, Validators.pattern(REGEX.PASSWORD)]],
+      email: ['', [Validators.required, Validators.pattern(REGEX.EMAIL)]],
+      password: ['', [Validators.required, Validators.pattern(REGEX.PASSWORD)]],
     });
   }
 
   loginData() {
     const loginDataValue = {
-      email : this.loginForm.get('email').value,
-      password : this.loginForm.get('password').value,
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value,
     };
     return loginDataValue;
   }
 
   onLoginClick() {
-
-    const data1 = this.loginData();
-    this.auth.login(data1).subscribe((res: any) => {
-      const data = {
-        email: data1.email
-      };
-
-      this.auth.findIdByEmail(data).subscribe((response: any) => {
-        const ownerId = response.user._id;
-        localStorage.setItem('ownerId', ownerId);
+    this.auth.login(this.loginData()).subscribe((res: any) => {
+      const ownerId = res.user._id;
+      localStorage.setItem('ownerId', ownerId);
+      if (res.institute) {
+        this.router.navigate(['/dashboard']);
+        localStorage.setItem('instituteId', res.institute._id);
+      } else {
         this.router.navigate(['/new-insitute']);
-      }, (err: any) => {
-        alert('Error in Id');
-      });
-
+      }
     }, (err: any) => {
       alert('Error in login');
     });

@@ -8,28 +8,28 @@ import { CourseService } from '../services/course.service';
   styleUrls: ['./course-list.component.css'],
 })
 export class CourseListComponent implements OnInit {
-  Course = [];
-  public instId = ' ';
+  courses = [];
   public instituteId = ' ';
   disableCourse = false;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private courseService: CourseService
   ) {}
 
   ngOnInit(): void {
-    const id = localStorage.getItem('instituteId');
-    this.instId = id;
-    this.instituteId = id;
-    this.getCourses();
+    this.instituteId = localStorage.getItem('instituteId');
+    if (this.instituteId) {
+      this.getCourses();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   getCourses() {
-    this.courseService.getCourses(this.instId).subscribe(
+    this.courseService.getCourses(this.instituteId).subscribe(
       (response: any) => {
-        this.Course = response.course;
+        this.courses = response.course;
       },
       (error) => {
         console.log(error);
