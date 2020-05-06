@@ -2,7 +2,7 @@
 
 <div class="mx-4 my-4 row justify-content-center align-items-center">
 
-  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-8 shadow">
+  <div class="col-lg-5 col-md-8 col-sm-12 col-xs-8 shadow">
 
     <form class="formGroup px-4 py-4" [formGroup]="instituteRegistrationForm" [class.has-error]="
 
@@ -16,21 +16,14 @@
 
         (city.invalid && city.touched) ||
 
-        (pincode.invalid && pincode.touched)
-
-      ">
+        (pincode.invalid && pincode.touched)">
 
       <!-- Institute Register Header -->
-
       <div class="form-group text-center">
-
         <h2 class="mx-auto">Institute Registration</h2>
-
         <br />
-
       </div>
-
-      <!-- /Institute Register Header -->
+      <!-- Institute Register Header -->
 
 
 
@@ -56,8 +49,6 @@
 
       <!-- /Institute Name -->
 
-
-
       <!-- Address Line 1 -->
 
       <label for="addressLine1">Address Line 1 </label>
@@ -78,8 +69,8 @@
 
       <br />
       <!-- /Address Line 1 -->
-      <!-- Address Line 2 -->
 
+      <!-- Address Line 2 -->
       <label for="addressLine2">Address Line 2 </label>
       <input type="text" class="form-control" pattern="^(\w*\s*[\#\-\,\/\.\(\)\&]*)+" formControlName="addressLine2" />
       <div class="text-danger" *ngIf="addressLine2.invalid && (addressLine2.dirty || addressLine2.touched)">
@@ -89,11 +80,16 @@
         Address is not valid.
       </div>
       <br />
-
       <!-- /Address Line 2 -->
+
       <!-- State -->
       <label for="state">State</label>
-      <input type="text" class="form-control"  formControlName="state" />
+      <input type="text" class="form-control" formControlName="state" (keyup)="complete()" />
+      <ul class="list-group" [hidden]="hideUl">
+        <li class="list-group-item" *ngFor="let item of StateArray" (click)="filltextBox(item)">
+          {{item.state}}
+        </li>
+      </ul>
       <div class="text-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
         state is required
       </div>
@@ -101,12 +97,18 @@
         state is not valid.
       </div>
       <br />
-
-
       <!-- /State -->
+
       <!-- City -->
       <label for="city">City </label>
-      <input type="text" class="form-control" formControlName="city" />
+      <input type="text" class="form-control" formControlName="city" formControlName="city" (keyup)="completeCity()" />
+      <ul class="list-group" [hidden]="hideCity">
+        <li class="list-group-item" *ngFor="let item of cityDemo" (click)="fillCityBox(item)">
+          {{item}}
+        </li>
+      </ul>
+
+
       <div class="text-danger" *ngIf="city.invalid && (city.dirty || city.touched)">
         City is required
       </div>
@@ -115,8 +117,8 @@
       </div>
       <br />
       <!-- /City -->
-      <!-- PinCode -->
 
+      <!-- PinCode -->
       <label class="control-label" for="pincode">Pin Code </label>
 
       <input type="text" class="form-control" pattern="^[1-9][0-9]{5}$" formControlName="pincode" />
@@ -144,10 +146,9 @@
       <div class="text-center">
 
         <button (click)="register()" [disabled]="instituteRegistrationForm.invalid"
+          class="btn btn-primary mr-3">Register</button>
 
-        class="btn btn-primary">Register</button>
-
-      <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+        <button (click)="cancel()" class="btn btn-danger">Cancel</button>
 
       </div>
 
@@ -160,4 +161,3 @@
 </div>
 
 <!-- /Institute Registeration Form-->
-

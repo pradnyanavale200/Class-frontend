@@ -1,10 +1,10 @@
-import { Institute } from 'src/app/instituteDemo';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { InstituteService } from '../services/institute.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { StateService } from 'src/app/state.service';
 
 @Component({
   selector: 'app-institute-update',
@@ -14,6 +14,16 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 export class InstituteUpdateComponent implements OnInit {
   // Reference variable of formGroup
   instituteUpdateForm: FormGroup;
+
+  // State and City variables
+  State = [];
+  StateArray = new Array();
+
+  CityArray = [];
+  cityDemo = new Array();
+
+  hideUl = true;
+  hideCity = true;
 
   public ownerId = ' ';
   public instituteId = ' ';
@@ -27,11 +37,12 @@ export class InstituteUpdateComponent implements OnInit {
     pinCode: '',
   };
   constructor(
+    private stateService: StateService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private instituteService: InstituteService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('ownerId');
@@ -58,6 +69,61 @@ export class InstituteUpdateComponent implements OnInit {
       city: [null, Validators.required],
       pincode: [null, Validators.required],
     });
+
+    this.State = this.stateService.getStates();
+  }
+
+  completeState() {
+    const StateValue = new String(
+      this.instituteUpdateForm.get('state').value
+    ).toLowerCase();
+    this.StateArray = [];
+    if (StateValue != '') {
+      for (let i = 0; i < this.State.length; i++) {
+        if (
+          this.State[i].state
+            .toLowerCase()
+            .startsWith(StateValue.toLowerCase()) &&
+          this.State[i].state.toLowerCase().indexOf((StateValue as string).toLowerCase()) >= 0
+        ) {
+          this.hideUl = false;
+          this.StateArray.push({
+            id: this.State[i].id,
+            state: this.State[i].state,
+          });
+        }
+      }
+    }
+  }
+
+  completeCity() {
+    const cityValue = new String(this.instituteUpdateForm.get('city').value);
+    this.cityDemo = [];
+
+    if (cityValue != '') {
+      for (let i = 0; i < this.CityArray.length; i++) {
+        if (
+          this.CityArray[i].toLowerCase().startsWith(cityValue.toLowerCase()) &&
+          this.CityArray[i].toLowerCase().indexOf((cityValue as string).toLowerCase()) >= 0
+        ) {
+          this.hideCity = false;
+          this.cityDemo.push(this.CityArray[i]);
+        }
+      }
+    }
+  }
+
+  filltextBox(value) {
+    this.instituteUpdateForm.controls.state.setValue(value.state);
+    this.hideUl = true;
+    this.CityArray = this.stateService
+      .getCity()
+      .filter((x) => x.id == value.id)[0].city;
+  }
+
+  fillCityBox(value) {
+    this.instituteUpdateForm.controls.city.setValue(value);
+    this.hideCity = true;
   }
 
   setData(institute) {
@@ -108,13 +174,12 @@ export class InstituteUpdateComponent implements OnInit {
       state: this.instituteUpdateForm.get('state').value,
       city: this.instituteUpdateForm.get('city').value,
       pincode: this.instituteUpdateForm.get('pincode').value,
-      ownerId: this.ownerId
+      ownerId: this.ownerId,
     };
 
     this.instituteService.updateInstitute(data).subscribe(
       (response: any) => {
-
-        const instituteId=this.instituteId;
+        const instituteId = this.instituteId;
         this.router.navigate(['/dashboard/course/list', instituteId]);
       },
       (error) => {
@@ -124,8 +189,8 @@ export class InstituteUpdateComponent implements OnInit {
     );
   }
 
-  cancel(){
-    const instituteId=this.instituteId;
+  cancel() {
+    const instituteId = this.instituteId;
     this.router.navigate(['/dashboard/course/list', instituteId]);
   }
 }
