@@ -69,7 +69,7 @@ export class ProfileUpdateComponent implements OnInit {
     this.router.navigate(['./dashboard/course/list']);
   }
 
-  updateStudent() {
+  updateUser() {
     const data = {
       _id: this.userId,
       firstName: this.profileUpdateform.get('firstName').value,
@@ -84,4 +84,5 @@ export class ProfileUpdateComponent implements OnInit {
       alert(error.error.message);
     });
   }
+
 }
