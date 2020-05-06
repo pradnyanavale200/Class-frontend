@@ -66,7 +66,7 @@ export class ProfileUpdateComponent implements OnInit {
     return this.profileUpdateform.get('email');
   }
 
-  updateStudent() {
+  updateUser() {
     const data = {
       _id: this.userId,
       firstName: this.profileUpdateform.get('firstName').value,
@@ -80,5 +80,16 @@ export class ProfileUpdateComponent implements OnInit {
       console.log(error);
       alert(error.error.message);
     });
+  }
+
+  cancel(){
+
+    this.profileUpdateform.reset({
+      firstName: '',
+      lastName: '',
+      email: ''
+    });
+    this.router.navigate(['/dashboard']);
+
   }
 }
