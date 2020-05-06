@@ -60,6 +60,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['./auth/register']);
   }
 
+  onForgetPasswordClick() {
+    this.router.navigate(['./auth/forgetpass']);
+  }
+
 
   get email() {
     return this.loginForm.get('email');
