@@ -31,9 +31,9 @@ export class CourseUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    const instId = this.route.snapshot.paramMap.get('instituteId');
+    const instId = localStorage.getItem('instituteId');
     this.courseId = id;
-    this.instituteId=instId;
+    this.instituteId = instId;
 
     this.courseService.getCourseData(this.courseId).subscribe((response: any) => {
       this.course = response.course;
@@ -72,7 +72,9 @@ export class CourseUpdateComponent implements OnInit {
   get feesValidate() {
     return this.courseUpdateForm.get('fees');
   }
-
+  cancel(){
+    this.router.navigate(['./dashboard/course/list']);
+  }
   updateCourse(){
     const data = {
       _id : this.courseId,
@@ -84,8 +86,7 @@ export class CourseUpdateComponent implements OnInit {
 
     this.courseService.updateCourse(data).subscribe((response: any) => {
 
-      const instituteId=this.instituteId;
-      this.router.navigate(['/dashboard/course/list', instituteId]);
+      this.router.navigate(['/dashboard/course/list']);
 
       }, (error) => {
         console.log(error);

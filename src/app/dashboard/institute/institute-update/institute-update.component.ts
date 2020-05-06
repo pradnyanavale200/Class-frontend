@@ -45,7 +45,7 @@ export class InstituteUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('ownerId');
+    const id = localStorage.getItem('ownerId');
     this.ownerId = id;
     const data = {
       ownerId: this.ownerId,
@@ -179,8 +179,8 @@ export class InstituteUpdateComponent implements OnInit {
 
     this.instituteService.updateInstitute(data).subscribe(
       (response: any) => {
-        const instituteId = this.instituteId;
-        this.router.navigate(['/dashboard/course/list', instituteId]);
+
+        this.router.navigate(['/dashboard/course/list']);
       },
       (error) => {
         console.log(error);
@@ -189,8 +189,7 @@ export class InstituteUpdateComponent implements OnInit {
     );
   }
 
-  cancel() {
-    const instituteId = this.instituteId;
-    this.router.navigate(['/dashboard/course/list', instituteId]);
+  cancel(){
+    this.router.navigate(['/dashboard/course/list']);
   }
 }

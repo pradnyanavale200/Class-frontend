@@ -47,7 +47,7 @@ export class InstituteRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('ownerId');
+    const id = localStorage.getItem('ownerId');
     this.ownerId = id;
     this.State = this.stateService.getStates();
   }
@@ -130,8 +130,8 @@ export class InstituteRegisterComponent implements OnInit {
     return this.instituteRegistrationForm.get('pincode');
   }
 
-  register() {
-    const institute = {
+  getInstituteData() {
+    return {
       instituteName: this.instituteRegistrationForm.get('instituteName').value,
       instituteAddressLine1: this.instituteRegistrationForm.get('addressLine1')
         .value,
@@ -142,14 +142,16 @@ export class InstituteRegisterComponent implements OnInit {
       pincode: this.instituteRegistrationForm.get('pincode').value,
       ownerId: this.ownerId,
     };
+  }
 
-    this.instituteService.createInstitute(institute).subscribe(
-      (response: any) => {
-        const ownerId = this.ownerId;
-        this.router.navigate(['/dashboard/institute/update', ownerId]);
-      },
+  register() {
+    const institute = this.getInstituteData();
+    this.instituteService.createInstitute(institute).subscribe((response: any) => {
+      localStorage.setItem('instituteId', response.institute._id);
+      this.router.navigate(['/dashboard/course/list']);
+    },
       (error) => {
-        console.log(error);
+        this.router.navigate(['/']);
         alert(error.error.message);
       }
     );

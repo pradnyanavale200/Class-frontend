@@ -13,6 +13,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   emailExample: '< example > @ < mail >.< com >';
+  togglePassword = 'visibility';
+  disabledPassword = true;
+  typePassword = 'password';
+  titlebtnDisabled: 'Please enter valid data to enable button';
+  titlebtn: 'Click to login';
+  title: 'data';
 
   constructor(
     private fb: FormBuilder,
@@ -20,37 +26,31 @@ export class LoginComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.loginForm = this.fb.group({
-      email : ['', [Validators.required, Validators.pattern(REGEX.EMAIL)]],
-      password : ['', [Validators.required, Validators.pattern(REGEX.PASSWORD)]],
+      email: ['', [Validators.required, Validators.pattern(REGEX.EMAIL)]],
+      password: ['', [Validators.required, Validators.pattern(REGEX.PASSWORD)]],
     });
   }
 
   loginData() {
     const loginDataValue = {
-      email : this.loginForm.get('email').value,
-      password : this.loginForm.get('password').value,
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value,
     };
     return loginDataValue;
   }
 
   onLoginClick() {
-
-    const data1 = this.loginData();
-    this.auth.login(data1).subscribe((res: any) => {
-      const data = {
-        email: data1.email
-      };
-      console.log(data)
-      this.auth.findIdByEmail(data).subscribe(( res: any) => {
-        const ownerId = res.user._id;
-        console.log(res.user._id)
-        this.router.navigate(['/new-insitute', ownerId]);
-      }, (err: any) => {
-        alert('Error in Id');
-      });
-
+    this.auth.login(this.loginData()).subscribe((res: any) => {
+      const ownerId = res.user._id;
+      localStorage.setItem('ownerId', ownerId);
+      if (res.institute) {
+        this.router.navigate(['/dashboard']);
+        localStorage.setItem('instituteId', res.institute._id);
+      } else {
+        this.router.navigate(['/new-insitute']);
+      }
     }, (err: any) => {
       alert('Error in login');
     });
@@ -60,6 +60,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['./auth/register']);
   }
 
+  onForgetPasswordClick() {
+    this.router.navigate(['./auth/forgotpass']);
+  }
+
 
   get email() {
     return this.loginForm.get('email');
@@ -67,5 +71,19 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
+
+  toggle() {
+    if (this.disabledPassword === true) {
+      this.disabledPassword = false;
+      this.togglePassword = 'visibility_off';
+      this.typePassword = 'text';
+    } else {
+      this.disabledPassword = true;
+      this.togglePassword = 'visibility';
+      this.typePassword = 'password';
+    }
+  }
+
+
 
 }

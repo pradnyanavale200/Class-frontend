@@ -3,12 +3,11 @@ import { CourseService } from '../../course/services/course.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
-  FormControl,
   FormBuilder,
   Validators,
 } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import {  Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-create',
@@ -23,8 +22,8 @@ export class StudentCreateComponent implements OnInit {
   ShowFilter = false;
   limitSelection = false;
   selectedItems: any = [];
-  InstID: any = '5eb029a7bbb56d0acc8a9d04';
   dropdownSettings: IDropdownSettings = {};
+  instituteId;
 
   constructor(
     private fb: FormBuilder,
@@ -32,19 +31,28 @@ export class StudentCreateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private courseService: CourseService
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.instituteId = localStorage.getItem('instituteId');
+    if (!this.instituteId) {
+      this.router.navigate(['/']);
+    }
+    this.buildForm();
+    this.getCourses();
+    this.createDropDownSettings();
+  }
 
+  buildForm() {
     this.studentRegistrationForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       courses: [this.selectedItems, Validators.required],
     });
+  }
 
-    this.getCourses();
-
+  createDropDownSettings() {
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
@@ -88,11 +96,11 @@ export class StudentCreateComponent implements OnInit {
       lastname: this.studentRegistrationForm.get('lastName').value,
       email: this.studentRegistrationForm.get('email').value,
       courses: this.studentRegistrationForm.get('courses').value,
+      instituteId: this.instituteId
     };
 
     this.studentService.createStudent(student).subscribe(
       (response: any) => {
-        alert(response.message);
         this.router.navigate(['./dashboard/student/list']);
       },
       (error) => {
@@ -102,17 +110,19 @@ export class StudentCreateComponent implements OnInit {
     );
   }
 
-  getCourses(){
-    this.courseService.getCourses(this.InstID).subscribe((response: any) => {
-      const data =[];
-      for(let i = 0; i < response.courseNameData.length; i++){
-         data[i] = {item_id :  i, item_text: response.courseNameData[i] };
+  getCourses() {
+    const instId = localStorage.getItem('instituteId');
+    this.courseService.getCourses(instId).subscribe(
+      (response: any) => {
+        const data = [];
+        for (let i = 0; i < response.courseNameData.length; i++) {
+          data[i] = { item_id: i, item_text: response.courseNameData[i] };
+        }
+        this.Courses = data;
+      },
+      (error) => {
+        console.log(error);
       }
-      this.Courses = data;
-      console.log(this.Courses);
-    }, (error) => {
-      console.log(error);
-    });
-
+    );
   }
 }

@@ -18,11 +18,16 @@ export class AuthService {
     return this.httpService.post(`${this.authApi}/login`, data);
   }
 
-  findIdByEmail(data) {
-    return this.httpService.post(`${this.authApi}/findId`, data);
-  }
 
   register(data) {
     return this.httpService.post(`${this.authApi}/register`, data);
+  }
+
+  forgotPassword(data){
+    return this.httpService.put(`${this.authApi}/forgetpass`, data);
+  }
+
+  confirmPassword(data){
+    return this.httpService.put(`${this.authApi}/userConfirmpass`, data);
   }
 }

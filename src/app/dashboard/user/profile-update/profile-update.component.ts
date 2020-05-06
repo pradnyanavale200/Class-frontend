@@ -28,13 +28,12 @@ export class ProfileUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // const id = this.route.snapshot.paramMap.get('id');
-    this.userId = '5ea6f540002e5e08ec9d000a';
+
+    this.userId = localStorage.getItem('ownerId');
 
     this.userService.getUser(this.userId).subscribe(
       (response: any) => {
         this.user = response.usersList;
-        console.log(response.usersList);
         this.setData(response.usersList);
       },
       (error) => {
@@ -66,8 +65,11 @@ export class ProfileUpdateComponent implements OnInit {
   get emailvalidate() {
     return this.profileUpdateform.get('email');
   }
+  cancel(){
+    this.router.navigate(['./dashboard/course/list']);
+  }
 
-  updateStudent() {
+  updateUser() {
     const data = {
       _id: this.userId,
       firstName: this.profileUpdateform.get('firstName').value,
@@ -76,10 +78,11 @@ export class ProfileUpdateComponent implements OnInit {
     };
 
     this.userService.updateUser(data).subscribe((response: any) => {
-      alert(response.message);
+      this.router.navigate(['/dashboard/course/list']);
     }, (error) => {
       console.log(error);
       alert(error.error.message);
     });
   }
+
 }

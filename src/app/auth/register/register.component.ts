@@ -9,10 +9,6 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  // firstName: string;
-  // lastName: string;
-  // email: string;
-  // password: string;
 
   togglePassword = 'visibility';
   disabledPassword = true;
@@ -23,7 +19,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,28 +35,29 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     const value = this.registerData();
 
-    this.auth.register(value).subscribe((res: any) => {
-
-      this.router.navigate(['./new-insitute']);
-    }, (err: any) => {
-      alert('Error in register');
-    });
-
+    this.auth.register(value).subscribe(
+      (res: any) => {
+        this.router.navigate(['./auth/login']);
+      },
+      (err: any) => {
+        alert('Error in register');
+      }
+    );
   }
 
   registerData() {
     const data = {
-      firstName : this.regsiterForm.get('firstName').value,
-      lastName : this.regsiterForm.get('lastName').value,
-      email : this.regsiterForm.get('email').value,
-      password : this.regsiterForm.get('password').value,
+      firstName: this.regsiterForm.get('firstName').value,
+      lastName: this.regsiterForm.get('lastName').value,
+      email: this.regsiterForm.get('email').value,
+      password: this.regsiterForm.get('password').value,
     };
     return data;
   }
 
   // Show/hide password character
   toggle() {
-    if (this.disabledPassword == true) {
+    if (this.disabledPassword === true) {
       this.disabledPassword = false;
       this.togglePassword = 'visibility_off';
       this.typePassword = 'text';
@@ -78,12 +75,10 @@ export class RegisterComponent implements OnInit {
     return this.regsiterForm.get('lastName');
   }
 
-
   get email() {
     return this.regsiterForm.get('email');
   }
   get password() {
     return this.regsiterForm.get('password');
   }
-
 }

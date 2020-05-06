@@ -3,6 +3,7 @@ import { StudentService } from '../services/student.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { CourseService } from '../../course/services/course.service';
 
 @Component({
   selector: 'app-student-update',
@@ -20,6 +21,7 @@ export class StudentUpdateComponent implements OnInit {
   ShowFilter = false;
   limitSelection = false;
   selectedItems: any = [];
+
   dropdownSettings: IDropdownSettings = {};
 
   public studId = ' ';
@@ -34,7 +36,8 @@ export class StudentUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private courseService: CourseService
   ) { }
 
   ngOnInit() {
@@ -55,12 +58,7 @@ export class StudentUpdateComponent implements OnInit {
       courses: [this.selectedItems, Validators.required],
     });
 
-    this.Courses = [
-      { item_id: 1, item_text: 'CPP' },
-      { item_id: 2, item_text: 'C' },
-      { item_id: 3, item_text: 'JAVA' },
-      { item_id: 4, item_text: 'PYTHON' },
-    ];
+    this.getCourses();
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -106,11 +104,31 @@ export class StudentUpdateComponent implements OnInit {
     };
 
     this.studentService.updateStudent(data).subscribe((response: any) => {
-        alert(response.message);
         this.router.navigate(['/dashboard/student/list']);
       }, (error) => {
         console.log(error);
         alert(error.error.message);
     });
+  }
+  cancel() {
+    this.router.navigate(['./dashboard/student/list']);
+  }
+
+  getCourses(){
+    const instId = localStorage.getItem('instituteId');
+    if (!instId) {
+      this.router.navigate(['/']);
+    }
+    this.courseService.getCourses(instId).subscribe((response: any) => {
+      const data =[];
+      for(let i = 0; i < response.courseNameData.length; i++){
+         data[i] = {item_id :  i, item_text: response.courseNameData[i] };
+      }
+      this.Courses = data;
+      console.log(this.Courses);
+    }, (error) => {
+      console.log(error);
+    });
+
   }
 }
