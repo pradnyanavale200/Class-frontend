@@ -21,7 +21,7 @@ export class StudentUpdateComponent implements OnInit {
   ShowFilter = false;
   limitSelection = false;
   selectedItems: any = [];
-  InstID: any = '5eb029a7bbb56d0acc8a9d04';
+
   dropdownSettings: IDropdownSettings = {};
 
   public studId = ' ';
@@ -110,9 +110,16 @@ export class StudentUpdateComponent implements OnInit {
         alert(error.error.message);
     });
   }
+  cancel() {
+    this.router.navigate(['./dashboard/student/list']);
+  }
 
   getCourses(){
-    this.courseService.getCourses(this.InstID).subscribe((response: any) => {
+    const instId = localStorage.getItem('instituteId');
+    if (!instId) {
+      this.router.navigate(['/']);
+    }
+    this.courseService.getCourses(instId).subscribe((response: any) => {
       const data =[];
       for(let i = 0; i < response.courseNameData.length; i++){
          data[i] = {item_id :  i, item_text: response.courseNameData[i] };

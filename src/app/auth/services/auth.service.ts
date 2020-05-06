@@ -22,4 +22,8 @@ export class AuthService {
   register(data) {
     return this.httpService.post(`${this.authApi}/register`, data);
   }
+
+  forgotPassword(data){
+    return this.httpService.put(`${this.authApi}/forgetpass`, data);
+  }
 }

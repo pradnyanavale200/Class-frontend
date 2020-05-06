@@ -12,7 +12,7 @@
       </div>
       <div *ngIf="firstName.errors?.pattern" style="color: red">
         Firstname not valid.
-      </div> <br> 
+      </div> <br>
       <!--FirstName end-->
 
       <!--LastName-->
@@ -49,7 +49,8 @@
       <br>
       <!--Course end-->
 
-      <button (click)="register()" [disabled]="studentRegistrationForm.invalid" class="btn btn-primary">Register</button> <button
+      <button (click)="register()" [disabled]="studentRegistrationForm.invalid" class="btn btn-primary">Register</button>
+      <button
         (click)="cancel()" class="btn btn-danger">Cancel</button><br><br>
     </form>
   </div>

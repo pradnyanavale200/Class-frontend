@@ -65,6 +65,9 @@ export class ProfileUpdateComponent implements OnInit {
   get emailvalidate() {
     return this.profileUpdateform.get('email');
   }
+  cancel(){
+    this.router.navigate(['./dashboard/course/list']);
+  }
 
   updateStudent() {
     const data = {
