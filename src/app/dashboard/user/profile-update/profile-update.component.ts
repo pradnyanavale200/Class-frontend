@@ -65,6 +65,9 @@ export class ProfileUpdateComponent implements OnInit {
   get emailvalidate() {
     return this.profileUpdateform.get('email');
   }
+  cancel(){
+    this.router.navigate(['./dashboard/course/list']);
+  }
 
   updateUser() {
     const data = {
@@ -82,14 +85,4 @@ export class ProfileUpdateComponent implements OnInit {
     });
   }
 
-  cancel(){
-
-    this.profileUpdateform.reset({
-      firstName: '',
-      lastName: '',
-      email: ''
-    });
-    this.router.navigate(['/dashboard']);
-
-  }
 }

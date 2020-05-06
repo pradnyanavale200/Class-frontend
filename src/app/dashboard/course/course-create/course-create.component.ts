@@ -47,6 +47,11 @@ export class CourseCreateComponent implements OnInit {
     return this.courseCreateForm.get('fees');
   }
 
+  cancel() {
+    this.router.navigate(['./dashboard/course/list']);
+  }
+
+
   createCourse() {
     const data = {
       courseName: this.courseCreateForm.get('courseName').value,

@@ -72,7 +72,9 @@ export class CourseUpdateComponent implements OnInit {
   get feesValidate() {
     return this.courseUpdateForm.get('fees');
   }
-
+  cancel(){
+    this.router.navigate(['./dashboard/course/list']);
+  }
   updateCourse(){
     const data = {
       _id : this.courseId,
