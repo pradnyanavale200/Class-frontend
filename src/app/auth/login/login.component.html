@@ -9,20 +9,22 @@
             <div  class="formGroup frmgrp" >
                 <!-- Firstname -->
                 <label for="email" >Email : </label>
-                <input  class="form-control" type="text" formControlName="email">
-                <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched)">
+                <input  class="form-control rounded-5" type="text" formControlName="email">
+                <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched)  ">
                     Please enter valid email<br>Must be in Format : abcd12@gmail.com
                 </div>
                 <!-- Firstname -->
 
                 <!-- Lastname -->
                 <label for="password" >Password : </label>
-                <div class="input-group">
+                <div class="input-group ">
                 <input  class="form-control" type={{typePassword}} formControlName="password">
-                <div class="input-group-append">
-                    <div class="input-group-text bg-white"><span class="material-icons" (click)="toggle()">
+                <div class="input-group-append ">
+                    <div class="input-group-text bg-white inpgrpapp">
+                        <span class="material-icons" (click)="toggle()">
                         {{togglePassword}}
-                      </span></div>
+                        </span>
+                    </div>
                 </div>
                 </div>
                 <div class="text-danger" *ngIf="password.invalid && (password.dirty|| password.touched)">
@@ -39,7 +41,7 @@
                     <div class="update btn-block" >
                         
                         <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" (click)="onLoginClick()"  
-                        data-toggle="tooltip" data-placement="right" title="Enter valid data to enable login button">Login</button>
+                        data-toggle="tooltip" data-placement="right" title="Enter valid data to enable login button" >Login</button>
                         
                     </div>
                     <div class="cancel" >
