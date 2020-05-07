@@ -20,6 +20,14 @@ form h2,
     margin-left: 10px;
 }
 
+input {
+    border-radius: 25px;
+}
+
+.inpgrpapp {
+    border-radius: 25px;
+}
+
 .btngrp {
     padding: 20px 0px 20px 0px; 
     
@@ -38,14 +46,15 @@ form h2,
     /* margin: 10px 0px 10px 0px; */
 }
 
-input:hover {
-    border-color: green
+input:hover,:focus {
+    border-color: green;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 button:hover {
     /* background: linear-gradient(to right, #009FFF 0%, #ec2F4B 100%); */
     background: green;
-    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* a:hover {
