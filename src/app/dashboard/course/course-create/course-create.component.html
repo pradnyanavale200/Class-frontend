@@ -20,7 +20,7 @@
                 <!-- Duration  -->
                 <label for="duration">Duration</label>
                 <input [class.is-invalid] = "courseCreateForm.get('duration').invalid && courseCreateForm.get('duration').touched"
-                  list="numbers" class="form-control" formControlName="duration" placeholder="Choose">
+                  list="numbers" class="form-control" formControlName="duration" placeholder="Choose" onfocus="this.value=''">
                 <datalist id="numbers">
                   <option>1</option>
                   <option>2</option>
