@@ -10,9 +10,12 @@
                 <!-- Firstname -->
                 <label for="email" >Email : </label>
                 <input  class="form-control rounded-5" type="text" formControlName="email">
-                <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched)  ">
-                    Please enter valid email<br>Must be in Format : abcd12@gmail.com
+                <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched)  " pattern>
+                    Please enter valid email
                 </div>
+                <div class="text-danger" *ngIf="email.errors?.pattern" >
+                    Email pattern not correct<br>Must be in Format : abcd12@gmail.com
+                  </div> 
                 <!-- Firstname -->
 
                 <!-- Lastname -->
@@ -42,6 +45,7 @@
                         
                         <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" (click)="onLoginClick()"  
                         data-toggle="tooltip" data-placement="right" [ngStyle]="{cursor: loginForm.invalid ? 'no-drop':'pointer'}" title="Enter valid data to enable login button">Login</button>
+                        <!-- nzTooltipTitle="prompt text" nzTooltipPlacement="right" nz-button nz-tooltip -->
                         
                     </div>
                     <div class="cancel" >
