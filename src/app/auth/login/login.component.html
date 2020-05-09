@@ -1,7 +1,5 @@
 <!-- <p>login works!</p> -->
 
-<!-- <p>student-update works!</p> -->
-
 <div class="row mx-4 my-4">
     <div  class="col-lg-6 col-md-12 col-sm-12 colnm shadow" >
         <form class="formGroup" [formGroup]="loginForm">
@@ -15,7 +13,7 @@
                 </div>
                 <div class="text-danger" *ngIf="email.errors?.pattern" >
                     Email pattern not correct<br>Must be in Format : abcd12@gmail.com
-                  </div> 
+                  </div>
                 <!-- Firstname -->
 
                 <!-- Lastname -->
@@ -42,11 +40,11 @@
                 <!-- Login and new user button -->
                 <div  class="btn-block btngrp" >
                     <div class="update btn-block" >
-                        
-                        <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" (click)="onLoginClick()"  
+
+                        <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" (click)="onLoginClick()"
                         data-toggle="tooltip" data-placement="right" [ngStyle]="{cursor: loginForm.invalid ? 'no-drop':'pointer'}" title="Enter valid data to enable login button">Login</button>
                         <!-- nzTooltipTitle="prompt text" nzTooltipPlacement="right" nz-button nz-tooltip -->
-                        
+
                     </div>
                     <div class="cancel" >
                         <a class="btn-block " (click)="onRegisterClick()">New User? <span class="reg">SignUp</span> </a>
@@ -55,7 +53,7 @@
                 <!-- Login and new user button -->
 
             </div>
-            
+
         </form>
     </div>
 </div>
