@@ -35,9 +35,6 @@ export class StudentCreateComponent implements OnInit {
 
   ngOnInit() {
     this.instituteId = localStorage.getItem('instituteId');
-    if (!this.instituteId) {
-      this.router.navigate(['/']);
-    }
     this.buildForm();
     this.getCourses();
     this.createDropDownSettings();

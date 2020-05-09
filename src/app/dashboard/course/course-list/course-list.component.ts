@@ -19,11 +19,6 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.instituteId = localStorage.getItem('instituteId');
-    if (this.instituteId) {
-      this.getCourses();
-    } else {
-      this.router.navigate(['/']);
-    }
   }
 
   getCourses() {
