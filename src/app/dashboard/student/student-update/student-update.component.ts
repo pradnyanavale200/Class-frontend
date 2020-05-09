@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CourseService } from '../../course/services/course.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-student-update',
@@ -35,7 +36,8 @@ export class StudentUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private studentService: StudentService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
@@ -102,10 +104,12 @@ export class StudentUpdateComponent implements OnInit {
     };
 
     this.studentService.updateStudent(data).subscribe((response: any) => {
+        this.createNotification('success', 'Success', 'Deleted Successfully', 'topRight');
         this.router.navigate(['/dashboard/student/list']);
       }, (error) => {
-        console.log(error);
-        alert(error.error.message);
+        this.createNotification('error', 'Error', 'Error in deleting', 'topRight');
+        // console.log(error);
+        // alert(error.error.message);
     });
   }
   cancel() {
@@ -129,4 +133,14 @@ export class StudentUpdateComponent implements OnInit {
     });
 
   }
+
+  createNotification(type, title, message, position) {
+    this.notification.create(
+      type,
+      title,
+      message,
+       { nzPlacement: 'topRight' }
+    );
+  }
+
 }

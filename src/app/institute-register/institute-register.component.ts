@@ -10,6 +10,7 @@ import {
 import { InstituteService } from '../dashboard/institute/services/institute.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StateService } from '../state.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 @Component({
   selector: 'app-institute-register',
   templateUrl: './institute-register.component.html',
@@ -34,7 +35,8 @@ export class InstituteRegisterComponent implements OnInit {
     public instituteService: InstituteService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notification: NzNotificationService,
   ) {
     this.instituteRegistrationForm = this.fb.group({
       instituteName: [null, Validators.required],
@@ -147,15 +149,26 @@ export class InstituteRegisterComponent implements OnInit {
   register() {
     const institute = this.getInstituteData();
     this.instituteService.createInstitute(institute).subscribe((response: any) => {
+      this.createNotification('success', 'Success', 'Istitute registered Successfully', 'topRight');
       localStorage.setItem('instituteId', response.institute._id);
       this.router.navigate(['/dashboard/course/list']);
     },
       (error) => {
         this.router.navigate(['/']);
+        this.createNotification('error', 'Error', 'Error in registering institute', 'topRight');
         alert(error.error.message);
       }
     );
   }
 
   cancel() { }
+
+  createNotification(type, title, message, position) {
+    this.notification.create(
+      type,
+      title,
+      message,
+       { nzPlacement: 'topRight' }
+    );
+  }
 }

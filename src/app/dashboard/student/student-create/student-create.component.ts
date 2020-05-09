@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-student-create',
@@ -30,7 +31,8 @@ export class StudentCreateComponent implements OnInit {
     private studentService: StudentService,
     private router: Router,
     private route: ActivatedRoute,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
@@ -98,11 +100,13 @@ export class StudentCreateComponent implements OnInit {
 
     this.studentService.createStudent(student).subscribe(
       (response: any) => {
+        this.createNotification('success', 'Success', 'Created Successfully', 'topRight');
         this.router.navigate(['./dashboard/student/list']);
       },
       (error) => {
-        console.log(error);
-        alert(error.error.message);
+        this.createNotification('error', 'Error', 'Error in creating student', 'topRight');
+        // console.log(error);
+        // alert(error.error.message);
       }
     );
   }
@@ -122,4 +126,14 @@ export class StudentCreateComponent implements OnInit {
       }
     );
   }
+
+  createNotification(type, title, message, position) {
+    this.notification.create(
+      type,
+      title,
+      message,
+       { nzPlacement: 'topRight' }
+    );
+  }
+
 }

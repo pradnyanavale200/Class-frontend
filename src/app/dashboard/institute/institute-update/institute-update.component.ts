@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { StateService } from 'src/app/state.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-institute-update',
@@ -41,7 +42,8 @@ export class InstituteUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private instituteService: InstituteService
+    private instituteService: InstituteService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -179,12 +181,13 @@ export class InstituteUpdateComponent implements OnInit {
 
     this.instituteService.updateInstitute(data).subscribe(
       (response: any) => {
-
+        this.createNotification('success', 'Success', 'Updated successfully', 'topRight');
         this.router.navigate(['/dashboard/course/list']);
       },
       (error) => {
-        console.log(error);
-        alert(error.error.message);
+        this.createNotification('error', 'Error', 'Error in updation', 'topRight');
+        // console.log(error);
+        // alert(error.error.message);
       }
     );
   }
@@ -192,4 +195,15 @@ export class InstituteUpdateComponent implements OnInit {
   cancel(){
     this.router.navigate(['/dashboard/course/list']);
   }
+
+  createNotification(type, title, message, position) {
+    this.notification.create(
+      type,
+      title,
+      message,
+       { nzPlacement: 'topRight' }
+    );
+  }
+
+
 }

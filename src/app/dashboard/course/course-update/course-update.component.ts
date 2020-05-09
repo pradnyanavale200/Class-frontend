@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { CourseService } from '../services/course.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-course-update',
@@ -26,7 +27,8 @@ export class CourseUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -85,12 +87,23 @@ export class CourseUpdateComponent implements OnInit {
     };
 
     this.courseService.updateCourse(data).subscribe((response: any) => {
-
+      this.createNotification('success', 'Success', 'Course updated Successfully', 'topRight');
       this.router.navigate(['/dashboard/course/list']);
 
       }, (error) => {
-        console.log(error);
-        alert(error.error.message);
+        this.createNotification('error', 'Error', 'Error in course updation', 'topRight');
+        // console.log(error);
+        // alert(error.error.message);
     });
   }
+
+  createNotification(type, title, message, position) {
+    this.notification.create(
+      type,
+      title,
+      message,
+       { nzPlacement: 'topRight' }
+    );
+  }
+
 }

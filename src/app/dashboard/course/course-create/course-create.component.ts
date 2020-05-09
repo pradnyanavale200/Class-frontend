@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '../services/course.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-course-create',
@@ -17,7 +18,8 @@ export class CourseCreateComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -63,11 +65,22 @@ export class CourseCreateComponent implements OnInit {
 
     this.courseService.courseCreate(data).subscribe(
       (response: any) => {
+        this.createNotification('success', 'Success', 'Course created Successfully', 'topRight');
         this.router.navigate(['/dashboard/course/list']);
       },
       (error) => {
-        console.log(error);
+        this.createNotification('error', 'Error', 'Error in course creation', 'topRight');
+        // console.log(error);
       }
+    );
+  }
+
+  createNotification(type, title, message, position) {
+    this.notification.create(
+      type,
+      title,
+      message,
+       { nzPlacement: 'topRight' }
     );
   }
 }
