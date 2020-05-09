@@ -16,10 +16,6 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.instituteId = localStorage.getItem('instituteId');
-    if (!this.instituteId) {
-      this.router.navigate(['/']);
-    }
-
     this.getStudents();
     if (this.students !== undefined) {
       this.disablelabel = false;
