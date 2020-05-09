@@ -1,9 +1,7 @@
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { InstituteService } from '../services/institute.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { StateService } from 'src/app/state.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -40,7 +38,6 @@ export class InstituteUpdateComponent implements OnInit {
   constructor(
     private stateService: StateService,
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private instituteService: InstituteService,
     private notification: NzNotificationService,
@@ -59,7 +56,6 @@ export class InstituteUpdateComponent implements OnInit {
         this.setData(response.institute);
       },
       (error) => {
-        console.log(error);
       }
     );
 
@@ -76,9 +72,7 @@ export class InstituteUpdateComponent implements OnInit {
   }
 
   completeState() {
-    const StateValue = new String(
-      this.instituteUpdateForm.get('state').value
-    ).toLowerCase();
+    const StateValue = this.instituteUpdateForm.get('state').value.toLowerCase();
     this.StateArray = [];
     if (StateValue != '') {
       for (let i = 0; i < this.State.length; i++) {
@@ -99,7 +93,7 @@ export class InstituteUpdateComponent implements OnInit {
   }
 
   completeCity() {
-    const cityValue = new String(this.instituteUpdateForm.get('city').value);
+    const cityValue = this.instituteUpdateForm.get('city').value;
     this.cityDemo = [];
 
     if (cityValue != '') {
@@ -120,7 +114,7 @@ export class InstituteUpdateComponent implements OnInit {
     this.hideUl = true;
     this.CityArray = this.stateService
       .getCity()
-      .filter((x) => x.id == value.id)[0].city;
+      .filter((x) => x.id === value.id)[0].city;
   }
 
   fillCityBox(value) {
@@ -186,13 +180,11 @@ export class InstituteUpdateComponent implements OnInit {
       },
       (error) => {
         this.createNotification('error', 'Error', 'Error in updation', 'topRight');
-        // console.log(error);
-        // alert(error.error.message);
       }
     );
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(['/dashboard/course/list']);
   }
 
@@ -201,7 +193,7 @@ export class InstituteUpdateComponent implements OnInit {
       type,
       title,
       message,
-       { nzPlacement: 'topRight' }
+      { nzPlacement: 'topRight' }
     );
   }
 
