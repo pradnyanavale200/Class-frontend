@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { REGEX } from 'src/app/shared/constants';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+
 
 @Component({
   selector: 'app-login',
@@ -19,11 +21,14 @@ export class LoginComponent implements OnInit {
   titlebtnDisabled: 'Please enter valid data to enable button';
   titlebtn: 'Click to login';
   title: 'data';
+  placement = 'topRight';
+  pattern = REGEX;
 
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
@@ -43,6 +48,7 @@ export class LoginComponent implements OnInit {
 
   onLoginClick() {
     this.auth.login(this.loginData()).subscribe((res: any) => {
+      this.createNotification('success', 'Success', 'Logged-in Successfully', 'topRight');
       const ownerId = res.user._id;
       localStorage.setItem('ownerId', ownerId);
       if (res.institute) {
@@ -52,7 +58,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/new-insitute']);
       }
     }, (err: any) => {
-      alert('Error in login');
+      this.createNotification('error', 'Error', 'Error in login', 'topRight');
+      // alert('Error in login');
     });
   }
 
@@ -84,6 +91,24 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // createNotification(type: string, title: string, message: string): void {
+  //   // this.placement = 'topRight';
+  //   this.notification.create(
+  //     type,
+  //     title,
+  //     message,
+  //     {nzPlacement: 'topRight'}
+  //     // { nzPlacement: this.placement }
+  //   );
+  // }
 
+  createNotification(type, title, message, position) {
+    this.notification.create(
+      type,
+      title,
+      message,
+       { nzPlacement: 'topRight' }
+    );
+  }
 
 }
