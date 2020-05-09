@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
@@ -24,7 +23,6 @@ export class ProfileUpdateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private userService: UserService,
     private notification: NzNotificationService,
   ) {}
@@ -39,7 +37,6 @@ export class ProfileUpdateComponent implements OnInit {
         this.setData(response.usersList);
       },
       (error) => {
-        console.log(error);
       }
     );
 
@@ -84,8 +81,6 @@ export class ProfileUpdateComponent implements OnInit {
       this.router.navigate(['/dashboard/course/list']);
     }, (error) => {
       this.createNotification('error', 'Error', 'Error in updation', 'topRight');
-      // console.log(error);
-      // alert(error.error.message);
     });
   }
 
