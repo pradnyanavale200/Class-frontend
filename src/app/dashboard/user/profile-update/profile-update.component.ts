@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-profile-update',
@@ -24,7 +25,7 @@ export class ProfileUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private notification: NzNotificationService,
+    private notification: NotificationService,
   ) {}
 
   ngOnInit() {
@@ -77,20 +78,11 @@ export class ProfileUpdateComponent implements OnInit {
     };
 
     this.userService.updateUser(data).subscribe((response: any) => {
-      this.createNotification('success', 'Success', 'Updated successfully', 'topRight');
+      this.notification.createNotification('success', 'Success', 'Updated successfully', 'topRight');
       this.router.navigate(['/dashboard/course/list']);
     }, (error) => {
-      this.createNotification('error', 'Error', 'Error in updation', 'topRight');
+      this.notification.createNotification('error', 'Error', 'Error in updation', 'topRight');
     });
-  }
-
-  createNotification(type, title, message, position) {
-    this.notification.create(
-      type,
-      title,
-      message,
-       { nzPlacement: 'topRight' }
-    );
   }
 
 }

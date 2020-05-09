@@ -3,6 +3,7 @@ import { StudentService } from '../services/student.service';
 import { Student } from '../models/student';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-student-list',
@@ -13,7 +14,11 @@ export class StudentListComponent implements OnInit {
   students: Student[];
   disablelabel = true;
   instituteId;
-  constructor(private studentService: StudentService, private router: Router, private notification: NzNotificationService,) { }
+  constructor(
+    private studentService: StudentService,
+    private router: Router,
+    private notification: NotificationService
+  ) { }
 
   ngOnInit(): void {
     this.instituteId = localStorage.getItem('instituteId');
@@ -26,7 +31,7 @@ export class StudentListComponent implements OnInit {
   getStudents(): void {
     this.studentService.getStudents(this.instituteId).subscribe(
       (response: any) => {
-        this.students = response.students ;
+        this.students = response.students;
       },
       (error) => {
         alert(error.error.message);
@@ -37,12 +42,11 @@ export class StudentListComponent implements OnInit {
   deleteStudent(id) {
     this.studentService.deleteStudent(id).subscribe(
       (response: any) => {
-        this.createNotification('success', 'Success', 'Deleted Successfully', 'topRight');
-        console.log('response', response);
+        this.notification.createNotification('success', 'Success', 'Deleted Successfully', 'topRight');
         this.getStudents();
       },
       (error) => {
-        this.createNotification('error', 'Error', 'Error in deleting', 'topRight');
+        this.notification.createNotification('error', 'Error', 'Error in deleting', 'topRight');
         alert(error.error.message);
       }
     );
@@ -54,15 +58,6 @@ export class StudentListComponent implements OnInit {
 
   addStudent() {
     this.router.navigate(['/dashboard/student/create']);
-  }
-
-  createNotification(type, title, message, position) {
-    this.notification.create(
-      type,
-      title,
-      message,
-       { nzPlacement: 'topRight' }
-    );
   }
 
 }

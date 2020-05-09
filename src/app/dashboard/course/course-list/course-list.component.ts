@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '../services/course.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-course-list',
@@ -16,7 +17,7 @@ export class CourseListComponent implements OnInit {
   constructor(
     private router: Router,
     private courseService: CourseService,
-    private notification: NzNotificationService,
+    private notification: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -49,22 +50,13 @@ export class CourseListComponent implements OnInit {
   deleteCourse(courseId) {
     this.courseService.deleteCourse(courseId).subscribe(
       (response: any) => {
-        this.createNotification('success', 'Success', 'Course deleted Successfully', 'topRight');
+        this.notification.createNotification('success', 'Success', 'Course deleted Successfully', 'topRight');
         this.getCourses();
       },
       (error) => {
-        this.createNotification('error', 'Error', 'Error in deleting course', 'topRight');
+        this.notification.createNotification('error', 'Error', 'Error in deleting course', 'topRight');
         // console.log(error);
       }
-    );
-  }
-
-  createNotification(type, title, message, position) {
-    this.notification.create(
-      type,
-      title,
-      message,
-       { nzPlacement: 'topRight' }
     );
   }
 }
