@@ -9,8 +9,10 @@
             <div  class="formGroup frmgrp" >
                 <!-- Firstname -->
                 <label for="email" >Email : </label>
-                <input  class="form-control rounded-5" type="text" formControlName="email">
-                <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched)  " pattern>
+                <input  [class.is-invalid] = "loginForm.get('email').invalid && loginForm.get('email').touched" class="form-control rounded-5" 
+                type="text" formControlName="email">
+                
+                <div class="text-danger" *ngIf="email.invalid && (email.dirty|| email.touched) " pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$">
                     Please enter valid email
                 </div>
                 <div class="text-danger" *ngIf="email.errors?.pattern" >
@@ -20,16 +22,20 @@
 
                 <!-- Lastname -->
                 <label for="password" >Password : </label>
-                <div class="input-group ">
-                <input  class="form-control" type={{typePassword}} formControlName="password">
-                <div class="input-group-append ">
-                    <div class="input-group-text bg-white inpgrpapp">
+                <div class="input-group " >
+                <input  [class.is-invalid] = "loginForm.get('password').invalid && loginForm.get('password').touched"
+                class="form-control" type={{typePassword}} formControlName="password">
+                
+                <div class="input-group-append " >
+                    <div class="input-group-text bg-white inpgrpapp" >
                         <span class="material-icons" (click)="toggle()">
                         {{togglePassword}}
                         </span>
                     </div>
                 </div>
+
                 </div>
+                
                 <div class="text-danger" *ngIf="password.invalid && (password.dirty|| password.touched)">
                     Please enter valid password<br>Password must contain at least one small letter, one capital letter, at least one number, and be longer than or equal to 8 charaters.
                 </div>
@@ -44,7 +50,7 @@
                     <div class="update btn-block" >
                         
                         <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary" (click)="onLoginClick()"  
-                        data-toggle="tooltip" data-placement="right" [ngStyle]="{cursor: loginForm.invalid ? 'no-drop':'pointer'}" title="Enter valid data to enable login button">Login</button>
+                        [ngStyle]="{cursor: loginForm.invalid ? 'no-drop':'pointer'}"  >Login</button>
                         <!-- nzTooltipTitle="prompt text" nzTooltipPlacement="right" nz-button nz-tooltip -->
                         
                     </div>

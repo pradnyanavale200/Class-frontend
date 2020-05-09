@@ -3,9 +3,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InstituteRegisterComponent } from './institute-register/institute-register.component';
+
 import { CoreModule } from './core/core.module';
 import { StateService } from './state.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +28,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     CoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzToolTipModule,
+    NzNotificationModule,
+    BrowserAnimationsModule,
+    NzIconModule
+
   ],
   providers: [StateService],
   bootstrap: [AppComponent]
