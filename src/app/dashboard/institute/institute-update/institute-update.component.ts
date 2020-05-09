@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InstituteService } from '../services/institute.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { StateService } from 'src/app/state.service';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-institute-update',
@@ -40,7 +40,7 @@ export class InstituteUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private instituteService: InstituteService,
-    private notification: NzNotificationService,
+    private readonly notification: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -175,11 +175,11 @@ export class InstituteUpdateComponent implements OnInit {
 
     this.instituteService.updateInstitute(data).subscribe(
       (response: any) => {
-        this.createNotification('success', 'Success', 'Updated successfully', 'topRight');
+        this.notification.createNotification('success', 'Success', 'Updated successfully', 'topRight');
         this.router.navigate(['/dashboard/course/list']);
       },
       (error) => {
-        this.createNotification('error', 'Error', 'Error in updation', 'topRight');
+        this.notification.createNotification('error', 'Error', 'Error in updation', 'topRight');
       }
     );
   }
@@ -188,14 +188,7 @@ export class InstituteUpdateComponent implements OnInit {
     this.router.navigate(['/dashboard/course/list']);
   }
 
-  createNotification(type, title, message, position) {
-    this.notification.create(
-      type,
-      title,
-      message,
-      { nzPlacement: 'topRight' }
-    );
-  }
+
 
 
 }
