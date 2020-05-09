@@ -101,7 +101,7 @@
 
       <!-- City -->
       <label for="city">City </label>
-      <input type="text"  class="form-control" formControlName="city"  (keyup)="completeCity()" />
+      <input type="text" class="form-control" formControlName="city" (keyup)="completeCity()" />
       <ul class="list-group" [hidden]="hideCity">
         <li class="list-group-item" *ngFor="let item of cityDemo" (click)="fillCityBox(item)">
           {{item}}
@@ -143,10 +143,11 @@
 
       <!-- Register Button -->
 
-      <div class="text-center btn-group btn-block" >
+      <div class="text-center btn-group btn-block">
 
         <button (click)="register()" [disabled]="instituteRegistrationForm.invalid"
-          class="btn btn-primary register mr-3 " [ngStyle]="{cursor : instituteRegistrationForm.invalid ? 'no-drop':'pointer'}"
+          class="btn btn-primary register mr-3 "
+          [ngStyle]="{cursor : instituteRegistrationForm.invalid ? 'no-drop':'pointer'}"
           title="Please fill the fields to register" style="border-radius : 25px">Register</button>
 
         <button (click)="cancel()" class="btn btn-danger cancel" style="border-radius : 25px">Cancel</button>

@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, } from '@angular/forms';
 import { InstituteService } from '../dashboard/institute/services/institute.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StateService } from '../state.service';
@@ -36,7 +29,7 @@ export class InstituteRegisterComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private notification: NzNotificationService,
+    private notification: NzNotificationService
   ) {
     this.instituteRegistrationForm = this.fb.group({
       instituteName: [null, Validators.required],
@@ -55,9 +48,7 @@ export class InstituteRegisterComponent implements OnInit {
   }
 
   complete() {
-    const StateValue = new String(
-      this.instituteRegistrationForm.get('state').value
-    );
+    const StateValue = this.instituteRegistrationForm.get('state').value;
     this.StateArray = [];
     if (StateValue != '') {
       for (let i = 0; i < this.State.length; i++) {
@@ -76,9 +67,7 @@ export class InstituteRegisterComponent implements OnInit {
   }
 
   completeCity() {
-    const cityValue = new String(
-      this.instituteRegistrationForm.get('city').value
-    );
+    const cityValue = this.instituteRegistrationForm.get('city').value;
     this.cityDemo = [];
 
     if (cityValue != '') {
@@ -99,7 +88,7 @@ export class InstituteRegisterComponent implements OnInit {
     this.hideUl = true;
     this.CityArray = this.stateService
       .getCity()
-      .filter((x) => x.id == value.id)[0].city;
+      .filter((x) => x.id === value.id)[0].city;
   }
 
   fillCityBox(value) {
@@ -168,7 +157,7 @@ export class InstituteRegisterComponent implements OnInit {
       type,
       title,
       message,
-       { nzPlacement: 'topRight' }
+      { nzPlacement: 'topRight' }
     );
   }
 }
