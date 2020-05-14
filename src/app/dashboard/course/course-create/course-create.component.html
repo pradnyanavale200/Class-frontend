@@ -1,19 +1,19 @@
-    <div class="container">
-      <h2>Course Create Form</h2>
-        <form [formGroup]="courseCreateForm">
-          <div class="form-row">
-            <div class="form-group col-md-6">
+<div class="container">
+  <h2>Course Create Form</h2>
+  <form [formGroup]="courseCreateForm">
+            <div class="form-row">
+              <div class="form-group col-md-6">
 
-              <!-- Course name -->
-              <label for="courseName">Course Name</label>
-              <input [class.is-invalid] = "courseCreateForm.get('courseName').invalid && courseCreateForm.get('courseName').touched"
-                type="text" class="form-control" formControlName = "courseName" id="courseName" placeholder="Enter Course Name">
-              <div *ngIf="(courseNameValidate.invalid && courseNameValidate.touched) || courseNameValidate.dirty">
-                <h6 style="text-align: left;" *ngIf="courseNameValidate.errors?.required" class="text-danger">*Course name is required</h6>
-                <h6 style="text-align: left;" *ngIf="courseNameValidate.errors?.pattern" class="text-danger">*Please provide a valid Course name</h6>
+                <!-- Course name -->
+                <label for="courseName">Course Name</label>
+                <input [class.is-invalid] = "courseCreateForm.get('courseName').invalid && courseCreateForm.get('courseName').touched"
+                  type="text" class="form-control" formControlName = "courseName" id="courseName" placeholder="Enter Course Name">
+                <div *ngIf="(courseNameValidate.invalid && courseNameValidate.touched) || courseNameValidate.dirty">
+                  <h6 style="text-align: left;" *ngIf="courseNameValidate.errors?.required" class="text-danger">*Course name is required</h6>
+                  <h6 style="text-align: left;" *ngIf="courseNameValidate.errors?.pattern" class="text-danger">*Please provide a valid Course name</h6>
+                </div>
+                <!-- Course name end -->
               </div>
-              <!-- Course name end -->
-            </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-3">
@@ -60,28 +60,25 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <!-- Fees -->
-              <label for="fess">Fees:</label>
-              <input [class.is-invalid] = "courseCreateForm.get('fees').invalid && courseCreateForm.get('fees').touched"
-                type="text" class="form-control" id="fees" formControlName="fees" placeholder="Enter Fees">
-              <div *ngIf="(feesValidate.invalid && feesValidate.touched) || feesValidate.dirty">
-                <h6 style="text-align: left;" *ngIf="feesValidate.errors?.required" class="text-danger">*Fees is required</h6>
-                <h6 style="text-align: left;" *ngIf="feesValidate.errors?.pattern" class="text-danger">*Please provide a valid Fees</h6>
+                <label for="fess">Fees:</label>
+                <input [class.is-invalid] = "courseCreateForm.get('fees').invalid && courseCreateForm.get('fees').touched"
+                  type="text" class="form-control" id="fees" formControlName="fees" placeholder="Enter Fees">
+                <div *ngIf="(feesValidate.invalid && feesValidate.touched) || feesValidate.dirty">
+                  <h6 style="text-align: left;" *ngIf="feesValidate.errors?.required" class="text-danger">*Fees is required</h6>
+                  <h6 style="text-align: left;" *ngIf="feesValidate.errors?.pattern" class="text-danger">*Please provide a valid Fees</h6>
+                </div>
+                <!-- Fees end -->
               </div>
-              <!-- Fees end -->
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-2">
-              <button [disabled]="courseCreateForm.invalid" type="submit" class="btn btn-success" (click)="createCourse()" >Create Course</button>
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <button [disabled]="courseCreateForm.invalid" type="submit" class="btn btn-success" (click)="createCourse()" >Create Course</button>
+              </div>
 
-            <button
-            (click)="cancel()" class="btn btn-danger">Cancel</button><br><br>
-          </div>
-          </div>
-        </form>
-    </div>
-
+              <div class="form-group col-md-2">
+                <button (click)="cancel()" class="btn btn-danger">Cancel</button><br><br>
+              </div>
+            </div>
+  </form>
+</div>
