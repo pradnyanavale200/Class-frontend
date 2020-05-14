@@ -29,6 +29,7 @@ export class InstituteUpdateComponent implements OnInit {
   disabledBtn = true;
   public institute = {
     instituteName: '',
+    instituteType: '',
     addressLine1: '',
     addressLine2: '',
     state: '',
@@ -61,6 +62,7 @@ export class InstituteUpdateComponent implements OnInit {
 
     this.instituteUpdateForm = this.fb.group({
       instituteName: [null, Validators.required],
+      instituteType: [null, Validators.required],
       addressLine1: [null, Validators.required],
       addressLine2: [null],
       state: [null, Validators.required],
@@ -127,6 +129,9 @@ export class InstituteUpdateComponent implements OnInit {
       .get('instituteName')
       .setValue(institute.instituteName);
     this.instituteUpdateForm
+      .get('instituteType')
+      .setValue(institute.instituteType);
+    this.instituteUpdateForm
       .get('addressLine1')
       .setValue(institute.instituteAddressLine1);
     this.instituteUpdateForm
@@ -139,6 +144,10 @@ export class InstituteUpdateComponent implements OnInit {
 
   get instituteName() {
     return this.instituteUpdateForm.get('instituteName');
+  }
+
+  get instituteType() {
+    return this.instituteUpdateForm.get('instituteType');
   }
 
   get addressLine1() {
@@ -165,6 +174,7 @@ export class InstituteUpdateComponent implements OnInit {
     const data = {
       _id: this.instituteId,
       instituteName: this.instituteUpdateForm.get('instituteName').value,
+      instituteType: this.instituteUpdateForm.get('instituteType').value,
       instituteAddressLine1: this.instituteUpdateForm.get('addressLine1').value,
       instituteAddressLine2: this.instituteUpdateForm.get('addressLine2').value,
       state: this.instituteUpdateForm.get('state').value,

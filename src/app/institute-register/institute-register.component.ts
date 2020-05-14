@@ -34,6 +34,7 @@ export class InstituteRegisterComponent implements OnInit {
   ) {
     this.instituteRegistrationForm = this.fb.group({
       instituteName: [null, Validators.required],
+      instituteType: [null, Validators.required],
       addressLine1: [null, Validators.required],
       addressLine2: [null],
       state: [null, Validators.required],
@@ -102,6 +103,10 @@ export class InstituteRegisterComponent implements OnInit {
     return this.instituteRegistrationForm.get('instituteName');
   }
 
+  get instituteType() {
+    return this.instituteRegistrationForm.get('instituteType');
+  }
+
   get addressLine1() {
     return this.instituteRegistrationForm.get('addressLine1');
   }
@@ -125,6 +130,7 @@ export class InstituteRegisterComponent implements OnInit {
   getInstituteData() {
     return {
       instituteName: this.instituteRegistrationForm.get('instituteName').value,
+      instituteType: this.instituteRegistrationForm.get('instituteType').value,
       instituteAddressLine1: this.instituteRegistrationForm.get('addressLine1')
         .value,
       instituteAddressLine2: this.instituteRegistrationForm.get('addressLine2')

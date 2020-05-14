@@ -8,6 +8,8 @@
 
         (instituteName.invalid && instituteName.touched) ||
 
+        (instituteType.invalid && instituteType.touched) ||
+
         (addressLine1.invalid && addressLine1.touched) ||
 
         (addressLine2.invalid && addressLine2.touched) ||
@@ -24,8 +26,6 @@
         <br />
       </div>
       <!-- Institute Register Header -->
-
-
 
       <!-- Institute Name -->
 
@@ -48,6 +48,28 @@
       <br />
 
       <!-- /Institute Name -->
+
+      <!-- Institute Type -->
+
+      <label for="instituteType">Institute Type</label>
+
+      <input type="text" class="form-control" pattern="^[a-zA-Z ]*$" formControlName="instituteType" />
+
+      <div class="text-danger" *ngIf="instituteType.invalid && (instituteType.dirty || instituteType.touched)">
+
+        Institute Type is required
+
+      </div>
+
+      <div *ngIf="instituteType.errors?.pattern" style="color: red;">
+
+        Institute Type is not valid.
+
+      </div>
+
+      <br />
+
+      <!-- /Institute Type -->
 
       <!-- Address Line 1 -->
 
@@ -138,8 +160,6 @@
       <br />
 
       <!-- /Pincode -->
-
-
 
       <!-- Register Button -->
 
