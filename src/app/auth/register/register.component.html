@@ -13,26 +13,28 @@
         <!-- First Name -->
         <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">FirstName: </label>
-          <input required formControlName="firstName" type="text" class="form-control"  name="FirstName"
+          <input required [class.is-invalid] = "regsiterForm.get('firstName').invalid && regsiterForm.get('firstName').touched"
+          formControlName="firstName" type="text" class="form-control"  name="FirstName"
             pattern="[a-zA-Z]*">
 
-          <small class="help-block" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">Please enter First
+          <div class="help-block text-danger" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">Please enter First
             Name
-          </small>
-          <small class="help-block" *ngIf="firstName.errors?.pattern"><br>Should contain Alphabets only</small>
+          </div>
+          <div class="help-block text-danger" *ngIf="firstName.errors?.pattern"><br>Should contain Alphabets only</div>
         </div>
         <!-- First Name -->
 
         <!-- Last Name -->
         <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">LastName: </label>
-          <input required formControlName="lastName" type="text" class="form-control" name="LastName"
+          <input required [class.is-invalid] = "regsiterForm.get('lastName').invalid && regsiterForm.get('lastName').touched"
+          formControlName="lastName" type="text" class="form-control" name="LastName"
             pattern="[a-zA-Z]*">
 
-          <small class="help-block" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Please enter Last
+          <div class="help-block text-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Please enter Last
             Name
-          </small>
-          <small class="help-block" *ngIf="lastName.errors?.pattern"><br>Should contain Alphabets only</small>
+          </div>
+          <div class="help-block text-danger" *ngIf="lastName.errors?.pattern"><br>Should contain Alphabets only</div>
         </div>
         <!-- Last Name -->
 
@@ -40,14 +42,15 @@
         <!-- Email ID -->
         <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">Email Id: </label>
-          <input required formControlName="email" type="email" class="form-control" name="Email"
+          <input required [class.is-invalid] = "regsiterForm.get('email').invalid && regsiterForm.get('email').touched"
+          formControlName="email" type="email" class="form-control" name="Email"
             pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
 
-          <small class="help-block" *ngIf="email.invalid && (email.dirty || email.touched)">Please enter Email
+          <div class="help-block text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">Please enter Email
             Id
-          </small>
-          <small class="help-block" *ngIf="email.errors?.pattern"><br>You can use letters, numbers, periods and
-            underscore</small>
+          </div>
+          <div class="help-block text-danger" *ngIf="email.errors?.pattern"><br>You can use letters, numbers, periods and
+            underscore</div>
         </div>
         <!-- Email ID -->
 
@@ -55,28 +58,31 @@
         <div class="form-group" >
           <label class="alert-link control-label" for="exampleInputPassword1">Password: </label>
           <div class="input-group">
-            <input required data-toggle="password" formControlName="password" type="{{typePassword}}" class="form-control"
+            <input required [class.is-invalid] = "regsiterForm.get('password').invalid && regsiterForm.get('password').touched"
+            data-toggle="password" formControlName="password" type="{{typePassword}}" class="form-control"
               name="Password"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}">
             <div class="input-group-append">
-              <div class="input-group-text bg-white"><span class="material-icons" (click)="toggle()">
+              <div class="input-group-text bg-white inpgrpapp"><span class="material-icons" (click)="toggle()">
                   {{togglePassword}}
                 </span></div>
             </div>
           </div>
-          <small class="help-block" *ngIf="password.errors && (password.dirty || password.touched)">Please enter valid
+          <div class="help-block text-danger" *ngIf="password.errors && (password.dirty || password.touched)">Please enter valid
             Password
-          </small>
-          <small class="help-block" *ngIf="password.errors?.pattern"><br>Use 8 or more characters with a mix of letters,
-            numbers & symbols ;)</small>
+          </div>
+          <div class="help-block text-danger" *ngIf="password.errors?.pattern"><br>Use 8 or more characters with a mix of letters,
+            numbers & symbols ;)</div>
         </div>
         <!-- Password -->
 
         <!-- Register Button -->
-        <button [disabled]="regsiterForm.invalid" type="submit"
-          class="btn btn-primary btn-block btn-group-lg shadow-lg" (click)="onSubmit()">REGISTER </button>
+        <button [disabled]="regsiterForm.invalid" type="submit" 
+        [ngStyle]="{cursor: regsiterForm.invalid? 'no-drop': 'pointer'}"
+        class="btn btn-primary btn-block btn-group-lg mt-4 " (click)="onSubmit()">REGISTER </button>
         <!-- Register Button -->
         <div class="form-group float-right mt-3">
-          <h5 class="alert alert-link "><a [routerLink]="['/auth/login']">Already Register? Login In</a></h5>
+            <a (click)="onClickLogin()">Already Register? <span class="login">Login</span>
+            </a>
         </div>
       </form>
     </div>

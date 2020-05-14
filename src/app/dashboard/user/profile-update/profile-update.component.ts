@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-profile-update',
@@ -23,8 +24,8 @@ export class ProfileUpdateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private notification: NotificationService,
   ) {}
 
   ngOnInit() {
@@ -37,7 +38,6 @@ export class ProfileUpdateComponent implements OnInit {
         this.setData(response.usersList);
       },
       (error) => {
-        console.log(error);
       }
     );
 
@@ -78,10 +78,10 @@ export class ProfileUpdateComponent implements OnInit {
     };
 
     this.userService.updateUser(data).subscribe((response: any) => {
+      this.notification.createNotification('success', 'Success', 'Updated successfully', 'topRight');
       this.router.navigate(['/dashboard/course/list']);
     }, (error) => {
-      console.log(error);
-      alert(error.error.message);
+      this.notification.createNotification('error', 'Error', 'Error in updation', 'topRight');
     });
   }
 

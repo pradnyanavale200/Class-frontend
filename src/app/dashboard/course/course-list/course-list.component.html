@@ -10,7 +10,7 @@
     <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
       <form class="form-inline justify-content-end">
         <div class="my-2 mx-2 my-sm-0">
-          <button (click)="addCourse()" class="btn btn-primary float-center"> Add Course</button>
+          <button type = "button" (click)="addCourse()" class="btn btn-primary float-center"> Add Course</button>
         </div>
       </form>
     </div>
@@ -44,7 +44,7 @@
                 <td>{{item.duration}}</td>
                 <td>{{item.value}}</td>
                 <td>{{item.fees}}</td>
-                <td><button (click)="editCourse(item._id)" class="btn btn-warning text-dark w-50">Edit</button>
+                <td><button (click)="editCourse(item._id)" class="btn btn-warning">Edit</button>
                 </td>
                 <td><button (click)="deleteCourse(item._id)" class="btn btn-danger">Delete</button></td>
               </tr>
