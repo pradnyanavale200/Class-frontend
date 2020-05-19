@@ -104,12 +104,10 @@ export class StudentUpdateComponent implements OnInit {
     };
 
     this.studentService.updateStudent(data).subscribe((response: any) => {
-        this.createNotification('success', 'Success', 'Deleted Successfully', 'topRight');
+        this.createNotification('success', 'Success', 'Updated Successfully', 'topRight');
         this.router.navigate(['/dashboard/student/list']);
       }, (error) => {
-        this.createNotification('error', 'Error', 'Error in deleting', 'topRight');
-        // console.log(error);
-        // alert(error.error.message);
+        this.createNotification('error', 'Error', 'Error in Updating', 'topRight');
     });
   }
   cancel() {
