@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/core/services/http.service';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,8 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class CourseService {
 
-  courseApi = 'http://localhost:3000/course/';
-  coursedeleteApi = 'http://localhost:3000/course/courseDelete';
+  courseApi = `${environment.api}/course/`;
+  coursedeleteApi = `${environment.api}/course/courseDelete`;
+
 
   constructor(
     private http: HttpService
@@ -28,7 +30,7 @@ export class CourseService {
   }
 
   getCourseData(data): Observable<object> {
-    return this.http.get(this.courseApi + 'courseSearch/' + data);
+    return this.http.get(`${this.courseApi}/courseSearch/${data}`);
   }
 
   deleteCourse(id){
