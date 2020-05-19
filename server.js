@@ -4,8 +4,11 @@ const path=require('path');
 
 const app=express();
 
-app.get('/*',function(req,res) {
-  res.sendFile(path.join(__dirname+'/angularapp/index.html'));
+app.use('/', express.static('angularapp'));
+
+app.get('*', (req,res,next) => {
+    const indexFile = path.resolve(__dirname + '/angularapp/index.html');
+    res.sendFile(indexFile);
 });
 
 app.listen(process.env.PORT || 4200);
